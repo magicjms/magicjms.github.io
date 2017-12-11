@@ -3,6 +3,38 @@
 	"data" : [
 	 
 	{
+		"title" : "curl模拟http发送get或post接口测试 - curl",
+		"url" : "/posts/Linux-base-curl-post.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "wget命令详解 - wget",
+		"url" : "/posts/Linux-base-cmd-wget.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "python内建函数—isinstance - python基础",
+		"url" : "/posts/Python_Base_isinstance.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "shell脚本中的时间运算 - shell",
+		"url" : "/posts/Linux-shell_time.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "阿里云公共NTP、DNS、镜像服务地址信息 - linux",
 		"url" : "/posts/LinuxPublicService.html"
 	}

@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="页面不存在：Page Not Found - 潘学文个人博客 - 作者:潘学文"/> 
-	
-    <title>页面不存在：Page Not Found - 潘学文个人博客</title>
+    <meta name="description" content="shell脚本中的时间运算 - 潘学文个人博客 - 作者:潘学文"/> 
+	<meta name="keywords" content="shell"/>
+    <title>shell脚本中的时间运算 - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -139,14 +139,153 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-          <p align="center">
-<h1></h1>Page Not Found!</h1>
-Please wait...
+          <!-- Navi -->
+<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/shell.html">shell</a>&nbsp;>&nbsp;正文
+<!-- Title -->
+<h2>shell脚本中的时间运算</h2>
+<b>标签：</b><a href="/tags.html#shell"><i>shell</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2017-12-01
+</div>
 <br/>
-<br/>
-thanks!
-</p>
 
+<!-- content -->
+<div style="text-indent:0em;">
+<p>在shell脚本中经常会遇到时间运算，本篇主要介绍shell脚本常用的时间处理方法以及常用示例<!-- more --></p>
+
+<blockquote>
+  <p>一、<b>时间基础知识</b></p>
+</blockquote>
+
+<p>首先我们先来说说什么是shell下的时间戳：</p>
+
+<p>自1970年1月1日（00:00:00 UTC/GMT）以来的秒数。它也被称为Unix时间戳（Unix Timestam、Unix epoch、POSIX time、Unix timestamp）是从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数，不考虑闰秒。</p>
+
+<p>UNIX时间戳的0按照ISO 8601规范为：1970-01-01T00:00:00Z 一个小时表示为UNIX时间戳格式为：3600秒；一天表示为UNIX时间戳为86400秒，闰秒不计算。</p>
+
+<blockquote>
+  <p>二、<b>时间运算原理</b></p>
+</blockquote>
+
+<p style="color:red">shell下的时间加减法就是根据时间戳来实现的，先将要运算的时间转化成时间戳然后进行运算，运算完成后再将得到的时间戳转化成我们常见格式的时间</p>
+
+<blockquote>
+  <p>三、<b>常用示例</b></p>
+</blockquote>
+
+<p>比如：计算某天的时间戳，也就是指定的某一个到1970年1月1日以来的秒数：</p>
+
+<pre><code>a.将基础时间转为时间戳
+time1=$(date +%s -d '1990-01-01 01:01:01')
+echo $time1
+631126861 【时间戳】
+
+b.将增加时间变成秒
+[root@localhost ~]# time2=$((1*60*60+20*60))
+[root@localhost ~]# echo $time2
+4800
+
+c.两个时间相加，计算出结果时间
+time3=$(($time1+$time2))
+time4=$(date +%Y-%m-%d\ %H:%M:%S -d "1970-01-01 UTC $time3 seconds");
+echo $time4
+1990-01-01 02:21:01
+ 
+d.时间差计算方法
+如：2010-01-01 与 2009-01-01 11:11:11 时间差
+原理：同样转成时间戳，然后计算天，时，分，秒
+time1=$(($(date +%s -d '2010-01-01') - $(date +%s -d '2009-01-01 11:11:11')));
+echo time1
+将time1 / 60 秒，就变成分了。
+
+ 
+e.如果知道某个时间戳，也可以计算出这个时间戳对应的时间日期
+[root@node1 shell]# date --date=@1417779944
+Fri Dec  5 19:45:44 CST 2014
+ 
+[root@node1 shell]# date -d @1417779944
+Fri Dec  5 19:45:44 CST 2014
+</code></pre>
+
+<p>知道这些之后那我们就可以计算某一天距离今天过了多少天了：</p>
+
+<pre><code>#!/bin/bash
+#
+first_stamp=`date -d "2014-12-05 19:45:44" +%s` #计算指定日期的时间戳
+today_stamp=`date +%s`                          #计算当天的时间戳
+let day_stamp=($today_stamp - $first_stamp)     #当天的时间戳减去指定的时间戳
+let day=($day_stamp/86400)                      #相差的时间戳除以一天的秒数就得到天数
+echo $day
+</code></pre>
+
+<p>以下还有一些时间的计算方法：</p>
+
+<pre><code>[root@node1 shell]# echo $(date --date='3 day')  //当天日期+3天
+Fri Jan 16 11:55:02 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 day ago')  //当天日期-3天
+Sat Jan 10 11:55:10 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 month')  //当天日期+3月
+Mon Apr 13 11:55:17 CST 2015
+[root@node1 shell]#  
+[root@node1 shell]# echo $(date --date='3 month ago')  //当天日期-3朋
+Mon Oct 13 11:55:25 CST 2014
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 year')  //当天日期+3年
+Sat Jan 13 11:55:32 CST 2018
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 year ago')  //当天日期-3年
+Fri Jan 13 11:55:38 CST 2012
+[root@node1 shell]#
+[root@node1 shell]# echo $(date --date='3 minute ')  //当天日期+3秒
+Tue Jan 13 11:58:44 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 minute ago')  //当天日期-3秒
+Tue Jan 13 11:52:52 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 hour ago')  //当天日期-3小时
+Tue Jan 13 08:56:00 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 hour')  //当天日期+3小时
+Tue Jan 13 14:56:06 CST 2015
+[root@node1 shell]#
+</code></pre>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="http://www.panxw.com/posts/Linux-shell_time.html" title="">http://www.panxw.com/posts/Linux-shell_time.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/LinuxPublicService.html">
+      阿里云公共NTP、DNS、镜像服务地址信息
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Python_Base_isinstance.html">
+      python内建函数—isinstance
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">

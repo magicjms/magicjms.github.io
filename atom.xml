@@ -94,19 +94,19 @@ http://blog.csdn.net/rabbitter/article/details/51125337
  --><ul id="nav"><!--一级导航的ul-->  
     <li class="home this"><a href="/"><i></i><span style="font-size: 18px;">首页</span></a></li>  
   
-    <li class="safe"><a href="safe.html"><i></i><span>系统</span></a><!--一级导航的li-->  
+    <li class="safe"><a href="/posts/linux.html"><i></i><span>Linux</span></a><!--一级导航的li-->  
         <ul><!--一级菜单的li中的二级导航的ul-->  
-            <li><a href="http://cn.bing.com"><span>After Effects</span></a></li><!--二级导航中各个选项li-->  
+            <li><a href="/posts/shell.html"><span>shell</span></a></li><!--二级导航中各个选项li-->  
             <li><a href="#"><span>Open-Source Apps</span></a></li>  
             <li><a href="#"><span>Android</span></a></li>  
             <li><a href="#"><span>JavaScript</span></a></li>  
         </ul>  
     </li>  
   
-    <li class="service"><a href="#"><i></i><span>编程</span></a>  
+    <li class="service"><a href="/posts/python.html"><i></i><span>Python</span></a>  
         <ul>  
-            <li><a href="#"><span>After Effects</span></a></li>  
-            <li><a href="#"><span>Open-Source Apps</span></a></li>  
+            <li><a href="#"><span>基础</span></a></li>  
+            <li><a href="#"><span>常用模块</span></a></li>  
             <li><a href="#"><span>Android</span></a></li>  
             <li><a href="#"><span>JavaScript</span></a></li>  
         </ul>  
@@ -158,12 +158,716 @@ http://blog.csdn.net/rabbitter/article/details/51125337
  <title></title>
  <link href="http://www.panxw.com/atom.xml" rel="self"/>
  <link href="http://www.panxw.com"/>
- <updated>2017-11-25T07:44:35-08:00</updated>
+ <updated>2017-12-11T06:18:11-08:00</updated>
  <author>
    <name>潘学文</name>
    <email>winfirm#163.com</email>
  </author>
 
+ 
+ <entry>
+   <title>curl模拟http发送get或post接口测试</title>
+   <link href="http://www.panxw.com/posts/Linux-base-curl-post.html"/>
+   <updated>2017-12-10T00:00:00-08:00</updated>
+   <id>/posts/Linux-base-curl-post</id>
+   <content type="html">&lt;p&gt;curl是我们在linux下经常使用的http访问、测试、诊断工具，这篇博客主要记录如何使用curl构建get、带参数的post请求&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;b&gt;一、get请求 &lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;curl “http://www.baidu.com”  如果这里的URL指向的是一个文件或者一幅图都可以直接下载到本地&lt;/p&gt;
+
+&lt;p&gt;curl -i “http://www.baidu.com”  显示全部信息&lt;/p&gt;
+
+&lt;p&gt;curl -l “http://www.baidu.com” 只显示头部信息&lt;/p&gt;
+
+&lt;p&gt;curl -v “http://www.baidu.com” 显示get请求全过程解析&lt;/p&gt;
+
+&lt;p&gt;wget “http://www.baidu.com”也可以&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;b&gt;二、post请求&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;curl -d “param1=value1&amp;amp;param2=value2” “http://www.baidu.com”&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;b&gt; 三、json格式的post请求&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;curl -l -H “Content-type: application/json” -X POST -d ‘{“phone”:”13521389587”,”password”:”test”}’ http://domain/apis/users.json&lt;/p&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -l -H &quot;Content-type: application/json&quot; -X POST -d '{&quot;ver&quot;: &quot;1.0&quot;,&quot;soa&quot;:{&quot;req&quot;:&quot;123&quot;},&quot;iface&quot;:&quot;me.ele.lpdinfra.prediction.service.PredictionService&quot;,&quot;method&quot;:&quot;restaurant_make_order_time&quot;,&quot;args&quot;:{&quot;arg2&quot;:&quot;\&quot;stable\&quot;&quot;,&quot;arg1&quot;:&quot;{\&quot;code\&quot;:[\&quot;WIND\&quot;],\&quot;temperature\&quot;:11.11}&quot;,&quot;arg0&quot;:&quot;{\&quot;tracking_id\&quot;:\&quot;100000000331770936\&quot;,\&quot;eleme_order_id\&quot;:\&quot;100000000331770936\&quot;,\&quot;platform_id\&quot;:\&quot;4\&quot;,\&quot;restaurant_id\&quot;:\&quot;482571\&quot;,\&quot;dish_num\&quot;:1,\&quot;dish_info\&quot;:[{\&quot;entity_id\&quot;:142547763,\&quot;quantity\&quot;:1,\&quot;category_id\&quot;:1,\&quot;dish_name\&quot;:\&quot;[0xe7][0x89][0xb9][0xe4][0xbb][0xb7][0xe8][0x85][0x8a][0xe5][0x91][0xb3][0xe5][0x8f][0x89][0xe7][0x83][0xa7][0xe5][0x8f][0x8c][0xe6][0x8b][0xbc][0xe7][0x85][0xb2][0xe4][0xbb][0x94][0xe9][0xa5][0xad]\&quot;,\&quot;price\&quot;:31.0}],\&quot;merchant_location\&quot;:{\&quot;longitude\&quot;:\&quot;121.47831425\&quot;,\&quot;latitude\&quot;:\&quot;31.27576153\&quot;},\&quot;customer_location\&quot;:{\&quot;longitude\&quot;:\&quot;121.47831425\&quot;,\&quot;latitude\&quot;:\&quot;31.27576153\&quot;},\&quot;created_at\&quot;:1477896550,\&quot;confirmed_at\&quot;:1477896550,\&quot;dishes_total_price\&quot;:0.0,\&quot;food_boxes_total_price\&quot;:2.0,\&quot;delivery_total_price\&quot;:2.0,\&quot;pay_amount\&quot;:35.0,\&quot;city_id\&quot;:\&quot;1\&quot;}&quot;}}' http://vpcb-lpdinfra-stream-1.vm.elenet.me:8989/rpc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考资料：&lt;a href=&quot;https://www.cnblogs.com/sunshine2016/p/6015976.html&quot; title=&quot;https://www.cnblogs.com/sunshine2016/p/6015976.html&quot;&gt;https://www.cnblogs.com/sunshine2016/p/6015976.html&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>wget命令详解</title>
+   <link href="http://www.panxw.com/posts/Linux-base-cmd-wget.html"/>
+   <updated>2017-12-10T00:00:00-08:00</updated>
+   <id>/posts/Linux-base-cmd-wget</id>
+   <content type="html">&lt;p&gt;Linux系统中的wget是一个下载文件的工具，它用在命令行下。对于Linux用户是必不可少的工具，我们经常要下载一些软件或从远程服务器恢复备份到本地服务器。wget支持HTTP，HTTPS和FTP协议，可以使用HTTP代理。所谓的自动下载是指，wget可以在用户退出系统的之后在后台执行。这意味这你可以登录系统，启动一个wget下载任务，然后退出系统，wget将在后台执行直到任务完成，相对于其它大部分浏览器在下载大量数据时需要用户一直的参与，这省去了极大的麻烦。&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;p&gt;wget 可以跟踪HTML页面上的链接依次下载来创建远程服务器的本地版本，完全重建原始站点的目录结构。这又常被称作”递归下载”。在递归下载的时候，wget 遵循Robot Exclusion标准(/robots.txt). wget可以在下载的同时，将链接转换成指向本地文件，以方便离线浏览。&lt;/p&gt;
+
+&lt;p&gt;wget 非常稳定，它在带宽很窄的情况下和不稳定网络中有很强的适应性.如果是由于网络的原因下载失败，wget会不断的尝试，直到整个文件下载完毕。如果是服务器打断下载过程，它会再次联到服务器上从停止的地方继续下载。这对从那些限定了链接时间的服务器上下载大文件非常有用。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;b&gt;1．命令格式：&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;wget [参数] [URL地址]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;b&gt;2．命令功能：&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;用于从网络上下载资源，没有指定目录，下载资源回默认为当前目录。wget虽然功能强大，但是使用起来还是比较简单：&lt;/p&gt;
+
+&lt;p&gt;1）支持断点下传功能；这一点，也是网络蚂蚁和FlashGet当年最大的卖点，现在，Wget也可以使用此功能，那些网络不是太好的用户可以放心了；&lt;/p&gt;
+
+&lt;p&gt;2）同时支持FTP和HTTP下载方式；尽管现在大部分软件可以使用HTTP方式下载，但是，有些时候，仍然需要使用FTP方式下载软件；&lt;/p&gt;
+
+&lt;p&gt;3）支持代理服务器；对安全强度很高的系统而言，一般不会将自己的系统直接暴露在互联网上，所以，支持代理是下载软件必须有的功能；&lt;/p&gt;
+
+&lt;p&gt;4）设置方便简单；可能，习惯图形界面的用户已经不是太习惯命令行了，但是，命令行在设置上其实有更多的优点，最少，鼠标可以少点很多次，也不要担心是否错点鼠标；&lt;/p&gt;
+
+&lt;p&gt;5）程序小，完全免费；程序小可以考虑不计，因为现在的硬盘实在太大了；完全免费就不得不考虑了，即使网络上有很多所谓的免费软件，但是，这些软件的广告却不是我们喜欢的。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;b&gt;3．使用实例：&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;b&gt;实例1：使用wget下载单个文件&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;以下的例子是从网络下载一个文件并保存在当前目录，在下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例2：使用wget -O下载并以不同的文件名保存&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget -O wordpress.zip http://www.minjieren.com/download.aspx?id=1080
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;wget默认会以最后一个符合”/”的后面的字符来命令，对于动态链接的下载通常文件名会不正确。&lt;/p&gt;
+
+&lt;p&gt;错误：下面的例子会下载一个文件并以名称download.aspx?id=1080保存&lt;/p&gt;
+
+&lt;p&gt;wget http://www.minjieren.com/download?id=1&lt;/p&gt;
+
+&lt;p&gt;即使下载的文件是zip格式，它仍然以download.php?id=1080命令。&lt;/p&gt;
+
+&lt;p&gt;正确：为了解决这个问题，我们可以使用参数-O来指定一个文件名：&lt;/p&gt;
+
+&lt;p&gt;wget -O wordpress.zip http://www.minjieren.com/download.aspx?id=1080&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例3：使用wget –limit -rate限速下载&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget --limit-rate=300k http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;当你执行wget的时候，它默认会占用全部可能的宽带下载。但是当你准备下载一个大文件，而你还需要下载其它文件时就有必要限速了。&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例4：使用wget -c断点续传&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget -c http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;使用wget -c重新启动下载中断的文件，对于我们下载大文件时突然由于网络等原因中断非常有帮助，我们可以继续接着下载而不是重新下载一个文件。需要继续中断的下载时可以使用-c参数。&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例5：使用wget -b后台下载&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; wget -b http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;对于下载非常大的文件的时候，我们可以使用参数-b进行后台下载。&lt;/p&gt;
+
+&lt;p&gt;wget -b http://www.minjieren.com/wordpress-3.1-zh_CN.zip&lt;/p&gt;
+
+&lt;p&gt;Continuing in background, pid 1840.&lt;/p&gt;
+
+&lt;p&gt;Output will be written to `wget-log’.&lt;/p&gt;
+
+&lt;p&gt;你可以使用以下命令来察看下载进度：&lt;/p&gt;
+
+&lt;p&gt;tail -f wget-log&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例6：伪装代理名称下载&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget --user-agent=&quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16&quot; http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;有些网站能通过根据判断代理名称不是浏览器而拒绝你的下载请求。不过你可以通过–user-agent参数伪装。&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例7：使用wget –spider测试下载链接&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget --spider URL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;当你打算进行定时下载，你应该在预定时间测试下载链接是否有效。我们可以增加–spider参数进行检查。&lt;/p&gt;
+
+&lt;p&gt;wget –spider URL&lt;/p&gt;
+
+&lt;p&gt;如果下载链接正确，将会显示&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget --spider URL
+
+Spider mode enabled. Check if remote file exists.
+
+HTTP request sent, awaiting response... 200 OK
+
+Length: unspecified [text/html]
+
+Remote file exists and could contain further links,
+
+but recursion is disabled -- not retrieving.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这保证了下载能在预定的时间进行，但当你给错了一个链接，将会显示如下错误&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget --spider url
+
+Spider mode enabled. Check if remote file exists.
+
+HTTP request sent, awaiting response... 404 Not Found
+
+Remote file does not exist -- broken link!!!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你可以在以下几种情况下使用spider参数：&lt;/p&gt;
+
+&lt;p&gt;定时下载之前进行检查&lt;/p&gt;
+
+&lt;p&gt;间隔检测网站是否可用&lt;/p&gt;
+
+&lt;p&gt;检查网站页面的死链接&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例8：使用wget –tries增加重试次数&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget --tries=40 URL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;如果网络有问题或下载一个大文件也有可能失败。wget默认重试20次连接下载文件。如果需要，你可以使用–tries增加重试次数。&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例9：使用wget -i下载多个文件&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget -i filelist.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;首先，保存一份下载链接文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cat &amp;gt; filelist.txt
+url1
+url2
+url3
+url4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接着使用这个文件和参数-i下载&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例10：使用wget –mirror镜像网站&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget --mirror -p --convert-links -P ./LOCAL URL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;下载整个网站到本地。&lt;/p&gt;
+
+&lt;p&gt;–miror:开户镜像下载&lt;/p&gt;
+
+&lt;p&gt;-p:下载所有为了html页面显示正常的文件&lt;/p&gt;
+
+&lt;p&gt;–convert-links:下载后，转换成本地的链接&lt;/p&gt;
+
+&lt;p&gt;-P ./LOCAL：保存所有文件和目录到本地指定目录&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例11：使用wget –reject过滤指定格式下载&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：
+    wget –reject=gif ur&lt;/p&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;下载一个网站，但你不希望下载图片，可以使用以下命令。&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例12：使用wget -o把下载信息存入日志文件&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget -o download.log URL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;不希望下载信息直接显示在终端而是在一个日志文件，可以使用&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例13：使用wget -Q限制总下载文件大小&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget -Q5m -i filelist.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;当你想要下载的文件超过5M而退出下载，你可以使用。注意：这个参数对单个文件下载不起作用，只能递归下载时才有效。&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例14：使用wget -r -A下载指定格式文件&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget -r -A.pdf url
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;可以在以下情况使用该功能：&lt;/p&gt;
+
+&lt;p&gt;下载一个网站的所有图片&lt;/p&gt;
+
+&lt;p&gt;下载一个网站的所有视频&lt;/p&gt;
+
+&lt;p&gt;下载一个网站的所有PDF文件&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;实例15：使用wget FTP下载&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget ftp-url
+
+wget --ftp-user=USERNAME --ftp-password=PASSWORD url
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;p&gt;可以使用wget来完成ftp链接的下载。&lt;/p&gt;
+
+&lt;p&gt;使用wget匿名ftp下载：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget ftp-url
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用wget用户名和密码认证的ftp下载&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget --ftp-user=USERNAME --ftp-password=PASSWORD url
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;备注：编译安装&lt;/p&gt;
+
+&lt;p&gt;使用如下命令编译安装：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# tar zxvf wget-1.9.1.tar.gz 
+# cd wget-1.9.1 
+# ./configure 
+# make 
+# make install 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;b&gt;4．命令参数：&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;b&gt;启动参数：&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;-V, –version 显示wget的版本后退出&lt;/p&gt;
+
+&lt;p&gt;-h, –help 打印语法帮助&lt;/p&gt;
+
+&lt;p&gt;-b, –background 启动后转入后台执行&lt;/p&gt;
+
+&lt;p&gt;-e, –execute=COMMAND 执行`.wgetrc’格式的命令，wgetrc格式参见/etc/wgetrc或~/.wgetrc记录和输入文件参数：&lt;/p&gt;
+
+&lt;p&gt;-o, –output-file=FILE 把记录写到FILE文件中&lt;/p&gt;
+
+&lt;p&gt;-a, –append-output=FILE 把记录追加到FILE文件中&lt;/p&gt;
+
+&lt;p&gt;-d, –debug 打印调试输出&lt;/p&gt;
+
+&lt;p&gt;-q, –quiet 安静模式(没有输出)&lt;/p&gt;
+
+&lt;p&gt;-v, –verbose 冗长模式(这是缺省设置)&lt;/p&gt;
+
+&lt;p&gt;-nv, –non-verbose 关掉冗长模式，但不是安静模式&lt;/p&gt;
+
+&lt;p&gt;-i, –input-file=FILE 下载在FILE文件中出现的URLs&lt;/p&gt;
+
+&lt;p&gt;-F, –force-html 把输入文件当作HTML格式文件对待&lt;/p&gt;
+
+&lt;p&gt;-B, –base=URL 将URL作为在-F -i参数指定的文件中出现的相对链接的前缀&lt;/p&gt;
+
+&lt;p&gt;–sslcertfile=FILE 可选客户端证书&lt;/p&gt;
+
+&lt;p&gt;–sslcertkey=KEYFILE 可选客户端证书的KEYFILE&lt;/p&gt;
+
+&lt;p&gt;–egd-file=FILE 指定EGD socket的文件名&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;下载参数：&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;–bind-address=ADDRESS 指定本地使用地址(主机名或IP，当本地有多个IP或名字时使用)&lt;/p&gt;
+
+&lt;p&gt;-t, –tries=NUMBER 设定最大尝试链接次数(0 表示无限制).&lt;/p&gt;
+
+&lt;p&gt;-O –output-document=FILE 把文档写到FILE文件中&lt;/p&gt;
+
+&lt;p&gt;-nc, –no-clobber 不要覆盖存在的文件或使用.#前缀&lt;/p&gt;
+
+&lt;p&gt;-c, –continue 接着下载没下载完的文件&lt;/p&gt;
+
+&lt;p&gt;–progress=TYPE 设定进程条标记&lt;/p&gt;
+
+&lt;p&gt;-N, –timestamping 不要重新下载文件除非比本地文件新&lt;/p&gt;
+
+&lt;p&gt;-S, –server-response 打印服务器的回应&lt;/p&gt;
+
+&lt;p&gt;–spider 不下载任何东西&lt;/p&gt;
+
+&lt;p&gt;-T, –timeout=SECONDS 设定响应超时的秒数&lt;/p&gt;
+
+&lt;p&gt;-w, –wait=SECONDS 两次尝试之间间隔SECONDS秒&lt;/p&gt;
+
+&lt;p&gt;–waitretry=SECONDS 在重新链接之间等待1…SECONDS秒&lt;/p&gt;
+
+&lt;p&gt;–random-wait 在下载之间等待0…2*WAIT秒&lt;/p&gt;
+
+&lt;p&gt;-Y, –proxy=on/off 打开或关闭代理&lt;/p&gt;
+
+&lt;p&gt;-Q, –quota=NUMBER 设置下载的容量限制&lt;/p&gt;
+
+&lt;p&gt;–limit-rate=RATE 限定下载输率&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;目录参数：&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;-nd –no-directories 不创建目录&lt;/p&gt;
+
+&lt;p&gt;-x, –force-directories 强制创建目录&lt;/p&gt;
+
+&lt;p&gt;-nH, –no-host-directories 不创建主机目录&lt;/p&gt;
+
+&lt;p&gt;-P, –directory-prefix=PREFIX 将文件保存到目录 PREFIX/…&lt;/p&gt;
+
+&lt;p&gt;–cut-dirs=NUMBER 忽略 NUMBER层远程目录&lt;/p&gt;
+
+&lt;p&gt;HTTP 选项参数：&lt;/p&gt;
+
+&lt;p&gt;–http-user=USER 设定HTTP用户名为 USER.&lt;/p&gt;
+
+&lt;p&gt;–http-passwd=PASS 设定http密码为 PASS&lt;/p&gt;
+
+&lt;p&gt;-C, –cache=on/off 允许/不允许服务器端的数据缓存 (一般情况下允许)&lt;/p&gt;
+
+&lt;p&gt;-E, –html-extension 将所有text/html文档以.html扩展名保存&lt;/p&gt;
+
+&lt;p&gt;–ignore-length 忽略 `Content-Length’头域&lt;/p&gt;
+
+&lt;p&gt;–header=STRING 在headers中插入字符串 STRING&lt;/p&gt;
+
+&lt;p&gt;–proxy-user=USER 设定代理的用户名为 USER&lt;/p&gt;
+
+&lt;p&gt;–proxy-passwd=PASS 设定代理的密码为 PASS&lt;/p&gt;
+
+&lt;p&gt;–referer=URL 在HTTP请求中包含 `Referer: URL’头&lt;/p&gt;
+
+&lt;p&gt;-s, –save-headers 保存HTTP头到文件&lt;/p&gt;
+
+&lt;p&gt;-U, –user-agent=AGENT 设定代理的名称为 AGENT而不是 Wget/VERSION&lt;/p&gt;
+
+&lt;p&gt;–no-http-keep-alive 关闭 HTTP活动链接 (永远链接)&lt;/p&gt;
+
+&lt;p&gt;–cookies=off 不使用 cookies&lt;/p&gt;
+
+&lt;p&gt;–load-cookies=FILE 在开始会话前从文件 FILE中加载cookie&lt;/p&gt;
+
+&lt;p&gt;–save-cookies=FILE 在会话结束后将 cookies保存到 FILE文件中&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;FTP 选项参数：&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;-nr, –dont-remove-listing 不移走 `.listing’文件&lt;/p&gt;
+
+&lt;p&gt;-g, –glob=on/off 打开或关闭文件名的 globbing机制&lt;/p&gt;
+
+&lt;p&gt;–passive-ftp 使用被动传输模式 (缺省值).&lt;/p&gt;
+
+&lt;p&gt;–active-ftp 使用主动传输模式&lt;/p&gt;
+
+&lt;p&gt;–retr-symlinks 在递归的时候，将链接指向文件(而不是目录)&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;递归下载参数：&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;-r, –recursive 递归下载－－慎用!&lt;/p&gt;
+
+&lt;p&gt;-l, –level=NUMBER 最大递归深度 (inf 或 0 代表无穷)&lt;/p&gt;
+
+&lt;p&gt;–delete-after 在现在完毕后局部删除文件&lt;/p&gt;
+
+&lt;p&gt;-k, –convert-links 转换非相对链接为相对链接&lt;/p&gt;
+
+&lt;p&gt;-K, –backup-converted 在转换文件X之前，将之备份为 X.orig&lt;/p&gt;
+
+&lt;p&gt;-m, –mirror 等价于 -r -N -l inf -nr&lt;/p&gt;
+
+&lt;p&gt;-p, –page-requisites 下载显示HTML文件的所有图片&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;递归下载中的包含和不包含(accept/reject)：&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;-A, –accept=LIST 分号分隔的被接受扩展名的列表&lt;/p&gt;
+
+&lt;p&gt;-R, –reject=LIST 分号分隔的不被接受的扩展名的列表&lt;/p&gt;
+
+&lt;p&gt;-D, –domains=LIST 分号分隔的被接受域的列表&lt;/p&gt;
+
+&lt;p&gt;–exclude-domains=LIST 分号分隔的不被接受的域的列表&lt;/p&gt;
+
+&lt;p&gt;–follow-ftp 跟踪HTML文档中的FTP链接&lt;/p&gt;
+
+&lt;p&gt;–follow-tags=LIST 分号分隔的被跟踪的HTML标签的列表&lt;/p&gt;
+
+&lt;p&gt;-G, –ignore-tags=LIST 分号分隔的被忽略的HTML标签的列表&lt;/p&gt;
+
+&lt;p&gt;-H, –span-hosts 当递归时转到外部主机&lt;/p&gt;
+
+&lt;p&gt;-L, –relative 仅仅跟踪相对链接&lt;/p&gt;
+
+&lt;p&gt;-I, –include-directories=LIST 允许目录的列表&lt;/p&gt;
+
+&lt;p&gt;-X, –exclude-directories=LIST 不被包含目录的列表&lt;/p&gt;
+
+&lt;p&gt;-np, –no-parent 不要追溯到父目录&lt;/p&gt;
+
+&lt;p&gt;wget -S –spider url 不下载只显示过程&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>python内建函数—isinstance</title>
+   <link href="http://www.panxw.com/posts/Python_Base_isinstance.html"/>
+   <updated>2017-12-08T00:00:00-08:00</updated>
+   <id>/posts/Python_Base_isinstance</id>
+   <content type="html">&lt;p&gt;本篇主要介绍python内建函数isinstance的功能及用法&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;一、&lt;b&gt;python内建函数 isinstance的用法&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;语法：isinstance（object，classinfo）&lt;/p&gt;
+
+&lt;p&gt;作用：来判断一个对象是否是这个类&lt;span style=&quot;color:red&quot;&gt;&lt;b&gt;(可以简单理解为object为classinfo的子集)&lt;/b&gt;&lt;/span&gt;。&lt;/p&gt;
+
+&lt;p&gt;其第一个参数（object）为对象，第二个参数（classinfo）为类型名(int…)或类型名的一个列表((int,list,float)是一个列表)。&lt;/p&gt;
+
+&lt;p&gt;返回值：为布尔型（True or flase）。&lt;/p&gt;
+
+&lt;p&gt;若对象的类型与参数二的类型相同则返回True。若参数二为一个元组，则若对象类型与元组中类型名之一相同即返回True。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二、&lt;b&gt;示例&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;例一&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; a = 4
+&amp;gt;&amp;gt;&amp;gt; isinstance (a,int)
+True
+&amp;gt;&amp;gt;&amp;gt; isinstance (a,str)
+False
+&amp;gt;&amp;gt;&amp;gt; isinstance (a,(str,int,list))
+True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例二&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class objA:   
+pass   
+  
+A = objA()   
+B = 'a','v'   
+C = 'a string'   
+  
+print isinstance(A, objA)   
+print isinstance(B, tuple)   
+print isinstance(C, basestring)   
+输出结果：   
+True   
+True   
+True   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不仅如此，还可以利用isinstance函数，来判断一个对象是否是一个已知的类型。&lt;br /&gt;
+isinstance说明如下:&lt;br /&gt;
+    isinstance(object, class-or-type-or-tuple) -&amp;gt; bool&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Return whether an object is an instance of a class or of a subclass thereof.  
+With a type as second argument, return whether that is the object's type.  
+The form using a tuple, isinstance(x, (A, B, ...)), is a shortcut for  
+isinstance(x, A) or isinstance(x, B) or ... (etc.).  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其第一个参数为对象，第二个为类型名或类型名的一个列表。其返回值为布尔型。若对象的类型与参数二的类型相同则返回True。若参数二为一个元组，则若对象类型与元组中类型名之一相同即返回True。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;isinstance(lst, list)  
+True  
+  
+&amp;gt;&amp;gt;&amp;gt;isinstance(lst, (int, str, list) )  
+True  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另外:Python可以得到一个对象的类型 ，利用type函数：»&amp;gt;lst = [1, 2, 3]»&amp;gt;type(lst)&amp;lt;type ‘list’&amp;gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>shell脚本中的时间运算</title>
+   <link href="http://www.panxw.com/posts/Linux-shell_time.html"/>
+   <updated>2017-12-01T00:00:00-08:00</updated>
+   <id>/posts/Linux-shell_time</id>
+   <content type="html">&lt;p&gt;在shell脚本中经常会遇到时间运算，本篇主要介绍shell脚本常用的时间处理方法以及常用示例&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;一、&lt;b&gt;时间基础知识&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;首先我们先来说说什么是shell下的时间戳：&lt;/p&gt;
+
+&lt;p&gt;自1970年1月1日（00:00:00 UTC/GMT）以来的秒数。它也被称为Unix时间戳（Unix Timestam、Unix epoch、POSIX time、Unix timestamp）是从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数，不考虑闰秒。&lt;/p&gt;
+
+&lt;p&gt;UNIX时间戳的0按照ISO 8601规范为：1970-01-01T00:00:00Z 一个小时表示为UNIX时间戳格式为：3600秒；一天表示为UNIX时间戳为86400秒，闰秒不计算。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二、&lt;b&gt;时间运算原理&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p style=&quot;color:red&quot;&gt;shell下的时间加减法就是根据时间戳来实现的，先将要运算的时间转化成时间戳然后进行运算，运算完成后再将得到的时间戳转化成我们常见格式的时间&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;三、&lt;b&gt;常用示例&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;比如：计算某天的时间戳，也就是指定的某一个到1970年1月1日以来的秒数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a.将基础时间转为时间戳
+time1=$(date +%s -d '1990-01-01 01:01:01')
+echo $time1
+631126861 【时间戳】
+
+b.将增加时间变成秒
+[root@localhost ~]# time2=$((1*60*60+20*60))
+[root@localhost ~]# echo $time2
+4800
+
+c.两个时间相加，计算出结果时间
+time3=$(($time1+$time2))
+time4=$(date +%Y-%m-%d\ %H:%M:%S -d &quot;1970-01-01 UTC $time3 seconds&quot;);
+echo $time4
+1990-01-01 02:21:01
+ 
+d.时间差计算方法
+如：2010-01-01 与 2009-01-01 11:11:11 时间差
+原理：同样转成时间戳，然后计算天，时，分，秒
+time1=$(($(date +%s -d '2010-01-01') - $(date +%s -d '2009-01-01 11:11:11')));
+echo time1
+将time1 / 60 秒，就变成分了。
+
+ 
+e.如果知道某个时间戳，也可以计算出这个时间戳对应的时间日期
+[root@node1 shell]# date --date=@1417779944
+Fri Dec  5 19:45:44 CST 2014
+ 
+[root@node1 shell]# date -d @1417779944
+Fri Dec  5 19:45:44 CST 2014
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;知道这些之后那我们就可以计算某一天距离今天过了多少天了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+#
+first_stamp=`date -d &quot;2014-12-05 19:45:44&quot; +%s` #计算指定日期的时间戳
+today_stamp=`date +%s`                          #计算当天的时间戳
+let day_stamp=($today_stamp - $first_stamp)     #当天的时间戳减去指定的时间戳
+let day=($day_stamp/86400)                      #相差的时间戳除以一天的秒数就得到天数
+echo $day
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以下还有一些时间的计算方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@node1 shell]# echo $(date --date='3 day')  //当天日期+3天
+Fri Jan 16 11:55:02 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 day ago')  //当天日期-3天
+Sat Jan 10 11:55:10 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 month')  //当天日期+3月
+Mon Apr 13 11:55:17 CST 2015
+[root@node1 shell]#  
+[root@node1 shell]# echo $(date --date='3 month ago')  //当天日期-3朋
+Mon Oct 13 11:55:25 CST 2014
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 year')  //当天日期+3年
+Sat Jan 13 11:55:32 CST 2018
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 year ago')  //当天日期-3年
+Fri Jan 13 11:55:38 CST 2012
+[root@node1 shell]#
+[root@node1 shell]# echo $(date --date='3 minute ')  //当天日期+3秒
+Tue Jan 13 11:58:44 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 minute ago')  //当天日期-3秒
+Tue Jan 13 11:52:52 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 hour ago')  //当天日期-3小时
+Tue Jan 13 08:56:00 CST 2015
+[root@node1 shell]# 
+[root@node1 shell]# echo $(date --date='3 hour')  //当天日期+3小时
+Tue Jan 13 14:56:06 CST 2015
+[root@node1 shell]#
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+ </entry>
  
  <entry>
    <title>阿里云公共NTP、DNS、镜像服务地址信息</title>
@@ -268,7 +972,7 @@ time.clock        time.localtime    time.strptime     time.tzname
   &lt;p&gt;三、&lt;b&gt;各时间格式转换关系以及对应的函数&lt;/b&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:8090/assets/2017-10-28-Python_Lib_time/1.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.panxw.com/assets/2017-10-28-Python_Lib_time/1.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;四、&lt;b&gt;主要函数讲解&lt;/b&gt;&lt;/p&gt;
@@ -590,14 +1294,14 @@ pip install requests
 
 &lt;p&gt;　　程序移动完成后，打开Finder，进入应用程序文件夹，这个时候会发现安装程序已经出现在安装程序列表中了。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:8090/assets/2017-10-27-UpanInstallMACSys/1.png&quot; alt=&quot;有帮助的截图&quot; /&gt;
-　　&lt;img src=&quot;http://localhost:8090/assets/2017-10-27-UpanInstallMACSys/2.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.panxw.com/assets/2017-10-27-UpanInstallMACSys/1.png&quot; alt=&quot;有帮助的截图&quot; /&gt;
+　　&lt;img src=&quot;http://www.panxw.com/assets/2017-10-27-UpanInstallMACSys/2.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:8090/assets/2017-10-27-UpanInstallMACSys/3.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.panxw.com/assets/2017-10-27-UpanInstallMACSys/3.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:8090/assets/2017-10-27-UpanInstallMACSys/4.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.panxw.com/assets/2017-10-27-UpanInstallMACSys/4.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:8090/assets/2017-10-27-UpanInstallMACSys/5.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.panxw.com/assets/2017-10-27-UpanInstallMACSys/5.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;b&gt;二、准备移动存储设备&lt;/b&gt;&lt;/p&gt;
@@ -611,7 +1315,7 @@ pip install requests
 
 &lt;p&gt;插入你的 U 盘，然后在「应用程序」-&amp;gt;「实用工具」里面找到并打开「磁盘工具」，或者直接用 Spotlight 搜索 “磁盘工具” 打开，如下图。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:8090/assets/2017-10-27-UpanInstallMACSys/6.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.panxw.com/assets/2017-10-27-UpanInstallMACSys/6.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -631,7 +1335,7 @@ pip install requests
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:8090/assets/2017-10-27-UpanInstallMACSys/7.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.panxw.com/assets/2017-10-27-UpanInstallMACSys/7.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;选择「GUID 分区表」，然后点击「好」&lt;/p&gt;
@@ -678,7 +1382,7 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
 
 &lt;p&gt;其实很简单，先在目标电脑上插上 U 盘，然后重启你的 Mac，然后一直按住「option」(alt) 按键不放，直到屏幕显示多出一个 USB 启动盘的选项，如下图。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:8090/assets/2017-10-27-UpanInstallMACSys/8.png&quot; alt=&quot;有帮助的截图&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.panxw.com/assets/2017-10-27-UpanInstallMACSys/8.png&quot; alt=&quot;有帮助的截图&quot; /&gt;
 这时选择 U 盘的图标回车，即可通过 U 盘来安装 Yosemite 了！这时，你可以直接覆盖安装系统(升级)，也可以在磁盘工具里面格式化抹掉整个硬盘，或者重新分区等实现全新的干净的安装。&lt;/p&gt;
 </content>
  </entry>
@@ -690,7 +1394,7 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
 <br/>
 <b>原创文章，转载请注明出处！</b>
 <br/>
-<b>本文链接：</b><a href="http://localhost:8090/atom.xml" title="atom.xml">http://localhost:8090/atom.xml</a>
+<b>本文链接：</b><a href="http://www.panxw.com/atom.xml" title="atom.xml">http://www.panxw.com/atom.xml</a>
 
 <!-- next and previous -->
 <div style="margin-top:15px; margin-bottom:10px">
@@ -773,6 +1477,30 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
 			<div class="row">
                             <div class="col-lg-12">
                 <ul class="list-unstyled">
+				
+                  <li>
+                    <a href="/posts/Linux-base-curl-post.html">
+                      curl模拟http发送get或post接口测试
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-base-cmd-wget.html">
+                      wget命令详解
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python_Base_isinstance.html">
+                      python内建函数—isinstance
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-shell_time.html">
+                      shell脚本中的时间运算
+                    </a>
+                  </li>
 				
                   <li>
                     <a href="/posts/LinuxPublicService.html">

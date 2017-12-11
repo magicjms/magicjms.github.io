@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="页面不存在：Page Not Found - 潘学文个人博客 - 作者:潘学文"/> 
-	
-    <title>页面不存在：Page Not Found - 潘学文个人博客</title>
+    <meta name="description" content="curl模拟http发送get或post接口测试 - 潘学文个人博客 - 作者:潘学文"/> 
+	<meta name="keywords" content="curl"/>
+    <title>curl模拟http发送get或post接口测试 - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -139,14 +139,78 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-          <p align="center">
-<h1></h1>Page Not Found!</h1>
-Please wait...
+          <!-- Navi -->
+<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/linux.html">Linux相关</a>&nbsp;>&nbsp;正文
+<!-- Title -->
+<h2>curl模拟http发送get或post接口测试</h2>
+<b>标签：</b><a href="/tags.html#curl"><i>curl</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2017-12-10
+</div>
 <br/>
-<br/>
-thanks!
-</p>
 
+<!-- content -->
+<div style="text-indent:0em;">
+<p>curl是我们在linux下经常使用的http访问、测试、诊断工具，这篇博客主要记录如何使用curl构建get、带参数的post请求<!-- more --></p>
+
+<blockquote>
+  <p><b>一、get请求 </b></p>
+</blockquote>
+
+<p>curl “http://www.baidu.com”  如果这里的URL指向的是一个文件或者一幅图都可以直接下载到本地</p>
+
+<p>curl -i “http://www.baidu.com”  显示全部信息</p>
+
+<p>curl -l “http://www.baidu.com” 只显示头部信息</p>
+
+<p>curl -v “http://www.baidu.com” 显示get请求全过程解析</p>
+
+<p>wget “http://www.baidu.com”也可以</p>
+
+<blockquote>
+  <p><b>二、post请求</b></p>
+</blockquote>
+
+<p>curl -d “param1=value1&amp;param2=value2” “http://www.baidu.com”</p>
+
+<blockquote>
+  <p><b> 三、json格式的post请求</b></p>
+</blockquote>
+
+<p>curl -l -H “Content-type: application/json” -X POST -d ‘{“phone”:”13521389587”,”password”:”test”}’ http://domain/apis/users.json</p>
+
+<p>例如：</p>
+
+<pre><code>curl -l -H "Content-type: application/json" -X POST -d '{"ver": "1.0","soa":{"req":"123"},"iface":"me.ele.lpdinfra.prediction.service.PredictionService","method":"restaurant_make_order_time","args":{"arg2":"\"stable\"","arg1":"{\"code\":[\"WIND\"],\"temperature\":11.11}","arg0":"{\"tracking_id\":\"100000000331770936\",\"eleme_order_id\":\"100000000331770936\",\"platform_id\":\"4\",\"restaurant_id\":\"482571\",\"dish_num\":1,\"dish_info\":[{\"entity_id\":142547763,\"quantity\":1,\"category_id\":1,\"dish_name\":\"[0xe7][0x89][0xb9][0xe4][0xbb][0xb7][0xe8][0x85][0x8a][0xe5][0x91][0xb3][0xe5][0x8f][0x89][0xe7][0x83][0xa7][0xe5][0x8f][0x8c][0xe6][0x8b][0xbc][0xe7][0x85][0xb2][0xe4][0xbb][0x94][0xe9][0xa5][0xad]\",\"price\":31.0}],\"merchant_location\":{\"longitude\":\"121.47831425\",\"latitude\":\"31.27576153\"},\"customer_location\":{\"longitude\":\"121.47831425\",\"latitude\":\"31.27576153\"},\"created_at\":1477896550,\"confirmed_at\":1477896550,\"dishes_total_price\":0.0,\"food_boxes_total_price\":2.0,\"delivery_total_price\":2.0,\"pay_amount\":35.0,\"city_id\":\"1\"}"}}' http://vpcb-lpdinfra-stream-1.vm.elenet.me:8989/rpc
+</code></pre>
+
+<p>参考资料：<a href="https://www.cnblogs.com/sunshine2016/p/6015976.html" title="https://www.cnblogs.com/sunshine2016/p/6015976.html">https://www.cnblogs.com/sunshine2016/p/6015976.html</a></p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="http://www.panxw.com/posts/Linux-base-curl-post.html" title="">http://www.panxw.com/posts/Linux-base-curl-post.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Linux-base-cmd-wget.html">
+      wget命令详解
+    </a>
+  </span>
+   
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">

@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="wget命令详解 - 潘学文个人博客 - 作者:潘学文"/> 
+	<meta name="keywords" content="wget"/>
+    <title>wget命令详解 - 潘学文个人博客</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="/css/blog.css" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+    queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://
+    -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+      </script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+      </script>
+    <![endif]-->
+        <!-- jQuery Version 1.11.0 -->
+    <script src="/js/jquery-1.11.0.js"> </script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+<!--         <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">
+              Toggle navigation
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+          </button>
+          <a class="navbar-brand" href="/">
+            首页
+          </a>
+        </div> -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          
+<!--
+http://blog.csdn.net/rabbitter/article/details/51125337
+-->
+
+<style type="text/css">
+/*    body,ul,li,a{margin: 0;padding: 0}  */
+/*    body{background-color: #e6e7e9;}  */
+/*    #nav-wrap{margin: 10px auto;width: 100%;background-color: white;border-bottom: 2px solid #ddd;}  
+*/  
+    ul,li,a{margin: 0;padding: 0;}
+    ul{list-style: none;}  
+    #nav{width: 750px; height: 45px;margin:0 auto; float: left;}  
+    #nav>li{float: left;position: relative;height: 45px;margin-right: 60px;}  
+    #nav a{display: block; text-decoration: none;font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 12px;}  
+    #nav>li>a{color: #000;text-transform:uppercase;height: 13px; line-height: 13px; padding: 17px 0 15px 0px;font-size: 16px;text-align: center; color: white;}  
+    #nav>li i{display: inline-block; height: 5px; width:5px; background: url(../images/home.png) left bottom no-repeat;}  
+    #nav>li ul{position: absolute;left: -20px;top: 47px; width: 180px;background-color: #fff;padding: 20px;display: none;  
+        border:1px solid #ECEFF5;}  
+    #nav>li ul li{margin-bottom: 10px;}  
+    #nav>li ul a{font-size: 12px;color: #606060;}  
+    .this{border-bottom: 2px solid #b0b;}  
+    #nav>li:hover ul{display:block;}  
+    #nav>li:hover{border-bottom: 2px solid #0bb;}  
+</style>
+
+
+<!-- <div id="nav-wrap">  
+ --><ul id="nav"><!--一级导航的ul-->  
+    <li class="home this"><a href="/"><i></i><span style="font-size: 18px;">首页</span></a></li>  
+  
+    <li class="safe"><a href="/posts/linux.html"><i></i><span>Linux</span></a><!--一级导航的li-->  
+        <ul><!--一级菜单的li中的二级导航的ul-->  
+            <li><a href="/posts/shell.html"><span>shell</span></a></li><!--二级导航中各个选项li-->  
+            <li><a href="#"><span>Open-Source Apps</span></a></li>  
+            <li><a href="#"><span>Android</span></a></li>  
+            <li><a href="#"><span>JavaScript</span></a></li>  
+        </ul>  
+    </li>  
+  
+    <li class="service"><a href="/posts/python.html"><i></i><span>Python</span></a>  
+        <ul>  
+            <li><a href="#"><span>基础</span></a></li>  
+            <li><a href="#"><span>常用模块</span></a></li>  
+            <li><a href="#"><span>Android</span></a></li>  
+            <li><a href="#"><span>JavaScript</span></a></li>  
+        </ul>  
+    </li>  
+    <li class="shoping-car"><a href="#"><i></i><span>SHOPING CAR</span></a>  
+        <ul>  
+            <li><a href="#"><span>After Effects</span></a></li>  
+            <li><a href="#"><span>Open-Source Apps</span></a></li>  
+            <li><a href="#"><span>Android</span></a></li>  
+            <li><a href="#"><span>JavaScript</span></a></li>  
+        </ul>  
+    </li>  
+    <li class="member"><a href="#"><i></i><span>MEMBER</span></a>  
+        <ul>  
+            <li><a href="#"><span>After Effects</span></a></li>  
+            <li><a href="#"><span>Open-Source Apps</span></a></li>  
+            <li><a href="#"><span>Android</span></a></li>  
+            <li><a href="#"><span>See More...</span></a></li>  
+        </ul>  
+    </li>  
+</ul>  
+<!-- </div>   --> 
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+          <!-- Navi -->
+<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/linux.html">Linux相关</a>&nbsp;>&nbsp;正文
+<!-- Title -->
+<h2>wget命令详解</h2>
+<b>标签：</b><a href="/tags.html#wget"><i>wget</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2017-12-10
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<p>Linux系统中的wget是一个下载文件的工具，它用在命令行下。对于Linux用户是必不可少的工具，我们经常要下载一些软件或从远程服务器恢复备份到本地服务器。wget支持HTTP，HTTPS和FTP协议，可以使用HTTP代理。所谓的自动下载是指，wget可以在用户退出系统的之后在后台执行。这意味这你可以登录系统，启动一个wget下载任务，然后退出系统，wget将在后台执行直到任务完成，相对于其它大部分浏览器在下载大量数据时需要用户一直的参与，这省去了极大的麻烦。<!-- more --></p>
+
+<p>wget 可以跟踪HTML页面上的链接依次下载来创建远程服务器的本地版本，完全重建原始站点的目录结构。这又常被称作”递归下载”。在递归下载的时候，wget 遵循Robot Exclusion标准(/robots.txt). wget可以在下载的同时，将链接转换成指向本地文件，以方便离线浏览。</p>
+
+<p>wget 非常稳定，它在带宽很窄的情况下和不稳定网络中有很强的适应性.如果是由于网络的原因下载失败，wget会不断的尝试，直到整个文件下载完毕。如果是服务器打断下载过程，它会再次联到服务器上从停止的地方继续下载。这对从那些限定了链接时间的服务器上下载大文件非常有用。</p>
+
+<blockquote>
+  <p><b>1．命令格式：</b></p>
+</blockquote>
+
+<pre><code>wget [参数] [URL地址]
+</code></pre>
+
+<blockquote>
+  <p><b>2．命令功能：</b></p>
+</blockquote>
+
+<p>用于从网络上下载资源，没有指定目录，下载资源回默认为当前目录。wget虽然功能强大，但是使用起来还是比较简单：</p>
+
+<p>1）支持断点下传功能；这一点，也是网络蚂蚁和FlashGet当年最大的卖点，现在，Wget也可以使用此功能，那些网络不是太好的用户可以放心了；</p>
+
+<p>2）同时支持FTP和HTTP下载方式；尽管现在大部分软件可以使用HTTP方式下载，但是，有些时候，仍然需要使用FTP方式下载软件；</p>
+
+<p>3）支持代理服务器；对安全强度很高的系统而言，一般不会将自己的系统直接暴露在互联网上，所以，支持代理是下载软件必须有的功能；</p>
+
+<p>4）设置方便简单；可能，习惯图形界面的用户已经不是太习惯命令行了，但是，命令行在设置上其实有更多的优点，最少，鼠标可以少点很多次，也不要担心是否错点鼠标；</p>
+
+<p>5）程序小，完全免费；程序小可以考虑不计，因为现在的硬盘实在太大了；完全免费就不得不考虑了，即使网络上有很多所谓的免费软件，但是，这些软件的广告却不是我们喜欢的。</p>
+
+<blockquote>
+  <p><b>3．使用实例：</b></p>
+</blockquote>
+
+<p><b>实例1：使用wget下载单个文件</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+</code></pre>
+
+<p>说明：</p>
+
+<p>以下的例子是从网络下载一个文件并保存在当前目录，在下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。</p>
+
+<p><b>实例2：使用wget -O下载并以不同的文件名保存</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget -O wordpress.zip http://www.minjieren.com/download.aspx?id=1080
+</code></pre>
+
+<p>说明：</p>
+
+<p>wget默认会以最后一个符合”/”的后面的字符来命令，对于动态链接的下载通常文件名会不正确。</p>
+
+<p>错误：下面的例子会下载一个文件并以名称download.aspx?id=1080保存</p>
+
+<p>wget http://www.minjieren.com/download?id=1</p>
+
+<p>即使下载的文件是zip格式，它仍然以download.php?id=1080命令。</p>
+
+<p>正确：为了解决这个问题，我们可以使用参数-O来指定一个文件名：</p>
+
+<p>wget -O wordpress.zip http://www.minjieren.com/download.aspx?id=1080</p>
+
+<p><b>实例3：使用wget –limit -rate限速下载</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget --limit-rate=300k http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+</code></pre>
+
+<p>说明：</p>
+
+<p>当你执行wget的时候，它默认会占用全部可能的宽带下载。但是当你准备下载一个大文件，而你还需要下载其它文件时就有必要限速了。</p>
+
+<p><b>实例4：使用wget -c断点续传</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget -c http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+</code></pre>
+
+<p>说明：</p>
+
+<p>使用wget -c重新启动下载中断的文件，对于我们下载大文件时突然由于网络等原因中断非常有帮助，我们可以继续接着下载而不是重新下载一个文件。需要继续中断的下载时可以使用-c参数。</p>
+
+<p><b>实例5：使用wget -b后台下载</b></p>
+
+<p>命令：</p>
+
+<pre><code> wget -b http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+</code></pre>
+
+<p>说明：</p>
+
+<p>对于下载非常大的文件的时候，我们可以使用参数-b进行后台下载。</p>
+
+<p>wget -b http://www.minjieren.com/wordpress-3.1-zh_CN.zip</p>
+
+<p>Continuing in background, pid 1840.</p>
+
+<p>Output will be written to `wget-log’.</p>
+
+<p>你可以使用以下命令来察看下载进度：</p>
+
+<p>tail -f wget-log</p>
+
+<p><b>实例6：伪装代理名称下载</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget --user-agent="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16" http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+</code></pre>
+
+<p>说明：</p>
+
+<p>有些网站能通过根据判断代理名称不是浏览器而拒绝你的下载请求。不过你可以通过–user-agent参数伪装。</p>
+
+<p><b>实例7：使用wget –spider测试下载链接</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget --spider URL
+</code></pre>
+
+<p>说明：</p>
+
+<p>当你打算进行定时下载，你应该在预定时间测试下载链接是否有效。我们可以增加–spider参数进行检查。</p>
+
+<p>wget –spider URL</p>
+
+<p>如果下载链接正确，将会显示</p>
+
+<pre><code>wget --spider URL
+
+Spider mode enabled. Check if remote file exists.
+
+HTTP request sent, awaiting response... 200 OK
+
+Length: unspecified [text/html]
+
+Remote file exists and could contain further links,
+
+but recursion is disabled -- not retrieving.
+</code></pre>
+
+<p>这保证了下载能在预定的时间进行，但当你给错了一个链接，将会显示如下错误</p>
+
+<pre><code>wget --spider url
+
+Spider mode enabled. Check if remote file exists.
+
+HTTP request sent, awaiting response... 404 Not Found
+
+Remote file does not exist -- broken link!!!
+</code></pre>
+
+<p>你可以在以下几种情况下使用spider参数：</p>
+
+<p>定时下载之前进行检查</p>
+
+<p>间隔检测网站是否可用</p>
+
+<p>检查网站页面的死链接</p>
+
+<p><b>实例8：使用wget –tries增加重试次数</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget --tries=40 URL
+</code></pre>
+
+<p>说明：</p>
+
+<p>如果网络有问题或下载一个大文件也有可能失败。wget默认重试20次连接下载文件。如果需要，你可以使用–tries增加重试次数。</p>
+
+<p><b>实例9：使用wget -i下载多个文件</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget -i filelist.txt
+</code></pre>
+
+<p>说明：</p>
+
+<p>首先，保存一份下载链接文件</p>
+
+<pre><code>cat &gt; filelist.txt
+url1
+url2
+url3
+url4
+</code></pre>
+
+<p>接着使用这个文件和参数-i下载</p>
+
+<p><b>实例10：使用wget –mirror镜像网站</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget --mirror -p --convert-links -P ./LOCAL URL
+</code></pre>
+
+<p>说明：</p>
+
+<p>下载整个网站到本地。</p>
+
+<p>–miror:开户镜像下载</p>
+
+<p>-p:下载所有为了html页面显示正常的文件</p>
+
+<p>–convert-links:下载后，转换成本地的链接</p>
+
+<p>-P ./LOCAL：保存所有文件和目录到本地指定目录</p>
+
+<p><b>实例11：使用wget –reject过滤指定格式下载</b></p>
+
+<p>命令：
+    wget –reject=gif ur</p>
+
+<p>说明：</p>
+
+<p>下载一个网站，但你不希望下载图片，可以使用以下命令。</p>
+
+<p><b>实例12：使用wget -o把下载信息存入日志文件</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget -o download.log URL
+</code></pre>
+
+<p>说明：</p>
+
+<p>不希望下载信息直接显示在终端而是在一个日志文件，可以使用</p>
+
+<p><b>实例13：使用wget -Q限制总下载文件大小</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget -Q5m -i filelist.txt
+</code></pre>
+
+<p>说明：</p>
+
+<p>当你想要下载的文件超过5M而退出下载，你可以使用。注意：这个参数对单个文件下载不起作用，只能递归下载时才有效。</p>
+
+<p><b>实例14：使用wget -r -A下载指定格式文件</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget -r -A.pdf url
+</code></pre>
+
+<p>说明：</p>
+
+<p>可以在以下情况使用该功能：</p>
+
+<p>下载一个网站的所有图片</p>
+
+<p>下载一个网站的所有视频</p>
+
+<p>下载一个网站的所有PDF文件</p>
+
+<p><b>实例15：使用wget FTP下载</b></p>
+
+<p>命令：</p>
+
+<pre><code>wget ftp-url
+
+wget --ftp-user=USERNAME --ftp-password=PASSWORD url
+</code></pre>
+
+<p>说明：</p>
+
+<p>可以使用wget来完成ftp链接的下载。</p>
+
+<p>使用wget匿名ftp下载：</p>
+
+<pre><code>wget ftp-url
+</code></pre>
+
+<p>使用wget用户名和密码认证的ftp下载</p>
+
+<pre><code>wget --ftp-user=USERNAME --ftp-password=PASSWORD url
+</code></pre>
+
+<p>备注：编译安装</p>
+
+<p>使用如下命令编译安装：</p>
+
+<pre><code># tar zxvf wget-1.9.1.tar.gz 
+# cd wget-1.9.1 
+# ./configure 
+# make 
+# make install 
+</code></pre>
+
+<blockquote>
+  <p><b>4．命令参数：</b></p>
+</blockquote>
+
+<p><b>启动参数：</b></p>
+
+<p>-V, –version 显示wget的版本后退出</p>
+
+<p>-h, –help 打印语法帮助</p>
+
+<p>-b, –background 启动后转入后台执行</p>
+
+<p>-e, –execute=COMMAND 执行`.wgetrc’格式的命令，wgetrc格式参见/etc/wgetrc或~/.wgetrc记录和输入文件参数：</p>
+
+<p>-o, –output-file=FILE 把记录写到FILE文件中</p>
+
+<p>-a, –append-output=FILE 把记录追加到FILE文件中</p>
+
+<p>-d, –debug 打印调试输出</p>
+
+<p>-q, –quiet 安静模式(没有输出)</p>
+
+<p>-v, –verbose 冗长模式(这是缺省设置)</p>
+
+<p>-nv, –non-verbose 关掉冗长模式，但不是安静模式</p>
+
+<p>-i, –input-file=FILE 下载在FILE文件中出现的URLs</p>
+
+<p>-F, –force-html 把输入文件当作HTML格式文件对待</p>
+
+<p>-B, –base=URL 将URL作为在-F -i参数指定的文件中出现的相对链接的前缀</p>
+
+<p>–sslcertfile=FILE 可选客户端证书</p>
+
+<p>–sslcertkey=KEYFILE 可选客户端证书的KEYFILE</p>
+
+<p>–egd-file=FILE 指定EGD socket的文件名</p>
+
+<p><b>下载参数：</b></p>
+
+<p>–bind-address=ADDRESS 指定本地使用地址(主机名或IP，当本地有多个IP或名字时使用)</p>
+
+<p>-t, –tries=NUMBER 设定最大尝试链接次数(0 表示无限制).</p>
+
+<p>-O –output-document=FILE 把文档写到FILE文件中</p>
+
+<p>-nc, –no-clobber 不要覆盖存在的文件或使用.#前缀</p>
+
+<p>-c, –continue 接着下载没下载完的文件</p>
+
+<p>–progress=TYPE 设定进程条标记</p>
+
+<p>-N, –timestamping 不要重新下载文件除非比本地文件新</p>
+
+<p>-S, –server-response 打印服务器的回应</p>
+
+<p>–spider 不下载任何东西</p>
+
+<p>-T, –timeout=SECONDS 设定响应超时的秒数</p>
+
+<p>-w, –wait=SECONDS 两次尝试之间间隔SECONDS秒</p>
+
+<p>–waitretry=SECONDS 在重新链接之间等待1…SECONDS秒</p>
+
+<p>–random-wait 在下载之间等待0…2*WAIT秒</p>
+
+<p>-Y, –proxy=on/off 打开或关闭代理</p>
+
+<p>-Q, –quota=NUMBER 设置下载的容量限制</p>
+
+<p>–limit-rate=RATE 限定下载输率</p>
+
+<p><b>目录参数：</b></p>
+
+<p>-nd –no-directories 不创建目录</p>
+
+<p>-x, –force-directories 强制创建目录</p>
+
+<p>-nH, –no-host-directories 不创建主机目录</p>
+
+<p>-P, –directory-prefix=PREFIX 将文件保存到目录 PREFIX/…</p>
+
+<p>–cut-dirs=NUMBER 忽略 NUMBER层远程目录</p>
+
+<p>HTTP 选项参数：</p>
+
+<p>–http-user=USER 设定HTTP用户名为 USER.</p>
+
+<p>–http-passwd=PASS 设定http密码为 PASS</p>
+
+<p>-C, –cache=on/off 允许/不允许服务器端的数据缓存 (一般情况下允许)</p>
+
+<p>-E, –html-extension 将所有text/html文档以.html扩展名保存</p>
+
+<p>–ignore-length 忽略 `Content-Length’头域</p>
+
+<p>–header=STRING 在headers中插入字符串 STRING</p>
+
+<p>–proxy-user=USER 设定代理的用户名为 USER</p>
+
+<p>–proxy-passwd=PASS 设定代理的密码为 PASS</p>
+
+<p>–referer=URL 在HTTP请求中包含 `Referer: URL’头</p>
+
+<p>-s, –save-headers 保存HTTP头到文件</p>
+
+<p>-U, –user-agent=AGENT 设定代理的名称为 AGENT而不是 Wget/VERSION</p>
+
+<p>–no-http-keep-alive 关闭 HTTP活动链接 (永远链接)</p>
+
+<p>–cookies=off 不使用 cookies</p>
+
+<p>–load-cookies=FILE 在开始会话前从文件 FILE中加载cookie</p>
+
+<p>–save-cookies=FILE 在会话结束后将 cookies保存到 FILE文件中</p>
+
+<p><b>FTP 选项参数：</b></p>
+
+<p>-nr, –dont-remove-listing 不移走 `.listing’文件</p>
+
+<p>-g, –glob=on/off 打开或关闭文件名的 globbing机制</p>
+
+<p>–passive-ftp 使用被动传输模式 (缺省值).</p>
+
+<p>–active-ftp 使用主动传输模式</p>
+
+<p>–retr-symlinks 在递归的时候，将链接指向文件(而不是目录)</p>
+
+<p><b>递归下载参数：</b></p>
+
+<p>-r, –recursive 递归下载－－慎用!</p>
+
+<p>-l, –level=NUMBER 最大递归深度 (inf 或 0 代表无穷)</p>
+
+<p>–delete-after 在现在完毕后局部删除文件</p>
+
+<p>-k, –convert-links 转换非相对链接为相对链接</p>
+
+<p>-K, –backup-converted 在转换文件X之前，将之备份为 X.orig</p>
+
+<p>-m, –mirror 等价于 -r -N -l inf -nr</p>
+
+<p>-p, –page-requisites 下载显示HTML文件的所有图片</p>
+
+<p><b>递归下载中的包含和不包含(accept/reject)：</b></p>
+
+<p>-A, –accept=LIST 分号分隔的被接受扩展名的列表</p>
+
+<p>-R, –reject=LIST 分号分隔的不被接受的扩展名的列表</p>
+
+<p>-D, –domains=LIST 分号分隔的被接受域的列表</p>
+
+<p>–exclude-domains=LIST 分号分隔的不被接受的域的列表</p>
+
+<p>–follow-ftp 跟踪HTML文档中的FTP链接</p>
+
+<p>–follow-tags=LIST 分号分隔的被跟踪的HTML标签的列表</p>
+
+<p>-G, –ignore-tags=LIST 分号分隔的被忽略的HTML标签的列表</p>
+
+<p>-H, –span-hosts 当递归时转到外部主机</p>
+
+<p>-L, –relative 仅仅跟踪相对链接</p>
+
+<p>-I, –include-directories=LIST 允许目录的列表</p>
+
+<p>-X, –exclude-directories=LIST 不被包含目录的列表</p>
+
+<p>-np, –no-parent 不要追溯到父目录</p>
+
+<p>wget -S –spider url 不下载只显示过程</p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="http://www.panxw.com/posts/Linux-base-cmd-wget.html" title="">http://www.panxw.com/posts/Linux-base-cmd-wget.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Python_Base_isinstance.html">
+      python内建函数—isinstance
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Linux-base-curl-post.html">
+      curl模拟http发送get或post接口测试
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
+        </div>
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <!-- Blog Categories Well -->
+          <div class="well">
+            <h4>
+              栏目分类
+            </h4>
+            <div class="row">
+                            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/posts/system.html">
+                      系统
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/web.html">
+                      Web建站
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/read.html">
+                      读书笔记
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/archives.html">
+                      存档
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.col-lg-6 -->
+              <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/posts/python.html">
+                      python语言
+                    </a>
+                  </li>                  
+				  <li>
+                    <a href="/posts/linux.html">
+                      Linux相关
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/other.html">
+                      杂记
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/tags.html">
+                      Tags
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.col-lg-6 -->
+ 
+            </div>
+            <!-- /.row -->
+          </div>
+		  <!-- Blog Recent Well -->
+          <div class="well">
+            <h4>
+              最新文章
+            </h4>
+			<div class="row">
+                            <div class="col-lg-12">
+                <ul class="list-unstyled">
+				
+                  <li>
+                    <a href="/posts/Linux-base-curl-post.html">
+                      curl模拟http发送get或post接口测试
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-base-cmd-wget.html">
+                      wget命令详解
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python_Base_isinstance.html">
+                      python内建函数—isinstance
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-shell_time.html">
+                      shell脚本中的时间运算
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/LinuxPublicService.html">
+                      阿里云公共NTP、DNS、镜像服务地址信息
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python_Lib_time.html">
+                      python模块详解—time
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/MACCommSourceInfo.html">
+                      MAC常用资源网站
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/LinuxUpdatePyton2.7.html">
+                      CentOS Python2.6升级2.7并安装easy_install和pip
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/UpanInstallMACSys.html">
+                      U盘安装MAC系统
+                    </a>
+                  </li>
+				  
+                </ul>
+              </div> 
+			</div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+      <!-- Footer -->
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+                        <div style="text-align:center;margin-top:15px;">
+				Copyright &copy; www.panxw.com, generated by Jekyll, designed by <a href="https://www.panxw.com">panxw</a>. <a href="https://github.com/panxw/panxw.github.com">[source]</a>
+				<br/>
+				请修改_includes/copyright.html添加统计代码。
+            </div>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script> 
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+      </footer>
+    </div>
+    <!-- /.container -->
+  </body>
+
+</html>

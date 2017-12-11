@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="页面不存在：Page Not Found - 潘学文个人博客 - 作者:潘学文"/> 
-	
-    <title>页面不存在：Page Not Found - 潘学文个人博客</title>
+    <meta name="description" content="python内建函数—isinstance - 潘学文个人博客 - 作者:潘学文"/> 
+	<meta name="keywords" content="python基础"/>
+    <title>python内建函数—isinstance - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -139,14 +139,122 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-          <p align="center">
-<h1></h1>Page Not Found!</h1>
-Please wait...
+          <!-- Navi -->
+<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/python.html">python语言</a>&nbsp;>&nbsp;正文
+<!-- Title -->
+<h2>python内建函数—isinstance</h2>
+<b>标签：</b><a href="/tags.html#python基础"><i>python基础</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2017-12-08
+</div>
 <br/>
-<br/>
-thanks!
-</p>
 
+<!-- content -->
+<div style="text-indent:0em;">
+<p>本篇主要介绍python内建函数isinstance的功能及用法<!-- more --></p>
+
+<blockquote>
+  <p>一、<b>python内建函数 isinstance的用法</b></p>
+</blockquote>
+
+<p>语法：isinstance（object，classinfo）</p>
+
+<p>作用：来判断一个对象是否是这个类<span style="color:red"><b>(可以简单理解为object为classinfo的子集)</b></span>。</p>
+
+<p>其第一个参数（object）为对象，第二个参数（classinfo）为类型名(int…)或类型名的一个列表((int,list,float)是一个列表)。</p>
+
+<p>返回值：为布尔型（True or flase）。</p>
+
+<p>若对象的类型与参数二的类型相同则返回True。若参数二为一个元组，则若对象类型与元组中类型名之一相同即返回True。</p>
+
+<blockquote>
+  <p>二、<b>示例</b></p>
+</blockquote>
+
+<p>例一</p>
+
+<pre><code>&gt;&gt;&gt; a = 4
+&gt;&gt;&gt; isinstance (a,int)
+True
+&gt;&gt;&gt; isinstance (a,str)
+False
+&gt;&gt;&gt; isinstance (a,(str,int,list))
+True
+</code></pre>
+
+<p>例二</p>
+
+<pre><code>class objA:   
+pass   
+  
+A = objA()   
+B = 'a','v'   
+C = 'a string'   
+  
+print isinstance(A, objA)   
+print isinstance(B, tuple)   
+print isinstance(C, basestring)   
+输出结果：   
+True   
+True   
+True   
+</code></pre>
+
+<p>不仅如此，还可以利用isinstance函数，来判断一个对象是否是一个已知的类型。<br />
+isinstance说明如下:<br />
+    isinstance(object, class-or-type-or-tuple) -&gt; bool</p>
+
+<pre><code>Return whether an object is an instance of a class or of a subclass thereof.  
+With a type as second argument, return whether that is the object's type.  
+The form using a tuple, isinstance(x, (A, B, ...)), is a shortcut for  
+isinstance(x, A) or isinstance(x, B) or ... (etc.).  
+</code></pre>
+
+<p>其第一个参数为对象，第二个为类型名或类型名的一个列表。其返回值为布尔型。若对象的类型与参数二的类型相同则返回True。若参数二为一个元组，则若对象类型与元组中类型名之一相同即返回True。</p>
+
+<pre><code>&gt;&gt;&gt;isinstance(lst, list)  
+True  
+  
+&gt;&gt;&gt;isinstance(lst, (int, str, list) )  
+True  
+</code></pre>
+
+<p>另外:Python可以得到一个对象的类型 ，利用type函数：»&gt;lst = [1, 2, 3]»&gt;type(lst)&lt;type ‘list’&gt;</p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="http://www.panxw.com/posts/Python_Base_isinstance.html" title="">http://www.panxw.com/posts/Python_Base_isinstance.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Linux-shell_time.html">
+      shell脚本中的时间运算
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Linux-base-cmd-wget.html">
+      wget命令详解
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
