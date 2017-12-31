@@ -158,7 +158,7 @@ http://blog.csdn.net/rabbitter/article/details/51125337
  <title></title>
  <link href="http://www.panxw.com/atom.xml" rel="self"/>
  <link href="http://www.panxw.com"/>
- <updated>2017-12-30T21:53:26-08:00</updated>
+ <updated>2017-12-30T21:59:01-08:00</updated>
  <author>
    <name>潘学文</name>
    <email>winfirm#163.com</email>
@@ -972,7 +972,7 @@ time.clock        time.localtime    time.strptime     time.tzname
   &lt;p&gt;三、&lt;b&gt;各时间格式转换关系以及对应的函数&lt;/b&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/2017-10-28-Python_Lib_time/1.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2017-10-28-Python_Lib_time/1.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;四、&lt;b&gt;主要函数讲解&lt;/b&gt;&lt;/p&gt;
