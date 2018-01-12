@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Atom Feed - 潘学文个人博客 - 作者:潘学文"/> 
+    <meta name="description" content="Atom Feed - 潘学文个人博客 - 作者:magicjms"/> 
 	
     <title>Atom Feed - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
@@ -156,19 +156,19 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title></title>
- <link href="http://www.panxw.com/atom.xml" rel="self"/>
- <link href="http://www.panxw.com"/>
- <updated>2017-12-30T22:04:12-08:00</updated>
+ <link href="http://magicjms.github.io/atom.xml" rel="self"/>
+ <link href="http://magicjms.github.io"/>
+ <updated>2018-01-12T16:56:26+08:00</updated>
  <author>
-   <name>潘学文</name>
-   <email>winfirm#163.com</email>
+   <name>magicjms</name>
+   <email>2368691083@qq.com</email>
  </author>
 
  
  <entry>
    <title>curl模拟http发送get或post接口测试</title>
-   <link href="http://www.panxw.com/posts/Linux-base-curl-post.html"/>
-   <updated>2017-12-10T00:00:00-08:00</updated>
+   <link href="http://magicjms.github.io/posts/Linux-base-curl-post.html"/>
+   <updated>2017-12-10T00:00:00+08:00</updated>
    <id>/posts/Linux-base-curl-post</id>
    <content type="html">&lt;p&gt;curl是我们在linux下经常使用的http访问、测试、诊断工具，这篇博客主要记录如何使用curl构建get、带参数的post请求&lt;!-- more --&gt;&lt;/p&gt;
 
@@ -209,8 +209,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
  
  <entry>
    <title>wget命令详解</title>
-   <link href="http://www.panxw.com/posts/Linux-base-cmd-wget.html"/>
-   <updated>2017-12-10T00:00:00-08:00</updated>
+   <link href="http://magicjms.github.io/posts/Linux-base-cmd-wget.html"/>
+   <updated>2017-12-10T00:00:00+08:00</updated>
    <id>/posts/Linux-base-cmd-wget</id>
    <content type="html">&lt;p&gt;Linux系统中的wget是一个下载文件的工具，它用在命令行下。对于Linux用户是必不可少的工具，我们经常要下载一些软件或从远程服务器恢复备份到本地服务器。wget支持HTTP，HTTPS和FTP协议，可以使用HTTP代理。所谓的自动下载是指，wget可以在用户退出系统的之后在后台执行。这意味这你可以登录系统，启动一个wget下载任务，然后退出系统，wget将在后台执行直到任务完成，相对于其它大部分浏览器在下载大量数据时需要用户一直的参与，这省去了极大的麻烦。&lt;!-- more --&gt;&lt;/p&gt;
 
@@ -686,8 +686,8 @@ wget --ftp-user=USERNAME --ftp-password=PASSWORD url
  
  <entry>
    <title>python内建函数—isinstance</title>
-   <link href="http://www.panxw.com/posts/Python_Base_isinstance.html"/>
-   <updated>2017-12-08T00:00:00-08:00</updated>
+   <link href="http://magicjms.github.io/posts/Python_Base_isinstance.html"/>
+   <updated>2017-12-08T00:00:00+08:00</updated>
    <id>/posts/Python_Base_isinstance</id>
    <content type="html">&lt;p&gt;本篇主要介绍python内建函数isinstance的功能及用法&lt;!-- more --&gt;&lt;/p&gt;
 
@@ -763,8 +763,8 @@ True
  
  <entry>
    <title>shell脚本中的时间运算</title>
-   <link href="http://www.panxw.com/posts/Linux-shell_time.html"/>
-   <updated>2017-12-01T00:00:00-08:00</updated>
+   <link href="http://magicjms.github.io/posts/Linux-shell_time.html"/>
+   <updated>2017-12-01T00:00:00+08:00</updated>
    <id>/posts/Linux-shell_time</id>
    <content type="html">&lt;p&gt;在shell脚本中经常会遇到时间运算，本篇主要介绍shell脚本常用的时间处理方法以及常用示例&lt;!-- more --&gt;&lt;/p&gt;
 
@@ -871,8 +871,8 @@ Tue Jan 13 14:56:06 CST 2015
  
  <entry>
    <title>阿里云公共NTP、DNS、镜像服务地址信息</title>
-   <link href="http://www.panxw.com/posts/LinuxPublicService.html"/>
-   <updated>2017-11-01T00:00:00-08:00</updated>
+   <link href="http://magicjms.github.io/posts/LinuxPublicService.html"/>
+   <updated>2017-11-01T00:00:00+08:00</updated>
    <id>/posts/LinuxPublicService</id>
    <content type="html">&lt;p&gt;今天发现开发环镜的几台服务器时间不同步，百度搜索公共ntp服务器得到的几乎都不能用，今天特意记录下能用的公共服务，以防下次再被百度误导(百度 阿里云ntp即可得到此结果)&lt;!-- more --&gt;&lt;/p&gt;
 
@@ -917,8 +917,8 @@ ntp7.aliyun.com
  
  <entry>
    <title>python模块详解—time</title>
-   <link href="http://www.panxw.com/posts/Python_Lib_time.html"/>
-   <updated>2017-10-28T00:00:00-08:00</updated>
+   <link href="http://magicjms.github.io/posts/Python_Lib_time.html"/>
+   <updated>2017-10-28T00:00:00+08:00</updated>
    <id>/posts/Python_Lib_time</id>
    <content type="html">&lt;p&gt;时间计算是程序中最常用到的，本篇主要记录、总结python time模块的功能和主要函数,此函数的缺陷是不能像datatime一样直接对时间进行加减运算，如要进行加减运算必须要先转换成时间戳&lt;!-- more --&gt;&lt;/p&gt;
 
@@ -1151,8 +1151,8 @@ time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;,time.localtime()) #把时间元组st
  
  <entry>
    <title>MAC常用资源网站</title>
-   <link href="http://www.panxw.com/posts/MACCommSourceInfo.html"/>
-   <updated>2017-10-28T00:00:00-08:00</updated>
+   <link href="http://magicjms.github.io/posts/MACCommSourceInfo.html"/>
+   <updated>2017-10-28T00:00:00+08:00</updated>
    <id>/posts/MACCommSourceInfo</id>
    <content type="html">&lt;p&gt;大家都知道苹果电脑MAC上很多软件都是要收费，即使有些网站上提供破解版的，也大多数不能使用。今天就给大家分享几个我经常下载MAC破解软件的网站&lt;!-- more --&gt;&lt;/p&gt;
 
@@ -1168,8 +1168,8 @@ time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;,time.localtime()) #把时间元组st
  
  <entry>
    <title>CentOS Python2.6升级2.7并安装easy_install和pip</title>
-   <link href="http://www.panxw.com/posts/LinuxUpdatePyton2.7.html"/>
-   <updated>2017-10-28T00:00:00-08:00</updated>
+   <link href="http://magicjms.github.io/posts/LinuxUpdatePyton2.7.html"/>
+   <updated>2017-10-28T00:00:00+08:00</updated>
    <id>/posts/LinuxUpdatePyton2.7</id>
    <content type="html">&lt;p&gt;Centos6.Xl默认自带的是Python2.6，而在实际工作中很多应用必须要求Python2.7以上，所以本篇文章主要记录、总结如何将CentOS自带的Python版本升级为2.7&lt;!-- more --&gt;&lt;/p&gt;
 
@@ -1187,12 +1187,16 @@ cd Python-2.7.14
 make &amp;amp;&amp;amp; make install
 cd /usr/local
 ln -s Python-2.7.14 python
+
+如make报错，请安装依赖包，具体参考：
+https://danieleriksson.net/2017/02/08/how-to-install-latest-python-on-centos/
+http://www.suohi.cc/posts/5631ee861f6d1303e9f04a3d
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;将系统Python版本修改为新安装的Python2.7并验证&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;mv /usr/bin/python /usr/bin/python2.6
-ln -s /usr/local/python/bin/python2.7 /usr/bin/
+ln -s /usr/local/python/bin/python2.7 /usr/bin/python
 python -V
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -1264,13 +1268,21 @@ ln -s /usr/local/pyhton/bin/pip2.7 /usr/bin/pip
 &lt;pre&gt;&lt;code&gt;ptyhon -V
 pip install requests
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;show&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@widget&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;respond_to&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# show.html.erb&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@widget&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 </content>
  </entry>
  
  <entry>
    <title>U盘安装MAC系统</title>
-   <link href="http://www.panxw.com/posts/UpanInstallMACSys.html"/>
-   <updated>2017-10-27T00:00:00-08:00</updated>
+   <link href="http://magicjms.github.io/posts/UpanInstallMACSys.html"/>
+   <updated>2017-10-27T00:00:00+08:00</updated>
    <id>/posts/UpanInstallMACSys</id>
    <content type="html">&lt;p&gt;U盘安装Windows操作系统相信大家都会，但是使用U盘安装苹果MAC操作系统(OS X Yosemite)呢，其实方法也比较简单，下面我就是我使用U盘安装MAC操作的步骤以及总结(共分三步：下载系统程序—制作U盘启动盘—从U盘启动盘进入MAC并安装系统)。这样以后想给 Mac 重装系统、在没有网络的情况下或者帮多台机器安装系统都方便得多&lt;!-- more --&gt;&lt;/p&gt;
 
@@ -1385,6 +1397,10 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
 
 &lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2017-10-27-UpanInstallMACSys/8.png&quot; alt=&quot;有帮助的截图&quot; /&gt;
 这时选择 U 盘的图标回车，即可通过 U 盘来安装 Yosemite 了！这时，你可以直接覆盖安装系统(升级)，也可以在磁盘工具里面格式化抹掉整个硬盘，或者重新分区等实现全新的干净的安装。&lt;/p&gt;
+
+&lt;p&gt;测试代码高亮显示：&lt;/p&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://magicjms.github.io/css/pygments.css&quot; /&gt;
+
 </content>
  </entry>
  
@@ -1395,7 +1411,7 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
 <br/>
 <b>原创文章，转载请注明出处！</b>
 <br/>
-<b>本文链接：</b><a href="http://www.panxw.com/atom.xml" title="atom.xml">http://www.panxw.com/atom.xml</a>
+<b>本文链接：</b><a href="http://localhost:8090/atom.xml" title="atom.xml">http://localhost:8090/atom.xml</a>
 
 <!-- next and previous -->
 <div style="margin-top:15px; margin-bottom:10px">
@@ -1546,7 +1562,7 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
         <div class="row">
           <div class="col-lg-12">
                         <div style="text-align:center;margin-top:15px;">
-				Copyright &copy; www.panxw.com, generated by Jekyll, designed by <a href="https://www.panxw.com">panxw</a>. <a href="https://github.com/panxw/panxw.github.com">[source]</a>
+				Copyright &copy; magicjms.github.io, generated by Jekyll, designed by <a href="https://www.panxw.com">panxw</a>. <a href="https://github.com/panxw/panxw.github.com">[source]</a>
 				<br/>
 				请修改_includes/copyright.html添加统计代码。
             </div>
