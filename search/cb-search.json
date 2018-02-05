@@ -3,6 +3,14 @@
 	"data" : [
 	 
 	{
+		"title" : "循环技巧 - pythonbase",
+		"url" : "/posts/python-pythonbase_loopingtechniques.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "curl模拟http发送get或post接口测试 - curl",
 		"url" : "/posts/Linux-base-curl-post.html"
 	}
@@ -19,7 +27,7 @@
 	
     
 	{
-		"title" : "python内建函数—isinstance - python基础",
+		"title" : "python内建函数—isinstance - pythonbase",
 		"url" : "/posts/Python_Base_isinstance.html"
 	}
 	
@@ -43,7 +51,7 @@
 	
     
 	{
-		"title" : "python模块详解—time - python模块time",
+		"title" : "python模块详解—time - pythonlib",
 		"url" : "/posts/Python_Lib_time.html"
 	}
 	

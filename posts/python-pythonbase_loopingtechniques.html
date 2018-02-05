@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="页面不存在：Page Not Found - 潘学文个人博客 - 作者:magicjms"/> 
-	
-    <title>页面不存在：Page Not Found - 潘学文个人博客</title>
+    <meta name="description" content="循环技巧 - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="pythonbase"/>
+    <title>循环技巧 - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -137,14 +137,99 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-          <p align="center">
-<h1></h1>Page Not Found!</h1>
-Please wait...
-<br/>
-<br/>
-thanks!
-</p>
+          <!-- Navi -->
 
+<!-- Title -->
+<h2>循环技巧</h2>
+<b>标签：</b><a href="/tags.html#pythonbase"><i>pythonbase</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-01-25
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>本篇主要记录python中列表和字典中的循环技巧<!-- more --></p>
+
+<p>在字典中循环时，关键字和对应的值可以使用 iteritems() 方法同时解读出来。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">knights</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gallahad&#39;</span><span class="p">:</span> <span class="s1">&#39;the pure&#39;</span><span class="p">,</span> <span class="s1">&#39;robin&#39;</span><span class="p">:</span> <span class="s1">&#39;the brave&#39;</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">knights</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">gallahad</span> <span class="n">the</span> <span class="n">pure</span>
+<span class="n">robin</span> <span class="n">the</span> <span class="n">brave</span></code></pre></figure>
+
+<p>在序列中循环时，索引位置和对应值可以使用 enumerate() 函数同时得到。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;tic&#39;</span><span class="p">,</span> <span class="s1">&#39;tac&#39;</span><span class="p">,</span> <span class="s1">&#39;toe&#39;</span><span class="p">]):</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="mi">0</span> <span class="n">tic</span>
+<span class="mi">1</span> <span class="n">tac</span>
+<span class="mi">2</span> <span class="n">toe</span></code></pre></figure>
+
+<p>同时循环两个或更多的序列，可以使用 zip() 整体打包。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">questions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;quest&#39;</span><span class="p">,</span> <span class="s1">&#39;favorite color&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lancelot&#39;</span><span class="p">,</span> <span class="s1">&#39;the holy grail&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="n">answers</span><span class="p">):</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;What is your {0}?  It is {1}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+<span class="o">...</span>
+<span class="n">What</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">name</span><span class="err">?</span>  <span class="n">It</span> <span class="ow">is</span> <span class="n">lancelot</span><span class="o">.</span>
+<span class="n">What</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">quest</span><span class="err">?</span>  <span class="n">It</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">holy</span> <span class="n">grail</span><span class="o">.</span>
+<span class="n">What</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">favorite</span> <span class="n">color</span><span class="err">?</span>  <span class="n">It</span> <span class="ow">is</span> <span class="n">blue</span><span class="o">.</span></code></pre></figure>
+
+<p>需要逆向循环序列的话，先正向定位序列，然后调用 reversed() 函数。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="mi">9</span>
+<span class="mi">7</span>
+<span class="mi">5</span>
+<span class="mi">3</span>
+<span class="mi">1</span></code></pre></figure>
+
+<p>要按排序后的顺序循环序列的话，使用 sorted() 函数，它不改动原序列，而是生成一个新的已排序的序列。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">basket</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">basket</span><span class="p">)):</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">apple</span>
+<span class="n">banana</span>
+<span class="n">orange</span>
+<span class="n">pear</span></code></pre></figure>
+
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="http://localhost:8090/posts/python-pythonbase_loopingtechniques.html" title="">http://localhost:8090/posts/python-pythonbase_loopingtechniques.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Linux-base-curl-post.html">
+      curl模拟http发送get或post接口测试
+    </a>
+  </span>
+   
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
