@@ -150,6 +150,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 
 <!-- content -->
 <div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
 <p>curl是我们在linux下经常使用的http访问、测试、诊断工具，这篇博客主要记录如何使用curl构建get、带参数的post请求<!-- more --></p>
 
 <blockquote>
@@ -180,8 +182,7 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 
 <p>例如：</p>
 
-<pre><code>curl -l -H "Content-type: application/json" -X POST -d '{"ver": "1.0","soa":{"req":"123"},"iface":"me.ele.lpdinfra.prediction.service.PredictionService","method":"restaurant_make_order_time","args":{"arg2":"\"stable\"","arg1":"{\"code\":[\"WIND\"],\"temperature\":11.11}","arg0":"{\"tracking_id\":\"100000000331770936\",\"eleme_order_id\":\"100000000331770936\",\"platform_id\":\"4\",\"restaurant_id\":\"482571\",\"dish_num\":1,\"dish_info\":[{\"entity_id\":142547763,\"quantity\":1,\"category_id\":1,\"dish_name\":\"[0xe7][0x89][0xb9][0xe4][0xbb][0xb7][0xe8][0x85][0x8a][0xe5][0x91][0xb3][0xe5][0x8f][0x89][0xe7][0x83][0xa7][0xe5][0x8f][0x8c][0xe6][0x8b][0xbc][0xe7][0x85][0xb2][0xe4][0xbb][0x94][0xe9][0xa5][0xad]\",\"price\":31.0}],\"merchant_location\":{\"longitude\":\"121.47831425\",\"latitude\":\"31.27576153\"},\"customer_location\":{\"longitude\":\"121.47831425\",\"latitude\":\"31.27576153\"},\"created_at\":1477896550,\"confirmed_at\":1477896550,\"dishes_total_price\":0.0,\"food_boxes_total_price\":2.0,\"delivery_total_price\":2.0,\"pay_amount\":35.0,\"city_id\":\"1\"}"}}' http://vpcb-lpdinfra-stream-1.vm.elenet.me:8989/rpc
-</code></pre>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span></span>curl -l -H <span class="s2">&quot;Content-type: application/json&quot;</span> -X POST -d <span class="s1">&#39;{&quot;ver&quot;: &quot;1.0&quot;,&quot;soa&quot;:{&quot;req&quot;:&quot;123&quot;},&quot;iface&quot;:&quot;me.ele.lpdinfra.prediction.service.PredictionService&quot;,&quot;method&quot;:&quot;restaurant_make_order_time&quot;,&quot;args&quot;:{&quot;arg2&quot;:&quot;\&quot;stable\&quot;&quot;,&quot;arg1&quot;:&quot;{\&quot;code\&quot;:[\&quot;WIND\&quot;],\&quot;temperature\&quot;:11.11}&quot;,&quot;arg0&quot;:&quot;{\&quot;tracking_id\&quot;:\&quot;100000000331770936\&quot;,\&quot;eleme_order_id\&quot;:\&quot;100000000331770936\&quot;,\&quot;platform_id\&quot;:\&quot;4\&quot;,\&quot;restaurant_id\&quot;:\&quot;482571\&quot;,\&quot;dish_num\&quot;:1,\&quot;dish_info\&quot;:[{\&quot;entity_id\&quot;:142547763,\&quot;quantity\&quot;:1,\&quot;category_id\&quot;:1,\&quot;dish_name\&quot;:\&quot;[0xe7][0x89][0xb9][0xe4][0xbb][0xb7][0xe8][0x85][0x8a][0xe5][0x91][0xb3][0xe5][0x8f][0x89][0xe7][0x83][0xa7][0xe5][0x8f][0x8c][0xe6][0x8b][0xbc][0xe7][0x85][0xb2][0xe4][0xbb][0x94][0xe9][0xa5][0xad]\&quot;,\&quot;price\&quot;:31.0}],\&quot;merchant_location\&quot;:{\&quot;longitude\&quot;:\&quot;121.47831425\&quot;,\&quot;latitude\&quot;:\&quot;31.27576153\&quot;},\&quot;customer_location\&quot;:{\&quot;longitude\&quot;:\&quot;121.47831425\&quot;,\&quot;latitude\&quot;:\&quot;31.27576153\&quot;},\&quot;created_at\&quot;:1477896550,\&quot;confirmed_at\&quot;:1477896550,\&quot;dishes_total_price\&quot;:0.0,\&quot;food_boxes_total_price\&quot;:2.0,\&quot;delivery_total_price\&quot;:2.0,\&quot;pay_amount\&quot;:35.0,\&quot;city_id\&quot;:\&quot;1\&quot;}&quot;}}&#39;</span> http://vpcb-lpdinfra-stream-1.vm.elenet.me:8989/rpc</code></pre></figure>
 
 <p>参考资料：<a href="https://www.cnblogs.com/sunshine2016/p/6015976.html" title="https://www.cnblogs.com/sunshine2016/p/6015976.html">https://www.cnblogs.com/sunshine2016/p/6015976.html</a></p>
 
@@ -291,6 +292,12 @@ http://blog.csdn.net/rabbitter/article/details/51125337
                 <ul class="list-unstyled">
 				
                   <li>
+                    <a href="/posts/Python_Lib_datetime.html">
+                      python模块详解—datetime
+                    </a>
+                  </li>
+				
+                  <li>
                     <a href="/posts/python-pythonbase_loopingtechniques.html">
                       循环技巧
                     </a>
@@ -341,12 +348,6 @@ http://blog.csdn.net/rabbitter/article/details/51125337
                   <li>
                     <a href="/posts/LinuxUpdatePyton2.7.html">
                       CentOS Python2.6升级2.7并安装easy_install和pip
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/UpanInstallMACSys.html">
-                      U盘安装MAC系统
                     </a>
                   </li>
 				  

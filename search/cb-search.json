@@ -3,6 +3,14 @@
 	"data" : [
 	 
 	{
+		"title" : "python模块详解—datetime - pythonlib",
+		"url" : "/posts/Python_Lib_datetime.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "循环技巧 - pythonbase",
 		"url" : "/posts/python-pythonbase_loopingtechniques.html"
 	}
