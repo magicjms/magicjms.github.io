@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="curl模拟http发送get或post接口测试 - 潘学文个人博客 - 作者:magicjms"/> 
-	<meta name="keywords" content="curl"/>
-    <title>curl模拟http发送get或post接口测试 - 潘学文个人博客</title>
+    <meta name="description" content="python内建函数—hasattr,getattr,setattr - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="pythonbase"/>
+    <title>python内建函数—hasattr,getattr,setattr - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -138,13 +138,13 @@ http://blog.csdn.net/rabbitter/article/details/51125337
         <!-- Blog Entries Column -->
         <div class="col-md-8">
           <!-- Navi -->
-<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/linux.html">Linux相关</a>&nbsp;>&nbsp;正文
+
 <!-- Title -->
-<h2>curl模拟http发送get或post接口测试</h2>
-<b>标签：</b><a href="/tags.html#curl"><i>curl</i></a>
+<h2>python内建函数—hasattr,getattr,setattr</h2>
+<b>标签：</b><a href="/tags.html#pythonbase"><i>pythonbase</i></a>
 <div class="post-date">
 	<span class="glyphicon glyphicon-time"></span>
-	2017-12-10
+	2018-02-22
 </div>
 <br/>
 
@@ -152,54 +152,118 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 <div style="text-indent:0em;">
 <link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
 
-<p>curl是我们在linux下经常使用的http访问、测试、诊断工具，这篇博客主要记录如何使用curl构建get、带参数的post请求<!-- more --></p>
+<p>本篇主要介绍python内建函数hasattr的功能及用法<!-- more --></p>
 
 <blockquote>
-  <p><b>一、get请求 </b></p>
+  <p>一、<b>python内建函数 hasattr 的用法</b></p>
 </blockquote>
 
-<p>curl “http://www.baidu.com”  如果这里的URL指向的是一个文件或者一幅图都可以直接下载到本地</p>
+<p>语法：hasattr（object，name）</p>
 
-<p>curl -i “http://www.baidu.com”  显示全部信息</p>
+<p>作用：判断一个对象里面是否有name属性或者name方法，返回BOOL值，有name特性返回True， 否则返回False。
+需要注意的是name要用括号括起来</p>
 
-<p>curl -l “http://www.baidu.com” 只显示头部信息</p>
-
-<p>curl -v “http://www.baidu.com” 显示get请求全过程解析</p>
-
-<p>wget “http://www.baidu.com”也可以</p>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
+<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#判断对象有name属性</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#判断对象有run方法</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
 
 <blockquote>
-  <p><b>二、post请求</b></p>
+  <p>二、<b>python内建函数 getattr 的用法</b></p>
 </blockquote>
 
-<p>curl -d “param1=value1&amp;param2=value2” “http://www.baidu.com”</p>
+<p>语法：getattr(object, name[,default])</p>
+
+<p>作用：获取对象object的属性或者方法，如果存在打印出来，如果不存在，打印出默认值，默认值可选。
+需要注意的是，如果是返回的对象的方法，返回的是方法的内存地址，如果需要运行这个方法，
+可以在后面添加一对括号。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
+<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#获取name属性，存在就打印出来。</span>
+<span class="s1">&#39;xiaohua&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#获取run方法，存在就打印出方法的内存地址。</span>
+<span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">test</span><span class="o">.</span><span class="n">run</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">test</span> <span class="n">instance</span> <span class="n">at</span> <span class="mh">0x0269C878</span><span class="o">&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)()</span>  <span class="c1">#获取run方法，后面加括号可以将这个方法运行。</span>
+<span class="s1">&#39;HelloWord&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#获取一个不存在的属性。</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;18&quot;</span><span class="p">)</span>  <span class="c1">#若属性不存在，返回一个默认值。</span>
+<span class="s1">&#39;18&#39;</span>
+<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
 
 <blockquote>
-  <p><b> 三、json格式的post请求</b></p>
+  <p>三、<b>python内建函数 setattr 的用法</b></p>
 </blockquote>
 
-<p>curl -l -H “Content-type: application/json” -X POST -d ‘{“phone”:”13521389587”,”password”:”test”}’ http://domain/apis/users.json</p>
+<p>语法：setattr(object, name, values)</p>
 
-<p>例如：</p>
+<p>作用：给对象的属性赋值，若属性不存在，先创建再赋值。</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span></span>curl -l -H <span class="s2">&quot;Content-type: application/json&quot;</span> -X POST -d <span class="s1">&#39;{&quot;ver&quot;: &quot;1.0&quot;,&quot;soa&quot;:{&quot;req&quot;:&quot;123&quot;},&quot;iface&quot;:&quot;me.ele.lpdinfra.prediction.service.PredictionService&quot;,&quot;method&quot;:&quot;restaurant_make_order_time&quot;,&quot;args&quot;:{&quot;arg2&quot;:&quot;\&quot;stable\&quot;&quot;,&quot;arg1&quot;:&quot;{\&quot;code\&quot;:[\&quot;WIND\&quot;],\&quot;temperature\&quot;:11.11}&quot;,&quot;arg0&quot;:&quot;{\&quot;tracking_id\&quot;:\&quot;100000000331770936\&quot;,\&quot;eleme_order_id\&quot;:\&quot;100000000331770936\&quot;,\&quot;platform_id\&quot;:\&quot;4\&quot;,\&quot;restaurant_id\&quot;:\&quot;482571\&quot;,\&quot;dish_num\&quot;:1,\&quot;dish_info\&quot;:[{\&quot;entity_id\&quot;:142547763,\&quot;quantity\&quot;:1,\&quot;category_id\&quot;:1,\&quot;dish_name\&quot;:\&quot;[0xe7][0x89][0xb9][0xe4][0xbb][0xb7][0xe8][0x85][0x8a][0xe5][0x91][0xb3][0xe5][0x8f][0x89][0xe7][0x83][0xa7][0xe5][0x8f][0x8c][0xe6][0x8b][0xbc][0xe7][0x85][0xb2][0xe4][0xbb][0x94][0xe9][0xa5][0xad]\&quot;,\&quot;price\&quot;:31.0}],\&quot;merchant_location\&quot;:{\&quot;longitude\&quot;:\&quot;121.47831425\&quot;,\&quot;latitude\&quot;:\&quot;31.27576153\&quot;},\&quot;customer_location\&quot;:{\&quot;longitude\&quot;:\&quot;121.47831425\&quot;,\&quot;latitude\&quot;:\&quot;31.27576153\&quot;},\&quot;created_at\&quot;:1477896550,\&quot;confirmed_at\&quot;:1477896550,\&quot;dishes_total_price\&quot;:0.0,\&quot;food_boxes_total_price\&quot;:2.0,\&quot;delivery_total_price\&quot;:2.0,\&quot;pay_amount\&quot;:35.0,\&quot;city_id\&quot;:\&quot;1\&quot;}&quot;}}&#39;</span> http://vpcb-lpdinfra-stream-1.vm.elenet.me:8989/rpc</code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
+<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>   <span class="c1">#判断属性是否存在</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">)</span>   <span class="c1">#为属相赋值，并没有返回值</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#属性存在了</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
 
-<p>参考资料：<a href="https://www.cnblogs.com/sunshine2016/p/6015976.html" title="https://www.cnblogs.com/sunshine2016/p/6015976.html">https://www.cnblogs.com/sunshine2016/p/6015976.html</a></p>
+<blockquote>
+  <p>四、<b>常用应用</b></p>
+</blockquote>
+
+<p>一种综合的用法是：判断一个对象的属性是否存在，若不存在就添加该属性。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
+<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#age属性不存在</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">))</span> <span class="c1">#age属性不存在时，设置该属性</span>
+<span class="s1">&#39;18&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#可检测设置成功</span>
+<span class="s1">&#39;18&#39;</span>
+<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+
+<p>本篇转自：<a href="https://www.cnblogs.com/cenyu/p/5713686.html" title="https://www.cnblogs.com/cenyu/p/5713686.html">https://www.cnblogs.com/cenyu/p/5713686.html</a></p>
 
 </div>
 
 <br/>
 <b>原创文章，转载请注明出处！</b>
 <br/>
-<b>本文链接：</b><a href="https://magicjms.github.io/posts/Linux-base-curl-post.html" title="">https://magicjms.github.io/posts/Linux-base-curl-post.html</a>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Python-Base_hasattr.html" title="">https://magicjms.github.io/posts/Python-Base_hasattr.html</a>
 
 <!-- next and previous -->
 <div style="margin-top:15px; margin-bottom:10px">
   
   <span class="next">
     上篇：
-    <a href="/posts/Linux-base-cmd-wget.html">
-      wget命令详解
+    <a href="/posts/Python-Lib_datetime.html">
+      python模块详解—datetime
     </a>
   </span>
    
@@ -207,8 +271,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   <div style="float:right">
   <span class="prev" >
     下篇：
-    <a href="/posts/Python-Base_loopingtechniques.html">
-      循环技巧
+    <a href="/posts/Python-Lib_subprocess.html">
+      python模块详解—subprocess
     </a>
   </span>
   </div>

@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="循环技巧 - 潘学文个人博客 - 作者:magicjms"/> 
+    <meta name="description" content="python内建函数—isinstance - 潘学文个人博客 - 作者:magicjms"/> 
 	<meta name="keywords" content="pythonbase"/>
-    <title>循环技巧 - 潘学文个人博客</title>
+    <title>python内建函数—isinstance - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -140,86 +140,100 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           <!-- Navi -->
 
 <!-- Title -->
-<h2>循环技巧</h2>
+<h2>python内建函数—isinstance</h2>
 <b>标签：</b><a href="/tags.html#pythonbase"><i>pythonbase</i></a>
 <div class="post-date">
 	<span class="glyphicon glyphicon-time"></span>
-	2018-01-25
+	2017-12-08
 </div>
 <br/>
 
 <!-- content -->
 <div style="text-indent:0em;">
-<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+<p>本篇主要介绍python内建函数isinstance的功能及用法<!-- more --></p>
 
-<p>本篇主要记录python中列表和字典中的循环技巧<!-- more --></p>
+<blockquote>
+  <p>一、<b>python内建函数 isinstance的用法</b></p>
+</blockquote>
 
-<p>在字典中循环时，关键字和对应的值可以使用 iteritems() 方法同时解读出来。</p>
+<p>语法：isinstance（object，classinfo）</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">knights</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gallahad&#39;</span><span class="p">:</span> <span class="s1">&#39;the pure&#39;</span><span class="p">,</span> <span class="s1">&#39;robin&#39;</span><span class="p">:</span> <span class="s1">&#39;the brave&#39;</span><span class="p">}</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">knights</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-<span class="o">...</span>
-<span class="n">gallahad</span> <span class="n">the</span> <span class="n">pure</span>
-<span class="n">robin</span> <span class="n">the</span> <span class="n">brave</span></code></pre></figure>
+<p>作用：来判断一个对象是否是这个类<span style="color:red"><b>(可以简单理解为object为classinfo的子集)</b></span>。</p>
 
-<p>在序列中循环时，索引位置和对应值可以使用 enumerate() 函数同时得到。</p>
+<p>其第一个参数（object）为对象，第二个参数（classinfo）为类型名(int…)或类型名的一个列表((int,list,float)是一个列表)。</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;tic&#39;</span><span class="p">,</span> <span class="s1">&#39;tac&#39;</span><span class="p">,</span> <span class="s1">&#39;toe&#39;</span><span class="p">]):</span>
-<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-<span class="o">...</span>
-<span class="mi">0</span> <span class="n">tic</span>
-<span class="mi">1</span> <span class="n">tac</span>
-<span class="mi">2</span> <span class="n">toe</span></code></pre></figure>
+<p>返回值：为布尔型（True or flase）。</p>
 
-<p>同时循环两个或更多的序列，可以使用 zip() 整体打包。</p>
+<p>若对象的类型与参数二的类型相同则返回True。若参数二为一个元组，则若对象类型与元组中类型名之一相同即返回True。</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">questions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;quest&#39;</span><span class="p">,</span> <span class="s1">&#39;favorite color&#39;</span><span class="p">]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lancelot&#39;</span><span class="p">,</span> <span class="s1">&#39;the holy grail&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="n">answers</span><span class="p">):</span>
-<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;What is your {0}?  It is {1}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
-<span class="o">...</span>
-<span class="n">What</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">name</span><span class="err">?</span>  <span class="n">It</span> <span class="ow">is</span> <span class="n">lancelot</span><span class="o">.</span>
-<span class="n">What</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">quest</span><span class="err">?</span>  <span class="n">It</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">holy</span> <span class="n">grail</span><span class="o">.</span>
-<span class="n">What</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">favorite</span> <span class="n">color</span><span class="err">?</span>  <span class="n">It</span> <span class="ow">is</span> <span class="n">blue</span><span class="o">.</span></code></pre></figure>
+<blockquote>
+  <p>二、<b>示例</b></p>
+</blockquote>
 
-<p>需要逆向循环序列的话，先正向定位序列，然后调用 reversed() 函数。</p>
+<p>例一</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
-<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="o">...</span>
-<span class="mi">9</span>
-<span class="mi">7</span>
-<span class="mi">5</span>
-<span class="mi">3</span>
-<span class="mi">1</span></code></pre></figure>
+<pre><code>&gt;&gt;&gt; a = 4
+&gt;&gt;&gt; isinstance (a,int)
+True
+&gt;&gt;&gt; isinstance (a,str)
+False
+&gt;&gt;&gt; isinstance (a,(str,int,list))
+True
+</code></pre>
 
-<p>要按排序后的顺序循环序列的话，使用 sorted() 函数，它不改动原序列，而是生成一个新的已排序的序列。</p>
+<p>例二</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">basket</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">basket</span><span class="p">)):</span>
-<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="o">...</span>
-<span class="n">apple</span>
-<span class="n">banana</span>
-<span class="n">orange</span>
-<span class="n">pear</span></code></pre></figure>
+<pre><code>class objA:   
+pass   
+  
+A = objA()   
+B = 'a','v'   
+C = 'a string'   
+  
+print isinstance(A, objA)   
+print isinstance(B, tuple)   
+print isinstance(C, basestring)   
+输出结果：   
+True   
+True   
+True   
+</code></pre>
 
+<p>不仅如此，还可以利用isinstance函数，来判断一个对象是否是一个已知的类型。<br />
+isinstance说明如下:<br />
+    isinstance(object, class-or-type-or-tuple) -&gt; bool</p>
+
+<pre><code>Return whether an object is an instance of a class or of a subclass thereof.  
+With a type as second argument, return whether that is the object's type.  
+The form using a tuple, isinstance(x, (A, B, ...)), is a shortcut for  
+isinstance(x, A) or isinstance(x, B) or ... (etc.).  
+</code></pre>
+
+<p>其第一个参数为对象，第二个为类型名或类型名的一个列表。其返回值为布尔型。若对象的类型与参数二的类型相同则返回True。若参数二为一个元组，则若对象类型与元组中类型名之一相同即返回True。</p>
+
+<pre><code>&gt;&gt;&gt;isinstance(lst, list)  
+True  
+  
+&gt;&gt;&gt;isinstance(lst, (int, str, list) )  
+True  
+</code></pre>
+
+<p>另外:Python可以得到一个对象的类型 ，利用type函数：»&gt;lst = [1, 2, 3]»&gt;type(lst)&lt;type ‘list’&gt;</p>
 
 </div>
 
 <br/>
 <b>原创文章，转载请注明出处！</b>
 <br/>
-<b>本文链接：</b><a href="http://localhost:8090/posts/python-pythonbase_loopingtechniques.html" title="">http://localhost:8090/posts/python-pythonbase_loopingtechniques.html</a>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Python-Base_isinstance.html" title="">https://magicjms.github.io/posts/Python-Base_isinstance.html</a>
 
 <!-- next and previous -->
 <div style="margin-top:15px; margin-bottom:10px">
   
   <span class="next">
     上篇：
-    <a href="/posts/Linux-base-curl-post.html">
-      curl模拟http发送get或post接口测试
+    <a href="/posts/Linux-shell_time.html">
+      shell脚本中的时间运算
     </a>
   </span>
    
@@ -227,8 +241,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   <div style="float:right">
   <span class="prev" >
     下篇：
-    <a href="/posts/Python_Lib_datetime.html">
-      python模块详解—datetime
+    <a href="/posts/Linux-base-cmd-wget.html">
+      wget命令详解
     </a>
   </span>
   </div>
@@ -312,13 +326,37 @@ http://blog.csdn.net/rabbitter/article/details/51125337
                 <ul class="list-unstyled">
 				
                   <li>
-                    <a href="/posts/Python_Lib_datetime.html">
+                    <a href="/posts/Python-Lib_threading.html">
+                      python模块详解—threading
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_thread.html">
+                      python模块详解—thread
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_subprocess.html">
+                      python模块详解—subprocess
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_hasattr.html">
+                      python内建函数—hasattr,getattr,setattr
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_datetime.html">
                       python模块详解—datetime
                     </a>
                   </li>
 				
                   <li>
-                    <a href="/posts/python-pythonbase_loopingtechniques.html">
+                    <a href="/posts/Python-Base_loopingtechniques.html">
                       循环技巧
                     </a>
                   </li>
@@ -336,7 +374,7 @@ http://blog.csdn.net/rabbitter/article/details/51125337
                   </li>
 				
                   <li>
-                    <a href="/posts/Python_Base_isinstance.html">
+                    <a href="/posts/Python-Base_isinstance.html">
                       python内建函数—isinstance
                     </a>
                   </li>
@@ -344,30 +382,6 @@ http://blog.csdn.net/rabbitter/article/details/51125337
                   <li>
                     <a href="/posts/Linux-shell_time.html">
                       shell脚本中的时间运算
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/LinuxPublicService.html">
-                      阿里云公共NTP、DNS、镜像服务地址信息
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Python_Lib_time.html">
-                      python模块详解—time
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/MACCommSourceInfo.html">
-                      MAC常用资源网站
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/LinuxUpdatePyton2.7.html">
-                      CentOS Python2.6升级2.7并安装easy_install和pip
                     </a>
                   </li>
 				  

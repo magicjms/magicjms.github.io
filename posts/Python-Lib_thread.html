@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="python模块详解—thread - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="pythonlib"/>
+    <title>python模块详解—thread - 潘学文个人博客</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="/css/blog.css" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+    queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://
+    -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+      </script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+      </script>
+    <![endif]-->
+        <!-- jQuery Version 1.11.0 -->
+    <script src="/js/jquery-1.11.0.js"> </script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+<!--         <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">
+              Toggle navigation
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+          </button>
+          <a class="navbar-brand" href="/">
+            首页
+          </a>
+        </div> -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          
+<!--
+http://blog.csdn.net/rabbitter/article/details/51125337
+-->
+
+<style type="text/css">
+/*    body,ul,li,a{margin: 0;padding: 0}  */
+/*    body{background-color: #e6e7e9;}  */
+/*    #nav-wrap{margin: 10px auto;width: 100%;background-color: white;border-bottom: 2px solid #ddd;}  
+*/  
+    ul,li,a{margin: 0;padding: 0;}
+    ul{list-style: none;}  
+    #nav{width: 750px; height: 45px;margin:0 auto; float: left;}  
+    #nav>li{float: left;position: relative;height: 45px;margin-right: 60px;}  
+    #nav a{display: block; text-decoration: none;font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 12px;}  
+    #nav>li>a{color: #000;text-transform:uppercase;height: 13px; line-height: 13px; padding: 17px 0 15px 0px;font-size: 16px;text-align: center; color: white;}  
+    #nav>li i{display: inline-block; height: 5px; width:5px; background: url(../images/home.png) left bottom no-repeat;}  
+    #nav>li ul{position: absolute;left: -20px;top: 47px; width: 180px;background-color: #fff;padding: 20px;display: none;border:1px solid #ECEFF5;}  
+    #nav>li ul li{margin-bottom: 10px;}  
+    #nav>li ul a{font-size: 12px;color: #606060;}  
+    .this{border-bottom: 2px solid #b0b;}  
+    #nav>li:hover ul{display:block;}  
+    #nav>li:hover{border-bottom: 2px solid #0bb;}  
+</style>
+
+
+<!-- <div id="nav-wrap">  
+ --><ul id="nav"><!--一级导航的ul-->  
+    <li class="home this"><a href="/"><i></i><span style="font-size: 18px;">首页</span></a></li>  
+  
+    <li class="safe"><a href="/posts/linux.html"><i></i><span>Linux</span></a><!--一级导航的li-->  
+        <ul><!--一级菜单的li中的二级导航的ul-->  
+            <li><a href="/posts/shell.html"><span>shell</span></a></li><!--二级导航中各个选项li-->  
+            <li><a href="#"><span>Open-Source Apps</span></a></li>  
+            <li><a href="#"><span>Android</span></a></li>  
+            <li><a href="#"><span>JavaScript</span></a></li>  
+        </ul>  
+    </li>  
+  
+    <li class="service"><a href="/posts/python.html"><i></i><span>Python语言</span></a>  
+        <ul>  
+            <li><a href="/posts/pythonbase.html"><span>基础</span></a></li>  
+            <li><a href="/posts/pythonlib.html"><span>常用模块</span></a></li>  
+            <li><a href="#"><span>实战常用</span></a></li>  
+            <li><a href="#"><span>大数据相关</span></a></li>  
+        </ul>  
+    </li>  
+    <li class="shoping-car"><a href="#"><i></i><span>数据库</span></a>  
+        <ul>  
+            <li><a href="#"><span>MySQL</span></a></li>  
+            <li><a href="#"><span>MongoDB</span></a></li>  
+            <li><a href="#"><span>Redis</span></a></li>  
+        </ul>  
+    </li>  
+    <li class="member"><a href="#"><i></i><span>MEMBER</span></a>  
+        <ul>  
+            <li><a href="#"><span>After Effects</span></a></li>  
+            <li><a href="#"><span>Open-Source Apps</span></a></li>  
+            <li><a href="#"><span>Android</span></a></li>  
+            <li><a href="#"><span>See More...</span></a></li>  
+        </ul>  
+    </li>  
+</ul>  
+<!-- </div>   --> 
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>python模块详解—thread</h2>
+<b>标签：</b><a href="/tags.html#pythonlib"><i>pythonlib</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-02-22
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>python提供两个模块支持多线程编程：thread和threading。<!-- more --></p>
+
+<blockquote>
+  <p>一、<b>关于python多线程</b></p>
+</blockquote>
+
+<p>Python解释器中可以同时运行多个线程，但是再任意时刻只能有一个线程在解释器运行。Python虚拟机的访问是由全局解锁器（GIL）控制的，由GIL保证同时只有一个线程的运行。</p>
+
+<p>执行方式如下：</p>
+
+<p>1.设置GIL</p>
+
+<p>2.切换进一个进程执行</p>
+
+<p>3.执行下面操作中的一个</p>
+
+<p>　　a.运行指定数量的字节码（操作系统中是由时钟控制的）</p>
+
+<p>　　b.线程主动出让控制权</p>
+
+<p>4.把线程设置为睡眠状态，即切换出线程</p>
+
+<p>5.解锁GIL</p>
+
+<p>6.重复以上步骤</p>
+
+<p>注意：1.调用外部代码时（C/C++扩展的内置函数），GIL保持锁定，因为外部代码没有Python字节码.</p>
+
+<p>　　　2.I/O密集型的Python程序要比计算密集型的程序更好的利用多线程。</p>
+
+<blockquote>
+  <p>二、<b>关于thread模块的多线程</b></p>
+</blockquote>
+
+<p>示例1，当没用使用多线程时：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span> <span class="n">ctime</span>
+
+<span class="k">def</span> <span class="nf">loop</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;start loop0 at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;loop 0 done at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">loop1</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;start loop1 at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;loop1 done at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;starting at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+    <span class="n">loop</span><span class="p">()</span>
+    <span class="n">loop1</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;loop1 done at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span></code></pre></figure>
+
+<p>输出结果为：</p>
+
+<pre><code>starting at: Mon Dec 19 22:17:42 2016
+start loop0 at: Mon Dec 19 22:17:42 2016
+loop 0 done at: Mon Dec 19 22:17:46 2016
+start loop1 at: Mon Dec 19 22:17:46 2016
+loop1 done at: Mon Dec 19 22:17:48 2016
+loop1 done at: Mon Dec 19 22:17:48 2016
+</code></pre>
+
+<p>从结果可以看出loop0和loop按照顺序执行，耗时一共6s</p>
+
+<p><b>thread模块的核心函数是：start_new_thread()</b></p>
+
+<p>用法：_thread.start_new_thread(func, *arg, **kwargs)</p>
+
+<p>示例2，当使用多线程时候：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">import</span> <span class="nn">_thread</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span> <span class="n">ctime</span>
+
+<span class="k">def</span> <span class="nf">loop0</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;start loop0 at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;loop0 done at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">loop1</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;start loop1 at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;loop1 done at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;starting at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+    <span class="n">_thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">loop0</span><span class="p">,</span> <span class="p">())</span>
+    <span class="n">_thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">loop1</span><span class="p">,</span> <span class="p">())</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;all done at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span></code></pre></figure>
+
+<p>结果为：</p>
+
+<pre><code>starting at: Mon Dec 19 22:27:57 2016
+start loop0 at: Mon Dec 19 22:27:57 2016
+start loop1 at: Mon Dec 19 22:27:57 2016
+loop1 done at: Mon Dec 19 22:27:59 2016
+loop0 done at: Mon Dec 19 22:28:01 2016
+all done at: Mon Dec 19 22:28:03 2016
+</code></pre>
+
+<p>从结果可以看出，1.结果不是按照顺序输出的，loop0后结束</p>
+
+<p>　　　　　　　　2.loop0和loop1的运行时间一共是4s，比没有使用多线程快了2s</p>
+
+<p>　　　　　　　　3.sleep(6)是针对主线程的，预计loop0和loop1会在6s前执行完毕。</p>
+
+<p>如果我们把主线程的执行时间设定为3s，那么结果就有意思了</p>
+
+<p>starting at: Mon Dec 19 22:33:01 2016
+start loop0 at: Mon Dec 19 22:33:01 2016
+start loop1 at: Mon Dec 19 22:33:01 2016
+loop1 done at: Mon Dec 19 22:33:03 2016
+all done at: Mon Dec 19 22:33:04 2016</p>
+
+<font style="color:red">从这个结果哦可以看出，loop0没有执行完毕就被迫退出！！！原因是主线程的切出时间为3s，3s过后主线程继续执行，loop0即使没运行完毕，被迫退出！！</font>
+
+<p>从这里也可以看出，对主线程执行sleep()来达到同步的目的不可靠，所以引入锁的概念。</p>
+
+<p><b>用锁怎么实现多线程呢？对于每一个子线程，我们都给它加锁，在执行结束后再释放锁，这样主线程的工作就是检查没一个子线程的加锁状态，如果都已经释放锁了，那就表示子线程全部执行结束，就可以退出了。</b></p>
+
+<p>示例3，使用锁的多线程：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1">#coding: utf-8  </span>
+<span class="kn">import</span> <span class="nn">thread</span>  
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span> <span class="n">ctime</span>  
+  
+<span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>  
+  
+<span class="k">def</span>  <span class="nf">loop</span><span class="p">(</span><span class="n">nloop</span><span class="p">,</span> <span class="n">nsec</span><span class="p">,</span> <span class="n">lock</span><span class="p">):</span>  
+    <span class="k">print</span> <span class="s1">&#39;loop&#39;</span><span class="p">,</span> <span class="n">nloop</span><span class="p">,</span> <span class="s1">&#39;start at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">()</span>  
+    <span class="k">print</span> <span class="s1">&#39;loop </span><span class="si">%d</span><span class="s1"> 挂起</span><span class="si">%d</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nloop</span><span class="p">,</span> <span class="n">nsec</span><span class="p">)</span>  
+    <span class="n">sleep</span><span class="p">(</span><span class="n">nsec</span><span class="p">)</span>  
+    <span class="k">print</span> <span class="s1">&#39;loop&#39;</span><span class="p">,</span> <span class="n">nloop</span><span class="p">,</span> <span class="s1">&#39;done at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">()</span>  
+    <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>  <span class="c1">#释放锁</span>
+  
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>  
+    <span class="k">print</span> <span class="s1">&#39;main thread start!&#39;</span>  
+    <span class="n">locks</span> <span class="o">=</span> <span class="p">[]</span>  		<span class="c1">#锁列表  </span>
+    <span class="n">nloops</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loops</span><span class="p">))</span>  
+  
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>  
+        <span class="n">lock</span> <span class="o">=</span> <span class="n">thread</span><span class="o">.</span><span class="n">allocate_lock</span><span class="p">()</span>  
+        <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>  	<span class="c1">#锁上锁</span>
+        <span class="n">locks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lock</span><span class="p">)</span>  <span class="c1">#保存锁</span>
+  
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>  
+        <span class="n">thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">loop</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">loops</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">locks</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>  
+  
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>  
+        <span class="k">while</span> <span class="n">locks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">locked</span><span class="p">():</span> <span class="k">pass</span>  <span class="c1">#主线程检查每一个子线程的加锁状态,直到所有的锁都被释放继续主线程</span>
+  
+    <span class="k">print</span> <span class="s1">&#39;all done at:&#39;</span><span class="p">,</span> <span class="n">ctime</span><span class="p">()</span>  
+  
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>  
+    <span class="n">main</span><span class="p">()</span>  </code></pre></figure>
+
+<p><font style="color:red">实际上，我们不建议使用thread模块。首先，更高级别的threading模块更为先进，对线程的支持更为完善，而且使用thread模块里的属性有可能会与threading出现冲突。其次，低级别的thread模块的同步原语只有一个，而threading模块则有很多。</font></p>
+
+<p><font style="color:red">还有一个原因是，使用thread对于你的进程什么时候应该结束完全没有控制，当主线程结束时，所有的线程都会被强制结束掉，没有警告也不会有正常的清除工作。但是threading模块能确保重要的子线程退出后进程才退出。</font></p>
+
+<p><font style="color:red">不过如果想访问线程的底层结构，那就可能要使用thread模块了。</font></p>
+
+<p>本文参考：
+<a href="https://www.cnblogs.com/fcyworld/p/6200968.html" title="https://www.cnblogs.com/fcyworld/p/6200968.html">https://www.cnblogs.com/fcyworld/p/6200968.html</a>
+<a href="http://blog.csdn.net/whoami021/article/details/21265031" title="http://blog.csdn.net/whoami021/article/details/21265031">http://blog.csdn.net/whoami021/article/details/21265031</a></p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Python-Lib_thread.html" title="">https://magicjms.github.io/posts/Python-Lib_thread.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Python-Lib_subprocess.html">
+      python模块详解—subprocess
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Python-Lib_threading.html">
+      python模块详解—threading
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
+        </div>
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <!-- Blog Categories Well -->
+          <div class="well">
+            <h4>
+              栏目分类
+            </h4>
+            <div class="row">
+                            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/posts/system.html">
+                      系统
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/web.html">
+                      Web建站
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/read.html">
+                      读书笔记
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/archives.html">
+                      存档
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.col-lg-6 -->
+              <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/posts/python.html">
+                      python语言
+                    </a>
+                  </li>                  
+				  <li>
+                    <a href="/posts/linux.html">
+                      Linux相关
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/other.html">
+                      杂记
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/tags.html">
+                      Tags
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.col-lg-6 -->
+ 
+            </div>
+            <!-- /.row -->
+          </div>
+		  <!-- Blog Recent Well -->
+          <div class="well">
+            <h4>
+              最新文章
+            </h4>
+			<div class="row">
+                            <div class="col-lg-12">
+                <ul class="list-unstyled">
+				
+                  <li>
+                    <a href="/posts/Python-Lib_threading.html">
+                      python模块详解—threading
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_thread.html">
+                      python模块详解—thread
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_subprocess.html">
+                      python模块详解—subprocess
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_hasattr.html">
+                      python内建函数—hasattr,getattr,setattr
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_datetime.html">
+                      python模块详解—datetime
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_loopingtechniques.html">
+                      循环技巧
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-base-curl-post.html">
+                      curl模拟http发送get或post接口测试
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-base-cmd-wget.html">
+                      wget命令详解
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_isinstance.html">
+                      python内建函数—isinstance
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-shell_time.html">
+                      shell脚本中的时间运算
+                    </a>
+                  </li>
+				  
+                </ul>
+              </div> 
+			</div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+      <!-- Footer -->
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+                        <div style="text-align:center;margin-top:15px;">
+				Copyright &copy; magicjms.github.io, generated by Jekyll, designed by <a href="https://www.panxw.com">panxw</a>. <a href="https://github.com/panxw/panxw.github.com">[source]</a>
+				<br/>
+				请修改_includes/copyright.html添加统计代码。
+            </div>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script> 
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+      </footer>
+    </div>
+    <!-- /.container -->
+  </body>
+
+</html>

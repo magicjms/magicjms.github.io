@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="python模块详解—threading - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="pythonlib"/>
+    <title>python模块详解—threading - 潘学文个人博客</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="/css/blog.css" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+    queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://
+    -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+      </script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+      </script>
+    <![endif]-->
+        <!-- jQuery Version 1.11.0 -->
+    <script src="/js/jquery-1.11.0.js"> </script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+<!--         <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">
+              Toggle navigation
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+          </button>
+          <a class="navbar-brand" href="/">
+            首页
+          </a>
+        </div> -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          
+<!--
+http://blog.csdn.net/rabbitter/article/details/51125337
+-->
+
+<style type="text/css">
+/*    body,ul,li,a{margin: 0;padding: 0}  */
+/*    body{background-color: #e6e7e9;}  */
+/*    #nav-wrap{margin: 10px auto;width: 100%;background-color: white;border-bottom: 2px solid #ddd;}  
+*/  
+    ul,li,a{margin: 0;padding: 0;}
+    ul{list-style: none;}  
+    #nav{width: 750px; height: 45px;margin:0 auto; float: left;}  
+    #nav>li{float: left;position: relative;height: 45px;margin-right: 60px;}  
+    #nav a{display: block; text-decoration: none;font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 12px;}  
+    #nav>li>a{color: #000;text-transform:uppercase;height: 13px; line-height: 13px; padding: 17px 0 15px 0px;font-size: 16px;text-align: center; color: white;}  
+    #nav>li i{display: inline-block; height: 5px; width:5px; background: url(../images/home.png) left bottom no-repeat;}  
+    #nav>li ul{position: absolute;left: -20px;top: 47px; width: 180px;background-color: #fff;padding: 20px;display: none;border:1px solid #ECEFF5;}  
+    #nav>li ul li{margin-bottom: 10px;}  
+    #nav>li ul a{font-size: 12px;color: #606060;}  
+    .this{border-bottom: 2px solid #b0b;}  
+    #nav>li:hover ul{display:block;}  
+    #nav>li:hover{border-bottom: 2px solid #0bb;}  
+</style>
+
+
+<!-- <div id="nav-wrap">  
+ --><ul id="nav"><!--一级导航的ul-->  
+    <li class="home this"><a href="/"><i></i><span style="font-size: 18px;">首页</span></a></li>  
+  
+    <li class="safe"><a href="/posts/linux.html"><i></i><span>Linux</span></a><!--一级导航的li-->  
+        <ul><!--一级菜单的li中的二级导航的ul-->  
+            <li><a href="/posts/shell.html"><span>shell</span></a></li><!--二级导航中各个选项li-->  
+            <li><a href="#"><span>Open-Source Apps</span></a></li>  
+            <li><a href="#"><span>Android</span></a></li>  
+            <li><a href="#"><span>JavaScript</span></a></li>  
+        </ul>  
+    </li>  
+  
+    <li class="service"><a href="/posts/python.html"><i></i><span>Python语言</span></a>  
+        <ul>  
+            <li><a href="/posts/pythonbase.html"><span>基础</span></a></li>  
+            <li><a href="/posts/pythonlib.html"><span>常用模块</span></a></li>  
+            <li><a href="#"><span>实战常用</span></a></li>  
+            <li><a href="#"><span>大数据相关</span></a></li>  
+        </ul>  
+    </li>  
+    <li class="shoping-car"><a href="#"><i></i><span>数据库</span></a>  
+        <ul>  
+            <li><a href="#"><span>MySQL</span></a></li>  
+            <li><a href="#"><span>MongoDB</span></a></li>  
+            <li><a href="#"><span>Redis</span></a></li>  
+        </ul>  
+    </li>  
+    <li class="member"><a href="#"><i></i><span>MEMBER</span></a>  
+        <ul>  
+            <li><a href="#"><span>After Effects</span></a></li>  
+            <li><a href="#"><span>Open-Source Apps</span></a></li>  
+            <li><a href="#"><span>Android</span></a></li>  
+            <li><a href="#"><span>See More...</span></a></li>  
+        </ul>  
+    </li>  
+</ul>  
+<!-- </div>   --> 
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>python模块详解—threading</h2>
+<b>标签：</b><a href="/tags.html#pythonlib"><i>pythonlib</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-02-24
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>介绍了thread模块，今天来学习Python中另一个操作线程的模块：threading。threading通过对thread模块进行二次封装，提供了更方便的API来操作线程。<!-- more --></p>
+
+<p><b>threading.Thread</b></p>
+
+<p>　　Thread 是threading模块中最重要的类之一，可以使用它来创建线程。<span style="color:red">有两种方式来创建线程：一种是通过继承Thread类，重写它的run方法；另一种是创建一个threading.Thread对象，在它的初始化函数（<strong>init</strong>）中将可调用对象作为参数传入。</span>下面分别举例说明。先来看看通过继承threading.Thread类来创建线程的例子：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1">#coding=gbk</span>
+<span class="kn">import</span> <span class="nn">threading</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">random</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">class</span> <span class="nc">Counter</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lock</span><span class="p">,</span> <span class="n">threadName</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;@summary: 初始化对象。</span>
+<span class="sd">        </span>
+<span class="sd">        @param lock: 琐对象。</span>
+<span class="sd">        @param threadName: 线程名称。</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Counter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">threadName</span><span class="p">)</span>  <span class="c1">#注意：一定要显式的调用父类的初始化函数。</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">lock</span>
+    
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;@summary: 重写父类run方法，在线程启动后执行该方法内的代码。</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">global</span> <span class="n">count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+<span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span> 
+    <span class="n">Counter</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="s2">&quot;thread-&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>	<span class="c1">#确保线程都执行完毕</span>
+<span class="k">print</span> <span class="n">count</span></code></pre></figure>
+
+<p>在代码中，我们创建了一个Counter类，它继承了threading.Thread。初始化函数接收两个参数，一个是琐对象，另一个是线程的名称。在Counter中，重写了从父类继承的run方法，run方法将一个全局变量逐一的增加10000。在接下来的代码中，创建了五个Counter对象，分别调用其start方法。最后打印结果。这里要说明一下run方法 和start方法: 它们都是从Thread继承而来的，run()方法将在线程开启后执行，可以把相关的逻辑写到run方法中（通常把run方法称为活动[Activity]。）；start()方法用于启动线程。</p>
+
+<p>再看看另外一种创建线程的方法：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">import</span> <span class="nn">threading</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">random</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">doAdd</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;@summary: 将全局变量count 逐一的增加10000。</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">global</span> <span class="n">count</span><span class="p">,</span> <span class="n">lock</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">doAdd</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(),</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;thread-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>	<span class="c1">#确保线程都执行完毕</span>
+<span class="k">print</span> <span class="n">count</span></code></pre></figure>
+
+<p>在这段代码中，我们定义了方法doAdd，它将全局变量count 逐一的增加10000。然后创建了5个Thread对象，把函数对象doAdd 作为参数传给它的初始化函数，再调用Thread对象的start方法，线程启动后将执行doAdd函数。这里有必要介绍一下threading.Thread类的初始化函数原型：</p>
+
+<pre><code>def __init__(self, group=None, target=None, name=None, args=(), kwargs={})
+　　参数group是预留的，用于将来扩展；
+　　参数target是一个可调用对象（也称为活动[activity]），在线程启动后执行；
+　　参数name是线程的名字。默认值为“Thread-N“，N是一个数字。
+　　参数args和kwargs分别表示调用target时的参数列表和关键字参数。
+</code></pre>
+
+<p>Thread类还定义了以下常用方法与属性：</p>
+
+<p><b>Thread.getName()</b></p>
+
+<p><b>Thread.setName()</b></p>
+
+<p><b>Thread.name</b></p>
+
+<p>　　用于获取和设置线程的名称。</p>
+
+<p><b>Thread.ident</b></p>
+
+<p>　　获取线程的标识符。线程标识符是一个非零整数，只有在调用了start()方法之后该属性才有效，否则它只返回None。</p>
+
+<p><b>Thread.is_alive()、Thread.isAlive()</b></p>
+
+<p>　　判断线程是否是激活的（alive）。从调用start()方法启动线程，到run()方法执行完毕或遇到未处理异常而中断 这段时间内，线程是激活的。</p>
+
+<p><b>Thread.join([timeout])</b></p>
+
+<p>　　调用Thread.join将会使主调线程堵塞，直到被调用线程运行结束或超时。参数timeout是一个数值类型，表示超时时间，如果未提供该参数，那么主调线程将一直堵塞到被调线程结束。下面举个例子说明join()的使用：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">import</span> <span class="nn">threading</span><span class="o">,</span> <span class="nn">time</span>
+<span class="k">def</span> <span class="nf">doWaiting</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s1">&#39;start waiting:&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H:%M:%S&#39;</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s1">&#39;stop waiting&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H:%M:%S&#39;</span><span class="p">)</span>
+<span class="n">thread1</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">doWaiting</span><span class="p">)</span>
+<span class="n">thread1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">#确保线程thread1已经启动</span>
+<span class="k">print</span> <span class="s1">&#39;start join&#39;</span>
+<span class="n">thread1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>	<span class="c1">#将一直堵塞，直到thread1运行结束。</span>
+<span class="k">print</span> <span class="s1">&#39;end join&#39;</span></code></pre></figure>
+
+<p><b>threading.RLock和threading.Lock</b></p>
+
+<p>　　在threading模块中，定义两种类型的琐：threading.Lock和threading.RLock。它们之间有一点细微的区别，通过比较下面两段代码来说明：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">import</span> <span class="nn">threading</span>
+<span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>	<span class="c1">#Lock对象</span>
+<span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>  <span class="c1">#产生了死琐。</span>
+<span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+<span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">import</span> <span class="nn">threading</span>
+<span class="n">rLock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>  <span class="c1">#RLock对象</span>
+<span class="n">rLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="n">rLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>	<span class="c1">#在同一线程内，程序不会堵塞。</span>
+<span class="n">rLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+<span class="n">rLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></code></pre></figure>
+
+<p>这两种琐的主要区别是：RLock允许在同一线程中被多次acquire。而Lock却不允许这种情况。注意：如果使用RLock，那么acquire和release必须成对出现，即调用了n次acquire，必须调用n次的release才能真正释放所占用的琐。</p>
+
+<p><b>threading.Condition</b></p>
+
+<p>　　可以把Condiftion理解为一把高级的琐，它提供了比Lock, RLock更高级的功能，允许我们能够控制复杂的线程同步问题。threadiong.Condition在内部维护一个琐对象（默认是RLock），可以在创建Condigtion对象的时候把琐对象作为参数传入。Condition也提供了acquire, release方法，其含义与琐的acquire, release方法一致，其实它只是简单的调用内部琐对象的对应的方法而已。Condition还提供了如下方法(特别要注意：这些方法只有在占用琐(acquire)之后才能调用，否则将会报RuntimeError异常。)：</p>
+
+<p><b>Condition.wait([timeout])</b></p>
+
+<p>　　wait方法释放内部所占用的琐，同时线程被挂起，直至接收到通知被唤醒或超时（如果提供了timeout参数的话）。当线程被唤醒并重新占有琐的时候，程序才会继续执行下去。</p>
+
+<p><b>Condition.notify()</b></p>
+
+<p>　　唤醒一个挂起的线程（如果存在挂起的线程）。注意：notify()方法不会释放所占用的琐。</p>
+
+<p><b>Condition.notify_all()</b></p>
+
+<p><b>Condition.notifyAll()</b></p>
+
+<p>　　唤醒所有挂起的线程（如果存在挂起的线程）。注意：这些方法不会释放所占用的琐。</p>
+
+<p>现在写个捉迷藏的游戏来具体介绍threading.Condition的基本使用。假设这个游戏由两个人来玩，一个藏(Hider)，一个找(Seeker)。游戏的规则如下：1. 游戏开始之后，Seeker先把自己眼睛蒙上，蒙上眼睛后，就通知Hider；2. Hider接收通知后开始找地方将自己藏起来，藏好之后，再通知Seeker可以找了； 3. Seeker接收到通知之后，就开始找Hider。Hider和Seeker都是独立的个体，在程序中用两个独立的线程来表示，在游戏过程中，两者之间的行为有一定的时序关系，我们通过Condition来控制这种时序关系。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1">#---- Condition</span>
+<span class="c1">#---- 捉迷藏的游戏</span>
+<span class="kn">import</span> <span class="nn">threading</span><span class="o">,</span> <span class="nn">time</span>
+<span class="k">class</span> <span class="nc">Hider</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Hider</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span> <span class="o">=</span> <span class="n">cond</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#确保先运行Seeker中的方法   </span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="c1">#b    </span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 我已经把眼睛蒙上了&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">notify</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span> <span class="c1">#c    </span>
+                         <span class="c1">#f </span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 我找到你了 ~_~&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">notify</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+                            <span class="c1">#g</span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 我赢了&#39;</span>   <span class="c1">#h</span>
+        
+<span class="k">class</span> <span class="nc">Seeker</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Seeker</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span> <span class="o">=</span> <span class="n">cond</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>    <span class="c1">#a    #释放对琐的占用，同时线程挂起在这里，直到被notify并重新占有琐。</span>
+                            <span class="c1">#d</span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 我已经藏好了，你快来找我吧&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">notify</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>    <span class="c1">#e</span>
+                            <span class="c1">#h</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">release</span><span class="p">()</span> 
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 被你找到了，哎~~~&#39;</span>
+        
+<span class="n">cond</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Condition</span><span class="p">()</span>
+<span class="n">seeker</span> <span class="o">=</span> <span class="n">Seeker</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="s1">&#39;seeker&#39;</span><span class="p">)</span>
+<span class="n">hider</span> <span class="o">=</span> <span class="n">Hider</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="s1">&#39;hider&#39;</span><span class="p">)</span>
+<span class="n">seeker</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">hider</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></code></pre></figure>
+
+<p><b>threading.Event</b></p>
+
+<p>Event实现与Condition类似的功能，不过比Condition简单一点。它通过维护内部的标识符来实现线程间的同步问题。（threading.Event和.NET中的System.Threading.ManualResetEvent类实现同样的功能。）</p>
+
+<p><b>Event.wait([timeout])</b></p>
+
+<p>　　堵塞线程，直到Event对象内部标识位被设为True或超时（如果提供了参数timeout）。</p>
+
+<p><b>Event.set()</b></p>
+
+<p>　　将标识位设为Ture</p>
+
+<p><b>Event.clear()</b></p>
+
+<p>　　将标识伴设为False。</p>
+
+<p><b>Event.isSet()</b></p>
+
+<p>　　判断标识位是否为Ture。</p>
+
+<p>下面使用Event来实现捉迷藏的游戏(可能用Event来实现不是很形象)</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1">#---- Event</span>
+<span class="c1">#---- 捉迷藏的游戏</span>
+<span class="kn">import</span> <span class="nn">threading</span><span class="o">,</span> <span class="nn">time</span>
+<span class="k">class</span> <span class="nc">Hider</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Hider</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span> <span class="o">=</span> <span class="n">cond</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#确保先运行Seeker中的方法   </span>
+        
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 我已经把眼睛蒙上了&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 我找到你了 ~_~&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+                            
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 我赢了&#39;</span>
+        
+<span class="k">class</span> <span class="nc">Seeker</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Seeker</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span> <span class="o">=</span> <span class="n">cond</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+                        
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 我已经藏好了，你快来找我吧&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cond</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+                            
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: 被你找到了，哎~~~&#39;</span>
+        
+<span class="n">cond</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+<span class="n">seeker</span> <span class="o">=</span> <span class="n">Seeker</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="s1">&#39;seeker&#39;</span><span class="p">)</span>
+<span class="n">hider</span> <span class="o">=</span> <span class="n">Hider</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="s1">&#39;hider&#39;</span><span class="p">)</span>
+<span class="n">seeker</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">hider</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></code></pre></figure>
+
+<p><b>threading.Timer</b></p>
+
+<p>threading.Timer是threading.Thread的子类，可以在指定时间间隔后执行某个操作。下面是Python手册上提供的一个例子：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;hello, world&quot;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">hello</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="c1"># 3秒钟之后执行hello函数。</span></code></pre></figure>
+
+<p>threading模块中还有一些常用的方法没有介绍：</p>
+
+<p><b>threading.active_count()、threading.activeCount()</b></p>
+
+<p>　　获取当前活动的(alive)线程的个数。</p>
+
+<p><b>threading.current_thread()、threading.currentThread()</b></p>
+
+<p>　　获取当前的线程对象（Thread object）。</p>
+
+<p><b>threading.enumerate()</b></p>
+
+<p>　　获取当前所有活动线程的列表。</p>
+
+<p><b>threading.settrace(func)</b></p>
+
+<p>　　设置一个跟踪函数，用于在run()执行之前被调用。</p>
+
+<p><b>threading.setprofile(func)</b></p>
+
+<p>　　设置一个跟踪函数，用于在run()执行完毕之后调用。</p>
+
+<p>threading模块的内容很多，一篇文章很难写全，更多关于threading模块的信息，请查询Python手册 threading模块。</p>
+
+<p>参考链接：
+<a href="http://python.jobbole.com/81546/" title="http://python.jobbole.com/81546/">http://python.jobbole.com/81546/</a></p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Python-Lib_threading.html" title="">https://magicjms.github.io/posts/Python-Lib_threading.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Python-Lib_thread.html">
+      python模块详解—thread
+    </a>
+  </span>
+   
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
+        </div>
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <!-- Blog Categories Well -->
+          <div class="well">
+            <h4>
+              栏目分类
+            </h4>
+            <div class="row">
+                            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/posts/system.html">
+                      系统
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/web.html">
+                      Web建站
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/read.html">
+                      读书笔记
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/archives.html">
+                      存档
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.col-lg-6 -->
+              <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/posts/python.html">
+                      python语言
+                    </a>
+                  </li>                  
+				  <li>
+                    <a href="/posts/linux.html">
+                      Linux相关
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/other.html">
+                      杂记
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/tags.html">
+                      Tags
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.col-lg-6 -->
+ 
+            </div>
+            <!-- /.row -->
+          </div>
+		  <!-- Blog Recent Well -->
+          <div class="well">
+            <h4>
+              最新文章
+            </h4>
+			<div class="row">
+                            <div class="col-lg-12">
+                <ul class="list-unstyled">
+				
+                  <li>
+                    <a href="/posts/Python-Lib_threading.html">
+                      python模块详解—threading
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_thread.html">
+                      python模块详解—thread
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_subprocess.html">
+                      python模块详解—subprocess
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_hasattr.html">
+                      python内建函数—hasattr,getattr,setattr
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_datetime.html">
+                      python模块详解—datetime
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_loopingtechniques.html">
+                      循环技巧
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-base-curl-post.html">
+                      curl模拟http发送get或post接口测试
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-base-cmd-wget.html">
+                      wget命令详解
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_isinstance.html">
+                      python内建函数—isinstance
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-shell_time.html">
+                      shell脚本中的时间运算
+                    </a>
+                  </li>
+				  
+                </ul>
+              </div> 
+			</div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+      <!-- Footer -->
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+                        <div style="text-align:center;margin-top:15px;">
+				Copyright &copy; magicjms.github.io, generated by Jekyll, designed by <a href="https://www.panxw.com">panxw</a>. <a href="https://github.com/panxw/panxw.github.com">[source]</a>
+				<br/>
+				请修改_includes/copyright.html添加统计代码。
+            </div>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script> 
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+      </footer>
+    </div>
+    <!-- /.container -->
+  </body>
+
+</html>
