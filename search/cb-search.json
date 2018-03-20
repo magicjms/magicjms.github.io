@@ -3,6 +3,22 @@
 	"data" : [
 	 
 	{
+		"title" : "linux下目录权限详解 - linuxbase",
+		"url" : "/posts/Linux-base_filePermission.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Linux下文件的三个时间（Atime，Mtime，Ctime） - linuxbase",
+		"url" : "/posts/Linux-base_fileTime.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "python模块详解—threading - pythonlib",
 		"url" : "/posts/Python-Lib_threading.html"
 	}

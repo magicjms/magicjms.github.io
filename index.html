@@ -97,7 +97,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
     <li class="home this"><a href="/"><i></i><span style="font-size: 18px;">首页</span></a></li>  
   
     <li class="safe"><a href="/posts/linux.html"><i></i><span>Linux</span></a><!--一级导航的li-->  
-        <ul><!--一级菜单的li中的二级导航的ul-->  
+        <ul><!--一级菜单的li中的二级导航的ul-->
+            <li><a href="/posts/linux.html"><span>基础</span></a></li><!--二级导航中各个选项li-->   
             <li><a href="/posts/shell.html"><span>shell</span></a></li><!--二级导航中各个选项li-->  
             <li><a href="#"><span>Open-Source Apps</span></a></li>  
             <li><a href="#"><span>Android</span></a></li>  
@@ -141,6 +142,46 @@ http://blog.csdn.net/rabbitter/article/details/51125337
         <!-- Blog Entries Column -->
         <div class="col-md-8">
           <!-- Loop output paged posts -->
+
+<h4>
+  <a href="/posts/Linux-base_filePermission.html">
+    linux下目录权限详解
+  </a> 
+  <div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-03-17
+  </div>
+</h4>
+<hr>
+
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>linux下每个文件都有三种权限读(r)、写(w)、执行(x)，每个目录也是这三种权限，但他又分别代表什么呢？</p>
+
+
+
+<p><h5><a href="/posts/Linux-base_filePermission.html">查看详情 &raquo;</a></h5></p>
+
+
+
+<h4>
+  <a href="/posts/Linux-base_fileTime.html">
+    Linux下文件的三个时间（Atime，Mtime，Ctime）
+  </a> 
+  <div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-03-16
+  </div>
+</h4>
+<hr>
+
+<p>众所周知linux系统下每个文件都有三个时间(atime、mtime、ctime)但是每个时间具体含义以及运行哪些指令后哪些时间会发生变化</p>
+
+
+
+<p><h5><a href="/posts/Linux-base_fileTime.html">查看详情 &raquo;</a></h5></p>
+
+
 
 <h4>
   <a href="/posts/Python-Lib_threading.html">
@@ -268,46 +309,6 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 
 
 
-<h4>
-  <a href="/posts/Linux-base-curl-post.html">
-    curl模拟http发送get或post接口测试
-  </a> 
-  <div class="post-date">
-	<span class="glyphicon glyphicon-time"></span>
-	2017-12-10
-  </div>
-</h4>
-<hr>
-
-<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
-
-<p>curl是我们在linux下经常使用的http访问、测试、诊断工具，这篇博客主要记录如何使用curl构建get、带参数的post请求</p>
-
-
-
-<p><h5><a href="/posts/Linux-base-curl-post.html">查看详情 &raquo;</a></h5></p>
-
-
-
-<h4>
-  <a href="/posts/Linux-base-cmd-wget.html">
-    wget命令详解
-  </a> 
-  <div class="post-date">
-	<span class="glyphicon glyphicon-time"></span>
-	2017-12-10
-  </div>
-</h4>
-<hr>
-
-<p>Linux系统中的wget是一个下载文件的工具，它用在命令行下。对于Linux用户是必不可少的工具，我们经常要下载一些软件或从远程服务器恢复备份到本地服务器。wget支持HTTP，HTTPS和FTP协议，可以使用HTTP代理。所谓的自动下载是指，wget可以在用户退出系统的之后在后台执行。这意味这你可以登录系统，启动一个wget下载任务，然后退出系统，wget将在后台执行直到任务完成，相对于其它大部分浏览器在下载大量数据时需要用户一直的参与，这省去了极大的麻烦。</p>
-
-
-
-<p><h5><a href="/posts/Linux-base-cmd-wget.html">查看详情 &raquo;</a></h5></p>
-
-
-
 
 <!-- Pager indicator -->
 <ul class="pager">
@@ -392,6 +393,18 @@ http://blog.csdn.net/rabbitter/article/details/51125337
                 <ul class="list-unstyled">
 				
                   <li>
+                    <a href="/posts/Linux-base_filePermission.html">
+                      linux下目录权限详解
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-base_fileTime.html">
+                      Linux下文件的三个时间（Atime，Mtime，Ctime）
+                    </a>
+                  </li>
+				
+                  <li>
                     <a href="/posts/Python-Lib_threading.html">
                       python模块详解—threading
                     </a>
@@ -436,18 +449,6 @@ http://blog.csdn.net/rabbitter/article/details/51125337
                   <li>
                     <a href="/posts/Linux-base-cmd-wget.html">
                       wget命令详解
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Python-Base_isinstance.html">
-                      python内建函数—isinstance
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Linux-shell_time.html">
-                      shell脚本中的时间运算
                     </a>
                   </li>
 				  

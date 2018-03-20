@@ -4,8 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=" - 潘学文个人博客 - 作者:magicjms"/>
-    <title>栏目：杂记 - 潘学文个人博客</title>
+    <meta name="description" content="Linux下文件的三个时间（Atime，Mtime，Ctime） - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="linuxbase"/>
+    <title>Linux下文件的三个时间（Atime，Mtime，Ctime） - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -24,6 +25,19 @@
     <script src="/js/jquery-1.11.0.js"> </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   
   <body>
@@ -31,7 +45,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+<!--         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">
               Toggle navigation
@@ -43,10 +57,10 @@
             <span class="icon-bar">
             </span>
           </button>
-<!--           <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/">
             首页
-          </a> -->
-        </div>
+          </a>
+        </div> -->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           
@@ -124,12 +138,117 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-			<!-- Navi -->
-			<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/other.html">杂记</a>&nbsp;>&nbsp;列表
-			<!-- List -->
-			<ul class="list-unstyled">
-			
-			</ul>
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>Linux下文件的三个时间（Atime，Mtime，Ctime）</h2>
+<b>标签：</b><a href="/tags.html#linuxbase"><i>linuxbase</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-03-16
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<p>众所周知linux系统下每个文件都有三个时间(atime、mtime、ctime)但是每个时间具体含义以及运行哪些指令后哪些时间会发生变化<!-- more --></p>
+
+<blockquote>
+  <p>文件的三个时间</p>
+</blockquote>
+
+<p>我们已经很熟悉windows系统了，那么我们在windows下新建一个文件，我们知道它在保存的时候肯定是会保存一下文件的创建时间之类的信息的，那么我们来看看windows下的一个文件保存了几个时间信息。</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/windows-time.png" alt="有帮助的截图" /></p>
+
+<p>这是我Windows电脑里的一个文件，看它的属性是可以看到保存了这个文件的创建时间、修改时间、和访问时间三个时间。</p>
+
+<p>那么在linux中是怎样的，我们在linux中新建一个文件，然后用stat命令查看文件信息，如下图：</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-1.png" alt="有帮助的截图" /></p>
+
+<p>可以从上图看到系统为我们保存了这个的三个时间，分别是Access time、Modify time、Change time，也就是访问时间、修改时间和状态时间。</p>
+
+<p>那么与前面所说的windows下做一个对比：</p>
+
+<p>在windows下，一个文件有：创建时间、修改时间、访问时间</p>
+
+<p>而Linux下，一个文件也有三种时间：访问时间、修改时间、状态时间</p>
+
+<p>那么可以知道，在linux中是文件是没有创建时间的，只是如果刚刚创建一个文件，毋庸置疑它的三个时间是都等于创建时间的，就像刚才创建的test文件，我们看到它的三个时间是相等的。那么在linux上这三个时间分别代表着什么，随着什么而改变：</p>
+
+<p><span style="color:red">修改时间：文件的内容被最后一次修改的时间，我们经常用的ls -l命令显示出来的文件时间就是这个时间，当用vim对文件进行编辑之后保存，它的mtime就会相应的改变；</span></p>
+
+<p><span style="color:red">访问时间：对文件进行一次读操作，它的访问时间就会改变。例如像：cat、more等操作，但是像之前的state还有ls命令对atime是不会有影响的；</span></p>
+
+<p><span style="color:red">状态时间：当文件的状态被改变的时候，状态时间就会随之改变，例如当使用chmod、chown等改变文件属性的操作是会改变文件的ctime的。</span></p>
+
+<p>每个时间改变的例子:</p>
+
+<h3>修改ctime示例</h3>
+<p>上面的文件信息中可以看到test文件的访问权限，那么我现在给拥有者添加执行权限，chmod u+x test，再此进行stat操作：可以看到这个改变了它权限的操作知识改变了test的状态时间，其他两个时间是没右改变的。</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-2.png" alt="有帮助的截图" /></p>
+
+<h3>修改atime示例</h3>
+<p>现在对文件进行读操作，cat test，但此时我们的test中还没有写入什么东西，所以是不会有什么显示出来的,和之前的对比可以看到此时是只有访问权限改变了，其他权限没有变化</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-3.png" alt="有帮助的截图" /></p>
+
+<h3>修改mtime示例</h3>
+<p>最后我们再来用vim指令对test进行编辑，给文件中简单的写入”Hello ！”</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-4.png" alt="有帮助的截图" /></p>
+
+<p>此时虽然说<span style="color:red">文件的修改时间发生了改变，但同时访问时间和状态时间也被改变了</span>，那么到底是不是修改时间被改变就改变了文件的三个时间呢？其实这也很好理解，当用vim对文件进行了编辑，那么相应的也相当于访问了文件并且你对文件进行了内容上的添加，这个文件的的大小等状态也发生了变化，所以文件的访问时间和状态时间也会跟着改变，并不奇怪。那么如果我只是用vim命令，没有进行文件内容的添加而是直接退出，就只有它的访问时间发生了改变，说明vim操作先对文件进行访问，如下图所示：</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-4.png" alt="有帮助的截图" /></p>
+
+<h3>单独查看三个时间的操作</h3>
+
+<p>除了可以通过stat来查看文件的mtime,ctime,atime等属性，也可以通过ls命令来查看，具体如下:</p>
+
+<p>ls -lc filename 列出文件的 ctime （最后更改时间）</p>
+
+<p>ls -lu filename 列出文件的 atime（最后存取时间）</p>
+
+<p>ls -l filename 列出文件的 mtime （最后修改时间)</p>
+
+<p>[来源:]<a href="https://www.cnblogs.com/MrListening/p/5793944.html" title="https://www.cnblogs.com/MrListening/p/5793944.html">https://www.cnblogs.com/MrListening/p/5793944.html</a></p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Linux-base_fileTime.html" title="">https://magicjms.github.io/posts/Linux-base_fileTime.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Python-Lib_threading.html">
+      python模块详解—threading
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Linux-base_filePermission.html">
+      linux下目录权限详解
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">

@@ -4,8 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=" - 潘学文个人博客 - 作者:magicjms"/>
-    <title>栏目：杂记 - 潘学文个人博客</title>
+    <meta name="description" content="linux下目录权限详解 - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="linuxbase"/>
+    <title>linux下目录权限详解 - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -24,6 +25,19 @@
     <script src="/js/jquery-1.11.0.js"> </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   
   <body>
@@ -31,7 +45,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+<!--         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">
               Toggle navigation
@@ -43,10 +57,10 @@
             <span class="icon-bar">
             </span>
           </button>
-<!--           <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/">
             首页
-          </a> -->
-        </div>
+          </a>
+        </div> -->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           
@@ -124,12 +138,135 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-			<!-- Navi -->
-			<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/other.html">杂记</a>&nbsp;>&nbsp;列表
-			<!-- List -->
-			<ul class="list-unstyled">
-			
-			</ul>
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>linux下目录权限详解</h2>
+<b>标签：</b><a href="/tags.html#linuxbase"><i>linuxbase</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-03-17
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>linux下每个文件都有三种权限读(r)、写(w)、执行(x)，每个目录也是这三种权限，但他又分别代表什么呢？<!-- more --></p>
+
+<blockquote>
+  <p>目录权限</p>
+</blockquote>
+
+<p>目录的权限位和文件有所不同现在我们来看看其中的区别。</p>
+
+<p>r：目录的读权限位意味着可以列出其中的内容</p>
+
+<p>w：写权限位意味着可以在该目录中创建文件，如果不希望其他用户在你的目录中创建文件，可以取消相应的写权限位</p>
+
+<p>x：执行权限位则意味着搜索和访问该目录</p>
+
+<p>目录权限</p>
+
+<pre><code>        r                       w                           x
+可以列出该目录中的文件   可以在该目录中创建或删除文件     可以搜索或进入该目录
+</code></pre>
+
+<p>目录权限举例</p>
+
+<pre><code>     权限　　　　　　　　　　　　　　文件属主　　　　　　　　　　同组用户
+drwx rwx r-x(775) 		读、写、执行 		读、写、执行 读、执行
+drwx r-x r--(754) 		读、写、执行 		读、执行 读
+drwx r-x r-x(755) 		读、写、执行 		读、执行 读、执行
+</code></pre>
+
+<p>如果把同组用户或其他用户针对某一目录的权限设置为–x，那么他们将无法列出该目录中的文件。如果该目录中有一个执行位置位的脚本或程序，只要用户知道它的路径和文件名，仍然可以执行它。用户不能够进入该目录并不妨碍他的执行。</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span></span>drwx r-- r-- <span class="m">1</span> louise admin		<span class="m">2390</span> Jul <span class="m">23</span> <span class="m">09</span>:44 docs</code></pre></figure>
+
+<p>目录的权限将会覆盖该目录中文件的权限。例如，如果目录docs具有如下的权限：
+而其中的文件pay的权限为：</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span></span>-rwx rwx rwx <span class="m">1</span> louise admin		<span class="m">5567</span> Oct <span class="m">3</span> <span class="m">05</span>:40 pay</code></pre></figure>
+
+<p>那么admin组的用户将无法编辑该文件，因为它所属的目录不具有这样的权限。
+该文件对任何用户都可读，但由于它所在的目录并未给admin组的用户赋予执行权限，所以该组的用户都将无法访问该目录，他们将会得到“访问受限”的错误消息。</p>
+
+<blockquote>
+  <p>suid/guid</p>
+</blockquote>
+
+<p>suid意味着如果某个用户对属于自己的shell脚本设置了这种权限，那么其他用户在执行这一脚本时也会具有其属主的相应权限。于是，如果根用户的某一个脚本设置了这样的权限，那么其他普通用户在执行它的期间也同样具有根用户的权限。同样的原则也适用于guid，执行相应脚本的用户将具有该文件所属用户组中用户的权限。</p>
+
+<p>使用场景：
+这里有一个很好的例子。我管理着几个大型的数据库系统，而对它们进行备份需要有系统管理权限。我写了几个脚本，并设置了它们的guid，这样我指定的一些用户只要执行这些脚本就能够完成相应的工作，而无须以数据库管理员的身份登录，以免不小心破坏了数据库服务器。通过执行这些脚本，他们可以完成数据库备份及其他管理任务，但是在这些脚本运行结束之后，他们就又回复到他们作为普通用户的权限。</p>
+
+<p>有相当一些UNIX命令也设置了suid和guid。如果想找出这些命令，可以进入/bin或/sbin目录，执行下面的命令：</p>
+
+<pre><code>$ ls -l | grep '^...s'
+上面的命令是用来查找suid文件的
+$ ls -l | grep '^...s..s'
+上面的命令是用来查找 suid和guid的
+</code></pre>
+
+<p>设置suid、guid
+如果希望设置suid，那么就将相应的权限位之前的那一位设置为 4；如果希望设置guid，那么就将相应的权限位之前的那一位设置为2；如果希望两者都置位，那么将相应的权限位之前的那一位设置为4+2。</p>
+
+<p><span style="color:red">一旦设置了这一位，一个s将出现在x的位置上。记住：在设置suid或guid的同时，相应的执行权限位必须要被设置。例如，如果希望设置guid，那么必须要让该用户组具有执行权限。</span></p>
+
+<p>如果想要对文件login设置suid，它当前所具有的权限为 rwx rw- r–(741)，需要在使用chmod命令时在该权限数字的前面加上一个4，即chmod 4741，这将使该文件的权限变为rws rw- r–。</p>
+
+<pre><code>$ chmod 4741 logit
+</code></pre>
+
+<blockquote>
+  <p>umask</p>
+</blockquote>
+
+<p>umask命令确定了你创建目录、文件的缺省权限，umask命令是在/etc/profile文件中设置的，每个用户在登录时都会引用这个文件，所以如果希望改变所有用户的umask，可以在该文件中加入相应的条目。如果希望永久性地设置自己的umask值，那么就把它放在自己 $ HOME目录下的.profile或.bash_profile文件中。</p>
+
+<p>根据umask设置(系统默认的umask为002)，计算创建目录、文件时的默认权限：</p>
+
+<p>例如，对于umask值002，相应的文件和目录缺省创建权限是什么呢？
+第一步，我们首先写下具有全部权限的模式，即777 (所有用户都具有读、写和执行权限 )。
+第二步，在下面一行按照umask值写下相应的位，在本例中是002。
+第三步，在接下来的一行中记下上面两行中没有匹配的位，所以创建目录的缺省权限为：775。
+第四步，对于文件来说，在创建时不能具有文件权限(即666)，只要拿掉相应的执行权限比特即可。所以创建文件的缺省权限为：664。</p>
+
+<blockquote>
+  <p>符号连接</p>
+</blockquote>
+
+<p>存在两种不同类型的链接，软链接和硬链接，这里我们只讨论软链接。软链接实际上就是一个指向文件的指针。</p>
+
+<p>不管是否在同一个文件系统中，都可以创建链接。在创建链接的时候，不要忘记在原有目录设置执行权限。<span style="color:red">链接一旦创建，链接目录将具有权限777或rwx rwx rwx，但是实际的原有文件的权限并未改变</span>。
+如果链接太多的话，可以删掉一些，不过切记不要删除源文件。</p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Linux-base_filePermission.html" title="">https://magicjms.github.io/posts/Linux-base_filePermission.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Linux-base_fileTime.html">
+      Linux下文件的三个时间（Atime，Mtime，Ctime）
+    </a>
+  </span>
+   
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">

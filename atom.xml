@@ -94,7 +94,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
     <li class="home this"><a href="/"><i></i><span style="font-size: 18px;">首页</span></a></li>  
   
     <li class="safe"><a href="/posts/linux.html"><i></i><span>Linux</span></a><!--一级导航的li-->  
-        <ul><!--一级菜单的li中的二级导航的ul-->  
+        <ul><!--一级菜单的li中的二级导航的ul-->
+            <li><a href="/posts/linux.html"><span>基础</span></a></li><!--二级导航中各个选项li-->   
             <li><a href="/posts/shell.html"><span>shell</span></a></li><!--二级导航中各个选项li-->  
             <li><a href="#"><span>Open-Source Apps</span></a></li>  
             <li><a href="#"><span>Android</span></a></li>  
@@ -156,12 +157,183 @@ http://blog.csdn.net/rabbitter/article/details/51125337
  <title></title>
  <link href="http://magicjms.github.io/atom.xml" rel="self"/>
  <link href="http://magicjms.github.io"/>
- <updated>2018-03-20T15:52:26+08:00</updated>
+ <updated>2018-03-20T16:34:54+08:00</updated>
  <author>
    <name>magicjms</name>
    <email>2368691083@qq.com</email>
  </author>
 
+ 
+ <entry>
+   <title>linux下目录权限详解</title>
+   <link href="http://magicjms.github.io/posts/Linux-base_filePermission.html"/>
+   <updated>2018-03-17T00:00:00+08:00</updated>
+   <id>/posts/Linux-base_filePermission</id>
+   <content type="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://magicjms.github.io/pygments.css&quot; /&gt;
+
+&lt;p&gt;linux下每个文件都有三种权限读(r)、写(w)、执行(x)，每个目录也是这三种权限，但他又分别代表什么呢？&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;目录权限&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;目录的权限位和文件有所不同现在我们来看看其中的区别。&lt;/p&gt;
+
+&lt;p&gt;r：目录的读权限位意味着可以列出其中的内容&lt;/p&gt;
+
+&lt;p&gt;w：写权限位意味着可以在该目录中创建文件，如果不希望其他用户在你的目录中创建文件，可以取消相应的写权限位&lt;/p&gt;
+
+&lt;p&gt;x：执行权限位则意味着搜索和访问该目录&lt;/p&gt;
+
+&lt;p&gt;目录权限&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;        r                       w                           x
+可以列出该目录中的文件   可以在该目录中创建或删除文件     可以搜索或进入该目录
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;目录权限举例&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     权限　　　　　　　　　　　　　　文件属主　　　　　　　　　　同组用户
+drwx rwx r-x(775) 		读、写、执行 		读、写、执行 读、执行
+drwx r-x r--(754) 		读、写、执行 		读、执行 读
+drwx r-x r-x(755) 		读、写、执行 		读、执行 读、执行
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果把同组用户或其他用户针对某一目录的权限设置为–x，那么他们将无法列出该目录中的文件。如果该目录中有一个执行位置位的脚本或程序，只要用户知道它的路径和文件名，仍然可以执行它。用户不能够进入该目录并不妨碍他的执行。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span&gt;&lt;/span&gt;drwx r-- r-- &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; louise admin		&lt;span class=&quot;m&quot;&gt;2390&lt;/span&gt; Jul &lt;span class=&quot;m&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;09&lt;/span&gt;:44 docs&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;目录的权限将会覆盖该目录中文件的权限。例如，如果目录docs具有如下的权限：
+而其中的文件pay的权限为：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span&gt;&lt;/span&gt;-rwx rwx rwx &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; louise admin		&lt;span class=&quot;m&quot;&gt;5567&lt;/span&gt; Oct &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;05&lt;/span&gt;:40 pay&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;那么admin组的用户将无法编辑该文件，因为它所属的目录不具有这样的权限。
+该文件对任何用户都可读，但由于它所在的目录并未给admin组的用户赋予执行权限，所以该组的用户都将无法访问该目录，他们将会得到“访问受限”的错误消息。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;suid/guid&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;suid意味着如果某个用户对属于自己的shell脚本设置了这种权限，那么其他用户在执行这一脚本时也会具有其属主的相应权限。于是，如果根用户的某一个脚本设置了这样的权限，那么其他普通用户在执行它的期间也同样具有根用户的权限。同样的原则也适用于guid，执行相应脚本的用户将具有该文件所属用户组中用户的权限。&lt;/p&gt;
+
+&lt;p&gt;使用场景：
+这里有一个很好的例子。我管理着几个大型的数据库系统，而对它们进行备份需要有系统管理权限。我写了几个脚本，并设置了它们的guid，这样我指定的一些用户只要执行这些脚本就能够完成相应的工作，而无须以数据库管理员的身份登录，以免不小心破坏了数据库服务器。通过执行这些脚本，他们可以完成数据库备份及其他管理任务，但是在这些脚本运行结束之后，他们就又回复到他们作为普通用户的权限。&lt;/p&gt;
+
+&lt;p&gt;有相当一些UNIX命令也设置了suid和guid。如果想找出这些命令，可以进入/bin或/sbin目录，执行下面的命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ls -l | grep '^...s'
+上面的命令是用来查找suid文件的
+$ ls -l | grep '^...s..s'
+上面的命令是用来查找 suid和guid的
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设置suid、guid
+如果希望设置suid，那么就将相应的权限位之前的那一位设置为 4；如果希望设置guid，那么就将相应的权限位之前的那一位设置为2；如果希望两者都置位，那么将相应的权限位之前的那一位设置为4+2。&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:red&quot;&gt;一旦设置了这一位，一个s将出现在x的位置上。记住：在设置suid或guid的同时，相应的执行权限位必须要被设置。例如，如果希望设置guid，那么必须要让该用户组具有执行权限。&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;如果想要对文件login设置suid，它当前所具有的权限为 rwx rw- r–(741)，需要在使用chmod命令时在该权限数字的前面加上一个4，即chmod 4741，这将使该文件的权限变为rws rw- r–。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ chmod 4741 logit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;umask&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;umask命令确定了你创建目录、文件的缺省权限，umask命令是在/etc/profile文件中设置的，每个用户在登录时都会引用这个文件，所以如果希望改变所有用户的umask，可以在该文件中加入相应的条目。如果希望永久性地设置自己的umask值，那么就把它放在自己 $ HOME目录下的.profile或.bash_profile文件中。&lt;/p&gt;
+
+&lt;p&gt;根据umask设置(系统默认的umask为002)，计算创建目录、文件时的默认权限：&lt;/p&gt;
+
+&lt;p&gt;例如，对于umask值002，相应的文件和目录缺省创建权限是什么呢？
+第一步，我们首先写下具有全部权限的模式，即777 (所有用户都具有读、写和执行权限 )。
+第二步，在下面一行按照umask值写下相应的位，在本例中是002。
+第三步，在接下来的一行中记下上面两行中没有匹配的位，所以创建目录的缺省权限为：775。
+第四步，对于文件来说，在创建时不能具有文件权限(即666)，只要拿掉相应的执行权限比特即可。所以创建文件的缺省权限为：664。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;符号连接&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;存在两种不同类型的链接，软链接和硬链接，这里我们只讨论软链接。软链接实际上就是一个指向文件的指针。&lt;/p&gt;
+
+&lt;p&gt;不管是否在同一个文件系统中，都可以创建链接。在创建链接的时候，不要忘记在原有目录设置执行权限。&lt;span style=&quot;color:red&quot;&gt;链接一旦创建，链接目录将具有权限777或rwx rwx rwx，但是实际的原有文件的权限并未改变&lt;/span&gt;。
+如果链接太多的话，可以删掉一些，不过切记不要删除源文件。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Linux下文件的三个时间（Atime，Mtime，Ctime）</title>
+   <link href="http://magicjms.github.io/posts/Linux-base_fileTime.html"/>
+   <updated>2018-03-16T00:00:00+08:00</updated>
+   <id>/posts/Linux-base_fileTime</id>
+   <content type="html">&lt;p&gt;众所周知linux系统下每个文件都有三个时间(atime、mtime、ctime)但是每个时间具体含义以及运行哪些指令后哪些时间会发生变化&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;文件的三个时间&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;我们已经很熟悉windows系统了，那么我们在windows下新建一个文件，我们知道它在保存的时候肯定是会保存一下文件的创建时间之类的信息的，那么我们来看看windows下的一个文件保存了几个时间信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/windows-time.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这是我Windows电脑里的一个文件，看它的属性是可以看到保存了这个文件的创建时间、修改时间、和访问时间三个时间。&lt;/p&gt;
+
+&lt;p&gt;那么在linux中是怎样的，我们在linux中新建一个文件，然后用stat命令查看文件信息，如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-1.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以从上图看到系统为我们保存了这个的三个时间，分别是Access time、Modify time、Change time，也就是访问时间、修改时间和状态时间。&lt;/p&gt;
+
+&lt;p&gt;那么与前面所说的windows下做一个对比：&lt;/p&gt;
+
+&lt;p&gt;在windows下，一个文件有：创建时间、修改时间、访问时间&lt;/p&gt;
+
+&lt;p&gt;而Linux下，一个文件也有三种时间：访问时间、修改时间、状态时间&lt;/p&gt;
+
+&lt;p&gt;那么可以知道，在linux中是文件是没有创建时间的，只是如果刚刚创建一个文件，毋庸置疑它的三个时间是都等于创建时间的，就像刚才创建的test文件，我们看到它的三个时间是相等的。那么在linux上这三个时间分别代表着什么，随着什么而改变：&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:red&quot;&gt;修改时间：文件的内容被最后一次修改的时间，我们经常用的ls -l命令显示出来的文件时间就是这个时间，当用vim对文件进行编辑之后保存，它的mtime就会相应的改变；&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:red&quot;&gt;访问时间：对文件进行一次读操作，它的访问时间就会改变。例如像：cat、more等操作，但是像之前的state还有ls命令对atime是不会有影响的；&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:red&quot;&gt;状态时间：当文件的状态被改变的时候，状态时间就会随之改变，例如当使用chmod、chown等改变文件属性的操作是会改变文件的ctime的。&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;每个时间改变的例子:&lt;/p&gt;
+
+&lt;h3&gt;修改ctime示例&lt;/h3&gt;
+&lt;p&gt;上面的文件信息中可以看到test文件的访问权限，那么我现在给拥有者添加执行权限，chmod u+x test，再此进行stat操作：可以看到这个改变了它权限的操作知识改变了test的状态时间，其他两个时间是没右改变的。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-2.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;修改atime示例&lt;/h3&gt;
+&lt;p&gt;现在对文件进行读操作，cat test，但此时我们的test中还没有写入什么东西，所以是不会有什么显示出来的,和之前的对比可以看到此时是只有访问权限改变了，其他权限没有变化&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-3.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;修改mtime示例&lt;/h3&gt;
+&lt;p&gt;最后我们再来用vim指令对test进行编辑，给文件中简单的写入”Hello ！”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-4.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;此时虽然说&lt;span style=&quot;color:red&quot;&gt;文件的修改时间发生了改变，但同时访问时间和状态时间也被改变了&lt;/span&gt;，那么到底是不是修改时间被改变就改变了文件的三个时间呢？其实这也很好理解，当用vim对文件进行了编辑，那么相应的也相当于访问了文件并且你对文件进行了内容上的添加，这个文件的的大小等状态也发生了变化，所以文件的访问时间和状态时间也会跟着改变，并不奇怪。那么如果我只是用vim命令，没有进行文件内容的添加而是直接退出，就只有它的访问时间发生了改变，说明vim操作先对文件进行访问，如下图所示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-03-16-Linux-base_fileTime/linux-4.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;单独查看三个时间的操作&lt;/h3&gt;
+
+&lt;p&gt;除了可以通过stat来查看文件的mtime,ctime,atime等属性，也可以通过ls命令来查看，具体如下:&lt;/p&gt;
+
+&lt;p&gt;ls -lc filename 列出文件的 ctime （最后更改时间）&lt;/p&gt;
+
+&lt;p&gt;ls -lu filename 列出文件的 atime（最后存取时间）&lt;/p&gt;
+
+&lt;p&gt;ls -l filename 列出文件的 mtime （最后修改时间)&lt;/p&gt;
+
+&lt;p&gt;[来源:]&lt;a href=&quot;https://www.cnblogs.com/MrListening/p/5793944.html&quot; title=&quot;https://www.cnblogs.com/MrListening/p/5793944.html&quot;&gt;https://www.cnblogs.com/MrListening/p/5793944.html&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>python模块详解—threading</title>
@@ -1311,7 +1483,9 @@ datetime.strftime(format)
    <link href="http://magicjms.github.io/posts/Linux-base-cmd-wget.html"/>
    <updated>2017-12-10T00:00:00+08:00</updated>
    <id>/posts/Linux-base-cmd-wget</id>
-   <content type="html">&lt;p&gt;Linux系统中的wget是一个下载文件的工具，它用在命令行下。对于Linux用户是必不可少的工具，我们经常要下载一些软件或从远程服务器恢复备份到本地服务器。wget支持HTTP，HTTPS和FTP协议，可以使用HTTP代理。所谓的自动下载是指，wget可以在用户退出系统的之后在后台执行。这意味这你可以登录系统，启动一个wget下载任务，然后退出系统，wget将在后台执行直到任务完成，相对于其它大部分浏览器在下载大量数据时需要用户一直的参与，这省去了极大的麻烦。&lt;!-- more --&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;Linux系统中的wget是一个下载文件的工具，它用在命令行下。&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;p&gt;Linux系统中的wget是一个下载文件的工具，它用在命令行下。对于Linux用户是必不可少的工具，我们经常要下载一些软件或从远程服务器恢复备份到本地服务器。wget支持HTTP，HTTPS和FTP协议，可以使用HTTP代理。所谓的自动下载是指，wget可以在用户退出系统的之后在后台执行。这意味这你可以登录系统，启动一个wget下载任务，然后退出系统，wget将在后台执行直到任务完成，相对于其它大部分浏览器在下载大量数据时需要用户一直的参与，这省去了极大的麻烦。&lt;/p&gt;
 
 &lt;p&gt;wget 可以跟踪HTML页面上的链接依次下载来创建远程服务器的本地版本，完全重建原始站点的目录结构。这又常被称作”递归下载”。在递归下载的时候，wget 遵循Robot Exclusion标准(/robots.txt). wget可以在下载的同时，将链接转换成指向本地文件，以方便离线浏览。&lt;/p&gt;
 
@@ -1341,163 +1515,130 @@ datetime.strftime(format)
 &lt;p&gt;5）程序小，完全免费；程序小可以考虑不计，因为现在的硬盘实在太大了；完全免费就不得不考虑了，即使网络上有很多所谓的免费软件，但是，这些软件的广告却不是我们喜欢的。&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;b&gt;3．使用实例：&lt;/b&gt;&lt;/p&gt;
+  &lt;p&gt;3．使用实例：&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;b&gt;实例1：使用wget下载单个文件&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#1&quot;&gt;实例1:wget下载单个文件&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#2&quot;&gt;实例2:-O下载并重命名&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#3&quot;&gt;实例3:–limit -rate限速下载&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#4&quot;&gt;实例4:-c断点续传&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#5&quot;&gt;实例5:-b后台下载&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#6&quot;&gt;实例6:–user-agent伪装代表名称&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#7&quot;&gt;实例7:–spider测试下载链接&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#8&quot;&gt;实例8:–tries增加重试次数&lt;/a&gt; 
+&lt;a href=&quot;#9&quot;&gt;实例9:-i下载多个文件&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#10&quot;&gt;实例10:–mirror镜像网站&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#9&quot;&gt;实例11:–reject过滤指定格式下载&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#12&quot;&gt;实例12:-o把下载信息存入日志文件&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#13&quot;&gt;实例13:-Q限制总下载文件大小&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#14&quot;&gt;实例14:-r -A下载指定格式文件&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;#15&quot;&gt;实例15:FTP下载&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;1&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例1：使用wget下载单个文件&lt;/b&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;wget http://www.minjieren.com/wordpress-3.1-zh_CN.zip
+&lt;pre&gt;&lt;code&gt;wget http://www.minjieren.com/wordpress-3.1-zh_CN.zip  
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：以上的例子是从网络下载一个文件并保存在当前目录，在下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。&lt;/p&gt;
 
-&lt;p&gt;以下的例子是从网络下载一个文件并保存在当前目录，在下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;2&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例2：使用wget -O下载并以不同的文件名保存&lt;/b&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;b&gt;实例2：使用wget -O下载并以不同的文件名保存&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;wget -O wordpress.zip http://www.minjieren.com/download.aspx?id=1080
+&lt;pre&gt;&lt;code&gt;wget -O wordpress.zip http://www.minjieren.com/download.aspx?id=1080  
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：wget默认会以最后一个符合”/”的后面的字符来命令，对于动态链接的下载通常文件名会不正确&lt;br /&gt;
+错误：下面的例子会下载一个文件并以名称download.aspx?id=1080保存&lt;br /&gt;
+wget http://www.minjieren.com/download.aspx?id=1080.zip 
+即使下载的文件是zip格式，它仍然以download.php?id=1080命令&lt;br /&gt;
+正确：为了解决这个问题，我们可以使用参数-O来指定一个文件名：&lt;br /&gt;
+wget -O wordpress.zip http://www.minjieren.com/download.aspx?id=1080&lt;/p&gt;
 
-&lt;p&gt;wget默认会以最后一个符合”/”的后面的字符来命令，对于动态链接的下载通常文件名会不正确。&lt;/p&gt;
-
-&lt;p&gt;错误：下面的例子会下载一个文件并以名称download.aspx?id=1080保存&lt;/p&gt;
-
-&lt;p&gt;wget http://www.minjieren.com/download?id=1&lt;/p&gt;
-
-&lt;p&gt;即使下载的文件是zip格式，它仍然以download.php?id=1080命令。&lt;/p&gt;
-
-&lt;p&gt;正确：为了解决这个问题，我们可以使用参数-O来指定一个文件名：&lt;/p&gt;
-
-&lt;p&gt;wget -O wordpress.zip http://www.minjieren.com/download.aspx?id=1080&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例3：使用wget –limit -rate限速下载&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;3&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例3：使用wget –limit -rate限速下载&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget --limit-rate=300k http://www.minjieren.com/wordpress-3.1-zh_CN.zip
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：当你执行wget的时候，它默认会占用全部可能的宽带下载。但是当你准备下载一个大文件，而你还需要下载其它文件时就有必要限速了。&lt;/p&gt;
 
-&lt;p&gt;当你执行wget的时候，它默认会占用全部可能的宽带下载。但是当你准备下载一个大文件，而你还需要下载其它文件时就有必要限速了。&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例4：使用wget -c断点续传&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;4&quot;&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;b&gt;实例4：使用wget -c断点续传&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget -c http://www.minjieren.com/wordpress-3.1-zh_CN.zip
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：使用wget -c重新启动下载中断的文件，对于我们下载大文件时突然由于网络等原因中断非常有帮助，我们可以继续接着下载而不是重新下载一个文件。需要继续中断的下载时可以使用-c参数。&lt;/p&gt;
 
-&lt;p&gt;使用wget -c重新启动下载中断的文件，对于我们下载大文件时突然由于网络等原因中断非常有帮助，我们可以继续接着下载而不是重新下载一个文件。需要继续中断的下载时可以使用-c参数。&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例5：使用wget -b后台下载&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;5&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例5：使用wget -b后台下载&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt; wget -b http://www.minjieren.com/wordpress-3.1-zh_CN.zip
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明:对于下载非常大的文件的时候，我们可以使用参数-b进行后台下载。&lt;br /&gt;
+wget -b http://www.minjieren.com/wordpress-3.1-zh_CN.zip&lt;br /&gt;
+Continuing in background, pid 1840.
+Output will be written to `wget-log’.&lt;/p&gt;
 
-&lt;p&gt;对于下载非常大的文件的时候，我们可以使用参数-b进行后台下载。&lt;/p&gt;
+&lt;p&gt;你可以使用以下命令来察看下载进度：
+tail -f wget-log&lt;/p&gt;
 
-&lt;p&gt;wget -b http://www.minjieren.com/wordpress-3.1-zh_CN.zip&lt;/p&gt;
-
-&lt;p&gt;Continuing in background, pid 1840.&lt;/p&gt;
-
-&lt;p&gt;Output will be written to `wget-log’.&lt;/p&gt;
-
-&lt;p&gt;你可以使用以下命令来察看下载进度：&lt;/p&gt;
-
-&lt;p&gt;tail -f wget-log&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例6：伪装代理名称下载&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;6&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例6：伪装代理名称下载&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget --user-agent=&quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16&quot; http://www.minjieren.com/wordpress-3.1-zh_CN.zip
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：有些网站能通过根据判断代理名称不是浏览器而拒绝你的下载请求。不过你可以通过–user-agent参数伪装。&lt;/p&gt;
 
-&lt;p&gt;有些网站能通过根据判断代理名称不是浏览器而拒绝你的下载请求。不过你可以通过–user-agent参数伪装。&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例7：使用wget –spider测试下载链接&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;7&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例7：使用wget –spider测试下载链接&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget --spider URL
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
-
-&lt;p&gt;当你打算进行定时下载，你应该在预定时间测试下载链接是否有效。我们可以增加–spider参数进行检查。&lt;/p&gt;
-
-&lt;p&gt;wget –spider URL&lt;/p&gt;
-
-&lt;p&gt;如果下载链接正确，将会显示&lt;/p&gt;
+&lt;p&gt;说明：当你打算进行定时下载，你应该在预定时间测试下载链接是否有效。我们可以增加–spider参数进行检查。&lt;br /&gt;
+wget –spider URL&lt;br /&gt;
+如果下载链接正确，将会显示&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget --spider URL
-
 Spider mode enabled. Check if remote file exists.
-
 HTTP request sent, awaiting response... 200 OK
-
 Length: unspecified [text/html]
-
 Remote file exists and could contain further links,
-
 but recursion is disabled -- not retrieving.
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这保证了下载能在预定的时间进行，但当你给错了一个链接，将会显示如下错误&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget --spider url
-
 Spider mode enabled. Check if remote file exists.
-
 HTTP request sent, awaiting response... 404 Not Found
-
 Remote file does not exist -- broken link!!!
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;你可以在以下几种情况下使用spider参数：&lt;/p&gt;
+&lt;p&gt;你可以在以下几种情况下使用spider参数：&lt;br /&gt;
+定时下载之前进行检查&lt;br /&gt;
+间隔检测网站是否可用&lt;br /&gt;
+检查网站页面的死链接&lt;/p&gt;
 
-&lt;p&gt;定时下载之前进行检查&lt;/p&gt;
-
-&lt;p&gt;间隔检测网站是否可用&lt;/p&gt;
-
-&lt;p&gt;检查网站页面的死链接&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例8：使用wget –tries增加重试次数&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;8&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例8：使用wget –tries增加重试次数&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget --tries=40 URL
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：如果网络有问题或下载一个大文件也有可能失败。wget默认重试20次连接下载文件。如果需要，你可以使用–tries增加重试次数。&lt;/p&gt;
 
-&lt;p&gt;如果网络有问题或下载一个大文件也有可能失败。wget默认重试20次连接下载文件。如果需要，你可以使用–tries增加重试次数。&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例9：使用wget -i下载多个文件&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;9&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例9：使用wget -i下载多个文件&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget -i filelist.txt
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
-
-&lt;p&gt;首先，保存一份下载链接文件&lt;/p&gt;
+&lt;p&gt;说明：首先，保存一份下载链接文件&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;cat &amp;gt; filelist.txt
 url1
@@ -1508,76 +1649,56 @@ url4
 
 &lt;p&gt;接着使用这个文件和参数-i下载&lt;/p&gt;
 
-&lt;p&gt;&lt;b&gt;实例10：使用wget –mirror镜像网站&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;10&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例10：使用wget –mirror镜像网站&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget --mirror -p --convert-links -P ./LOCAL URL
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：&lt;br /&gt;
+下载整个网站到本地。&lt;br /&gt;
+–miror:开户镜像下载&lt;br /&gt;
+-p:下载所有为了html页面显示正常的文件&lt;br /&gt;
+–convert-links:下载后，转换成本地的链接&lt;br /&gt;
+-P ./LOCAL：保存所有文件和目录到本地指定目录&lt;/p&gt;
 
-&lt;p&gt;下载整个网站到本地。&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;11&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例11：使用wget –reject过滤指定格式下载&lt;/b&gt;&lt;/p&gt;
 
-&lt;p&gt;–miror:开户镜像下载&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wget --reject=gif ur
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;-p:下载所有为了html页面显示正常的文件&lt;/p&gt;
+&lt;p&gt;说明：下载一个网站，但你不希望下载图片，可以使用以下命令。&lt;/p&gt;
 
-&lt;p&gt;–convert-links:下载后，转换成本地的链接&lt;/p&gt;
-
-&lt;p&gt;-P ./LOCAL：保存所有文件和目录到本地指定目录&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例11：使用wget –reject过滤指定格式下载&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：
-    wget –reject=gif ur&lt;/p&gt;
-
-&lt;p&gt;说明：&lt;/p&gt;
-
-&lt;p&gt;下载一个网站，但你不希望下载图片，可以使用以下命令。&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例12：使用wget -o把下载信息存入日志文件&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;12&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例12：使用wget -o把下载信息存入日志文件&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget -o download.log URL
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：不希望下载信息直接显示在终端而是在一个日志文件，可以使用&lt;/p&gt;
 
-&lt;p&gt;不希望下载信息直接显示在终端而是在一个日志文件，可以使用&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例13：使用wget -Q限制总下载文件大小&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;13&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例13：使用wget -Q限制总下载文件大小&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget -Q5m -i filelist.txt
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：当你想要下载的文件超过5M而退出下载，你可以使用。注意：这个参数对单个文件下载不起作用，只能递归下载时才有效。&lt;/p&gt;
 
-&lt;p&gt;当你想要下载的文件超过5M而退出下载，你可以使用。注意：这个参数对单个文件下载不起作用，只能递归下载时才有效。&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例14：使用wget -r -A下载指定格式文件&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;14&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例14：使用wget -r -A下载指定格式文件&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget -r -A.pdf url
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;p&gt;说明：可以在以下情况使用该功能&lt;br /&gt;
+下载一个网站的所有图片&lt;br /&gt;
+下载一个网站的所有视频&lt;br /&gt;
+下载一个网站的所有PDF文件&lt;/p&gt;
 
-&lt;p&gt;可以在以下情况使用该功能：&lt;/p&gt;
-
-&lt;p&gt;下载一个网站的所有图片&lt;/p&gt;
-
-&lt;p&gt;下载一个网站的所有视频&lt;/p&gt;
-
-&lt;p&gt;下载一个网站的所有PDF文件&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;实例15：使用wget FTP下载&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;/p&gt;
+&lt;p&gt;&lt;span id=&quot;15&quot;&gt;&lt;/span&gt;
+&lt;b&gt;实例15：使用wget FTP下载&lt;/b&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;wget ftp-url
 
@@ -1598,7 +1719,7 @@ wget --ftp-user=USERNAME --ftp-password=PASSWORD url
 &lt;pre&gt;&lt;code&gt;wget --ftp-user=USERNAME --ftp-password=PASSWORD url
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;备注：编译安装&lt;/p&gt;
+&lt;p&gt;编译安装&lt;/p&gt;
 
 &lt;p&gt;使用如下命令编译安装：&lt;/p&gt;
 
@@ -1613,171 +1734,95 @@ wget --ftp-user=USERNAME --ftp-password=PASSWORD url
   &lt;p&gt;&lt;b&gt;4．命令参数：&lt;/b&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;b&gt;启动参数：&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;-V, –version 显示wget的版本后退出&lt;/p&gt;
-
-&lt;p&gt;-h, –help 打印语法帮助&lt;/p&gt;
-
-&lt;p&gt;-b, –background 启动后转入后台执行&lt;/p&gt;
-
-&lt;p&gt;-e, –execute=COMMAND 执行`.wgetrc’格式的命令，wgetrc格式参见/etc/wgetrc或~/.wgetrc记录和输入文件参数：&lt;/p&gt;
-
-&lt;p&gt;-o, –output-file=FILE 把记录写到FILE文件中&lt;/p&gt;
-
-&lt;p&gt;-a, –append-output=FILE 把记录追加到FILE文件中&lt;/p&gt;
-
-&lt;p&gt;-d, –debug 打印调试输出&lt;/p&gt;
-
-&lt;p&gt;-q, –quiet 安静模式(没有输出)&lt;/p&gt;
-
-&lt;p&gt;-v, –verbose 冗长模式(这是缺省设置)&lt;/p&gt;
-
-&lt;p&gt;-nv, –non-verbose 关掉冗长模式，但不是安静模式&lt;/p&gt;
-
-&lt;p&gt;-i, –input-file=FILE 下载在FILE文件中出现的URLs&lt;/p&gt;
-
-&lt;p&gt;-F, –force-html 把输入文件当作HTML格式文件对待&lt;/p&gt;
-
-&lt;p&gt;-B, –base=URL 将URL作为在-F -i参数指定的文件中出现的相对链接的前缀&lt;/p&gt;
-
-&lt;p&gt;–sslcertfile=FILE 可选客户端证书&lt;/p&gt;
-
-&lt;p&gt;–sslcertkey=KEYFILE 可选客户端证书的KEYFILE&lt;/p&gt;
-
-&lt;p&gt;–egd-file=FILE 指定EGD socket的文件名&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;下载参数：&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;–bind-address=ADDRESS 指定本地使用地址(主机名或IP，当本地有多个IP或名字时使用)&lt;/p&gt;
-
-&lt;p&gt;-t, –tries=NUMBER 设定最大尝试链接次数(0 表示无限制).&lt;/p&gt;
-
-&lt;p&gt;-O –output-document=FILE 把文档写到FILE文件中&lt;/p&gt;
-
-&lt;p&gt;-nc, –no-clobber 不要覆盖存在的文件或使用.#前缀&lt;/p&gt;
-
-&lt;p&gt;-c, –continue 接着下载没下载完的文件&lt;/p&gt;
-
-&lt;p&gt;–progress=TYPE 设定进程条标记&lt;/p&gt;
-
-&lt;p&gt;-N, –timestamping 不要重新下载文件除非比本地文件新&lt;/p&gt;
-
-&lt;p&gt;-S, –server-response 打印服务器的回应&lt;/p&gt;
-
-&lt;p&gt;–spider 不下载任何东西&lt;/p&gt;
-
-&lt;p&gt;-T, –timeout=SECONDS 设定响应超时的秒数&lt;/p&gt;
-
-&lt;p&gt;-w, –wait=SECONDS 两次尝试之间间隔SECONDS秒&lt;/p&gt;
-
-&lt;p&gt;–waitretry=SECONDS 在重新链接之间等待1…SECONDS秒&lt;/p&gt;
-
-&lt;p&gt;–random-wait 在下载之间等待0…2*WAIT秒&lt;/p&gt;
-
-&lt;p&gt;-Y, –proxy=on/off 打开或关闭代理&lt;/p&gt;
-
-&lt;p&gt;-Q, –quota=NUMBER 设置下载的容量限制&lt;/p&gt;
-
-&lt;p&gt;–limit-rate=RATE 限定下载输率&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;目录参数：&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;-nd –no-directories 不创建目录&lt;/p&gt;
-
-&lt;p&gt;-x, –force-directories 强制创建目录&lt;/p&gt;
-
-&lt;p&gt;-nH, –no-host-directories 不创建主机目录&lt;/p&gt;
-
-&lt;p&gt;-P, –directory-prefix=PREFIX 将文件保存到目录 PREFIX/…&lt;/p&gt;
-
-&lt;p&gt;–cut-dirs=NUMBER 忽略 NUMBER层远程目录&lt;/p&gt;
-
-&lt;p&gt;HTTP 选项参数：&lt;/p&gt;
-
-&lt;p&gt;–http-user=USER 设定HTTP用户名为 USER.&lt;/p&gt;
-
-&lt;p&gt;–http-passwd=PASS 设定http密码为 PASS&lt;/p&gt;
-
-&lt;p&gt;-C, –cache=on/off 允许/不允许服务器端的数据缓存 (一般情况下允许)&lt;/p&gt;
-
-&lt;p&gt;-E, –html-extension 将所有text/html文档以.html扩展名保存&lt;/p&gt;
-
-&lt;p&gt;–ignore-length 忽略 `Content-Length’头域&lt;/p&gt;
-
-&lt;p&gt;–header=STRING 在headers中插入字符串 STRING&lt;/p&gt;
-
-&lt;p&gt;–proxy-user=USER 设定代理的用户名为 USER&lt;/p&gt;
-
-&lt;p&gt;–proxy-passwd=PASS 设定代理的密码为 PASS&lt;/p&gt;
-
-&lt;p&gt;–referer=URL 在HTTP请求中包含 `Referer: URL’头&lt;/p&gt;
-
-&lt;p&gt;-s, –save-headers 保存HTTP头到文件&lt;/p&gt;
-
-&lt;p&gt;-U, –user-agent=AGENT 设定代理的名称为 AGENT而不是 Wget/VERSION&lt;/p&gt;
-
-&lt;p&gt;–no-http-keep-alive 关闭 HTTP活动链接 (永远链接)&lt;/p&gt;
-
-&lt;p&gt;–cookies=off 不使用 cookies&lt;/p&gt;
-
-&lt;p&gt;–load-cookies=FILE 在开始会话前从文件 FILE中加载cookie&lt;/p&gt;
-
-&lt;p&gt;–save-cookies=FILE 在会话结束后将 cookies保存到 FILE文件中&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;FTP 选项参数：&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;-nr, –dont-remove-listing 不移走 `.listing’文件&lt;/p&gt;
-
-&lt;p&gt;-g, –glob=on/off 打开或关闭文件名的 globbing机制&lt;/p&gt;
-
-&lt;p&gt;–passive-ftp 使用被动传输模式 (缺省值).&lt;/p&gt;
-
-&lt;p&gt;–active-ftp 使用主动传输模式&lt;/p&gt;
-
-&lt;p&gt;–retr-symlinks 在递归的时候，将链接指向文件(而不是目录)&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;递归下载参数：&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;-r, –recursive 递归下载－－慎用!&lt;/p&gt;
-
-&lt;p&gt;-l, –level=NUMBER 最大递归深度 (inf 或 0 代表无穷)&lt;/p&gt;
-
-&lt;p&gt;–delete-after 在现在完毕后局部删除文件&lt;/p&gt;
-
-&lt;p&gt;-k, –convert-links 转换非相对链接为相对链接&lt;/p&gt;
-
-&lt;p&gt;-K, –backup-converted 在转换文件X之前，将之备份为 X.orig&lt;/p&gt;
-
-&lt;p&gt;-m, –mirror 等价于 -r -N -l inf -nr&lt;/p&gt;
-
-&lt;p&gt;-p, –page-requisites 下载显示HTML文件的所有图片&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;递归下载中的包含和不包含(accept/reject)：&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;-A, –accept=LIST 分号分隔的被接受扩展名的列表&lt;/p&gt;
-
-&lt;p&gt;-R, –reject=LIST 分号分隔的不被接受的扩展名的列表&lt;/p&gt;
-
-&lt;p&gt;-D, –domains=LIST 分号分隔的被接受域的列表&lt;/p&gt;
-
-&lt;p&gt;–exclude-domains=LIST 分号分隔的不被接受的域的列表&lt;/p&gt;
-
-&lt;p&gt;–follow-ftp 跟踪HTML文档中的FTP链接&lt;/p&gt;
-
-&lt;p&gt;–follow-tags=LIST 分号分隔的被跟踪的HTML标签的列表&lt;/p&gt;
-
-&lt;p&gt;-G, –ignore-tags=LIST 分号分隔的被忽略的HTML标签的列表&lt;/p&gt;
-
-&lt;p&gt;-H, –span-hosts 当递归时转到外部主机&lt;/p&gt;
-
-&lt;p&gt;-L, –relative 仅仅跟踪相对链接&lt;/p&gt;
-
-&lt;p&gt;-I, –include-directories=LIST 允许目录的列表&lt;/p&gt;
-
-&lt;p&gt;-X, –exclude-directories=LIST 不被包含目录的列表&lt;/p&gt;
-
-&lt;p&gt;-np, –no-parent 不要追溯到父目录&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;启动参数：&lt;/b&gt;&lt;br /&gt;
+-V, –version 显示wget的版本后退出&lt;br /&gt;
+-h, –help 打印语法帮助&lt;br /&gt;
+-b, –background 启动后转入后台执行&lt;br /&gt;
+-e, –execute=COMMAND 执行`.wgetrc’格式的命令，wgetrc格式参见/etc/wgetrc或~/.wgetrc记录和输入文件参数：&lt;br /&gt;
+-o, –output-file=FILE 把记录写到FILE文件中&lt;br /&gt;
+-a, –append-output=FILE 把记录追加到FILE文件中&lt;br /&gt;
+-d, –debug 打印调试输出&lt;br /&gt;
+-q, –quiet 安静模式(没有输出)&lt;br /&gt;
+-v, –verbose 冗长模式(这是缺省设置)&lt;br /&gt;
+-nv, –non-verbose 关掉冗长模式，但不是安静模式&lt;br /&gt;
+-i, –input-file=FILE 下载在FILE文件中出现的URLs&lt;br /&gt;
+-F, –force-html 把输入文件当作HTML格式文件对待&lt;br /&gt;
+-B, –base=URL 将URL作为在-F -i参数指定的文件中出现的相对链接的前缀&lt;br /&gt;
+–sslcertfile=FILE 可选客户端证书&lt;br /&gt;
+–sslcertkey=KEYFILE 可选客户端证书的KEYFILE&lt;br /&gt;
+–egd-file=FILE 指定EGD socket的文件名&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;下载参数：&lt;/b&gt;&lt;br /&gt;
+–bind-address=ADDRESS 指定本地使用地址(主机名或IP，当本地有多个IP或名字时使用)&lt;br /&gt;
+-t, –tries=NUMBER 设定最大尝试链接次数(0 表示无限制)&lt;br /&gt;
+-O –output-document=FILE 把文档写到FILE文件中&lt;br /&gt;
+-nc, –no-clobber 不要覆盖存在的文件或使用.#前缀&lt;br /&gt;
+-c, –continue 接着下载没下载完的文件&lt;br /&gt;
+–progress=TYPE 设定进程条标记&lt;br /&gt;
+-N, –timestamping 不要重新下载文件除非比本地文件新 
+-S, –server-response 打印服务器的回应&lt;br /&gt;
+–spider 不下载任何东西&lt;br /&gt;
+-T, –timeout=SECONDS 设定响应超时的秒数&lt;br /&gt;
+-w, –wait=SECONDS 两次尝试之间间隔SECONDS秒&lt;br /&gt;
+–waitretry=SECONDS 在重新链接之间等待1…SECONDS秒&lt;br /&gt;
+–random-wait 在下载之间等待0…2*WAIT秒&lt;br /&gt;
+-Y, –proxy=on/off 打开或关闭代理&lt;br /&gt;
+-Q, –quota=NUMBER 设置下载的容量限制&lt;br /&gt;
+–limit-rate=RATE 限定下载输率&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;目录参数：&lt;/b&gt;&lt;br /&gt;
+-nd –no-directories 不创建目录&lt;br /&gt;
+-x, –force-directories 强制创建目录&lt;br /&gt;
+-nH, –no-host-directories 不创建主机目录&lt;br /&gt;
+-P, –directory-prefix=PREFIX 将文件保存到目录 PREFIX/…&lt;br /&gt;
+–cut-dirs=NUMBER 忽略 NUMBER层远程目录&lt;/p&gt;
+
+&lt;p&gt;HTTP 选项参数：
+–http-user=USER 设定HTTP用户名为 USER&lt;br /&gt;
+–http-passwd=PASS 设定http密码为 PASS&lt;br /&gt;
+-C, –cache=on/off 允许/不允许服务器端的数据缓存 (一般情况下允许)&lt;br /&gt;
+-E, –html-extension 将所有text/html文档以.html扩展名保存&lt;br /&gt;
+–ignore-length 忽略 ‘Content-Length’头域&lt;br /&gt;
+–header=STRING 在headers中插入字符串 STRING&lt;br /&gt;
+–proxy-user=USER 设定代理的用户名为 USER&lt;br /&gt;
+–proxy-passwd=PASS 设定代理的密码为 PASS&lt;br /&gt;
+–referer=URL 在HTTP请求中包含 `Referer: URL’头&lt;br /&gt;
+-s, –save-headers 保存HTTP头到文件&lt;br /&gt;
+-U, –user-agent=AGENT 设定代理的名称为 AGENT而不是 Wget/VERSION&lt;br /&gt;
+–no-http-keep-alive 关闭 HTTP活动链接 (永远链接)&lt;br /&gt;
+–cookies=off 不使用 cookies&lt;br /&gt;
+–load-cookies=FILE 在开始会话前从文件 FILE中加载cookie&lt;br /&gt;
+–save-cookies=FILE 在会话结束后将 cookies保存到 FILE文件中&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;FTP 选项参数：&lt;/b&gt;&lt;br /&gt;
+-nr, –dont-remove-listing 不移走 `.listing’文件&lt;br /&gt;
+-g, –glob=on/off 打开或关闭文件名的 globbing机制&lt;br /&gt;
+–passive-ftp 使用被动传输模式 (缺省值)&lt;br /&gt;
+–active-ftp 使用主动传输模式&lt;br /&gt;
+–retr-symlinks 在递归的时候，将链接指向文件(而不是目录)&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;递归下载参数：&lt;/b&gt;&lt;br /&gt;
+-r, –recursive 递归下载－－慎用!&lt;br /&gt;
+-l, –level=NUMBER 最大递归深度 (inf 或 0 代表无穷)&lt;br /&gt;
+–delete-after 在现在完毕后局部删除文件&lt;br /&gt;
+-k, –convert-links 转换非相对链接为相对链接&lt;br /&gt;
+-K, –backup-converted 在转换文件X之前，将之备份为 X.orig&lt;br /&gt;
+-m, –mirror 等价于 -r -N -l inf -nr&lt;br /&gt;
+-p, –page-requisites 下载显示HTML文件的所有图片&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;递归下载中的包含和不包含(accept/reject)：&lt;/b&gt;&lt;br /&gt;
+-A, –accept=LIST 分号分隔的被接受扩展名的列表&lt;br /&gt;
+-R, –reject=LIST 分号分隔的不被接受的扩展名的列表&lt;br /&gt;
+-D, –domains=LIST 分号分隔的被接受域的列表&lt;br /&gt;
+–exclude-domains=LIST 分号分隔的不被接受的域的列表&lt;br /&gt;
+–follow-ftp 跟踪HTML文档中的FTP链接&lt;br /&gt;
+–follow-tags=LIST 分号分隔的被跟踪的HTML标签的列表&lt;br /&gt;
+-G, –ignore-tags=LIST 分号分隔的被忽略的HTML标签的列表&lt;br /&gt;
+-H, –span-hosts 当递归时转到外部主机&lt;br /&gt;
+-L, –relative 仅仅跟踪相对链接&lt;br /&gt;
+-I, –include-directories=LIST 允许目录的列表&lt;br /&gt;
+-X, –exclude-directories=LIST 不被包含目录的列表&lt;br /&gt;
+-np, –no-parent 不要追溯到父目录&lt;/p&gt;
 
 &lt;p&gt;wget -S –spider url 不下载只显示过程&lt;/p&gt;
 </content>
@@ -2604,6 +2649,18 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
                 <ul class="list-unstyled">
 				
                   <li>
+                    <a href="/posts/Linux-base_filePermission.html">
+                      linux下目录权限详解
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-base_fileTime.html">
+                      Linux下文件的三个时间（Atime，Mtime，Ctime）
+                    </a>
+                  </li>
+				
+                  <li>
                     <a href="/posts/Python-Lib_threading.html">
                       python模块详解—threading
                     </a>
@@ -2648,18 +2705,6 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
                   <li>
                     <a href="/posts/Linux-base-cmd-wget.html">
                       wget命令详解
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Python-Base_isinstance.html">
-                      python内建函数—isinstance
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Linux-shell_time.html">
-                      shell脚本中的时间运算
                     </a>
                   </li>
 				  
