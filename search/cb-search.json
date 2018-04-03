@@ -3,6 +3,14 @@
 	"data" : [
 	 
 	{
+		"title" : "python模块详解—random - pythonlib",
+		"url" : "/posts/Python-Lib_random.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "linux下目录权限详解 - linuxbase",
 		"url" : "/posts/Linux-base_filePermission.html"
 	}
