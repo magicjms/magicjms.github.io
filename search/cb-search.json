@@ -3,6 +3,54 @@
 	"data" : [
 	 
 	{
+		"title" : "ftp服务器搭建 - ftp",
+		"url" : "/posts/Linux-base-services_vsftp.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Git基础操作 - git",
+		"url" : "/posts/Other-Git_base.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "sort命令详解 - linuxbase",
+		"url" : "/posts/Linux-base-cmd_sort.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "sed命令详解 - linuxbase",
+		"url" : "/posts/Linux-base-cmd_sed.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "echo命令详解 - linuxbase",
+		"url" : "/posts/Linux-base-cmd_echo.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Git排除文件 - git",
+		"url" : "/posts/Other-Git_ignore.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "python模块详解—random - pythonlib",
 		"url" : "/posts/Python-Lib_random.html"
 	}
@@ -83,7 +131,7 @@
 	
     
 	{
-		"title" : "wget命令详解 - wget",
+		"title" : "wget命令详解 - linuxbase",
 		"url" : "/posts/Linux-base-cmd-wget.html"
 	}
 	
@@ -131,7 +179,7 @@
 	
     
 	{
-		"title" : "CentOS Python2.6升级2.7并安装easy_install和pip - linux_python",
+		"title" : "CentOS Python2.6升级2.7并安装easy_install和pip - linuxbase",
 		"url" : "/posts/LinuxUpdatePyton2.7.html"
 	}
 	

@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="交换链接说明 - 潘学文个人博客 - 作者:magicjms"/> 
-	<meta name="keywords" content="链接,友情,交换"/>
-    <title>交换链接说明 - 潘学文个人博客</title>
+    <meta name="description" content="Git基础操作 - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="git"/>
+    <title>Git基础操作 - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -143,45 +143,240 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-          <h4 id="一说明">一.说明</h4>
-<p>本站只换首页链接，交换请做好本站链接后留言！<br />
-本站链接：</p>
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>Git基础操作</h2>
+<b>标签：</b><a href="/tags.html#git"><i>git</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-04-25
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>git是目前最流行的代码版本管理工具，本篇主要介绍git初始化及常见的操作<!-- more --></p>
 
 <blockquote>
-  <p>站名：潘学文博客<br />
-网址：http://www.panxw.com<br />
-说明：潘学文个人博客</p>
+  <p>安装Git（Windows）</p>
 </blockquote>
 
-<p>留言格式参考本站链接，谢谢!</p>
+<p>官网（https://github.com/git/git）上下载Git然后，一直下一步下一步即可</p>
 
-<h4 id="二链接收藏">二.链接收藏</h4>
-<li>
-<a href="https://news.ycombinator.com/">
-  Hacker News
-</a>
-</li>
-<li>
-<a href="http://www.stackoverflow.com/">
-  Stack Overflow
-</a>
-</li>
-<li>
-<a href="http://developer.android.com/">
-  Android Developer
-</a>
-</li>
-<li>
-<a href="http://blog.jobbole.com/">
-  Jobbole
-</a>
-</li>
-<li>
-<a href="http://99u.com/">
-  99U
-</a>
-</li>
+<blockquote>
+  <p>Git基础使用</p>
+</blockquote>
 
+<p>初始化Git（唯一标识）</p>
+
+<pre><code>git config --global user.name "your_username"
+git config --global user.email your_email@domain.com
+</code></pre>
+
+<p>创建一个本地代码库</p>
+
+<pre><code>选中目录——右击——Git Bash Here
+git init		//Git会在选中的目录下创建一个名为.git的隐藏文件夹，哪就是你的本地代码库
+</code></pre>
+
+<p>加载（Stage）文件</p>
+
+<pre><code>git add .		//最后的“.”符号的意思是：所有文件、文件夹和子文件夹，也可以添加特定文件到源代码控制中去，后接文件名如：git add my_file，my_other_file
+git status
+</code></pre>
+
+<p>提交文件</p>
+
+<pre><code>git commit -m "initial commit"		//initial commit为提交时带的注释
+//就这样。现在你随时都可以回滚到这个提交状态。如果你有需要检查你现在的已加载（staged）和未加载（unstaged）文件的状态、提交等，你可以询问git的状态：	
+git log
+git reflog
+</code></pre>
+
+<p>比较</p>
+
+<pre><code>git diff readme.txt 	
+</code></pre>
+
+<p>回滚到之前的提交状态 <br />
+在某些时候，你可能想要回到之前的代码版本。首先，你需要找到你想回到哪个版本。要看所有的完成了的提交，使用：git log</p>
+
+<pre><code>git log //这会输出你的提交的历史记录，像这样：
+commit ca82a6dff817ec66f44342007202690a93763949Author: your_username your_email@domain.comDate:   Mon Nov 4 12:52:11 2013 -0700    changes the frontpage layout
+commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7Author: your_username your_email@domain.comDate:   Mon Nov 4 11:40:33 2013 -0700    adds my new feature
+commit a11bef06a3f659402fe7563abf99ad00de2209e6Author: your_username your_email@domain.comDate:   Mon Nov 4 10:37:28 2013 -0700    initial commit
+
+git log –pretty=oneline //这会输出你的提交的历史记录，git log精简版
+
+git reset  –hard HEAD^ 或git reset  –hard HEAD^^或者git reset  –hard HEAD~100
+
+git reflog
+$ git reflog
+	9892673 HEAD@{0}: checkout: moving from master to dev
+	9892673 HEAD@{1}: pull csdn master: Merge made by the 'recursive' strategy.
+	a29d84b HEAD@{2}: commit: 提交b文件
+	27a3f3a HEAD@{3}: commit: 一次提交所有文件,包括新建文件test.txt
+	0a8eecc HEAD@{4}: reset: moving to 0a8eecc
+	655821e HEAD@{5}: reset: moving to HEAD^
+	0a8eecc HEAD@{6}: commit: readme.txt增加第3行
+	655821e HEAD@{7}: commit: readme.txt添加第2行
+	b2efd92 HEAD@{8}: commit (initial): readme.txt提交
+
+git reset  –-hard 版本号
+//如果你想回到“adds my new feature”这个提交，简单地用提交的ID做签出（checkout）（我通常只用到ID开头的9个字符）
+
+git checkout 085bb3bcb
+
+//你也可以签出到一个新的分支，像这样：
+git checkout -b my_previous_version 085bb3bcb
+//只是别太疯狂了！你的分支越复杂，就越难确定你真正在做什么。
+</code></pre>
+
+<p>撒消修改：</p>
+
+<pre><code>git checkout --readme.txt //readme.txt自动修改后，还没有放到暂存区，使用 撤销修改就回到和版本库一模一样的状态
+//另外一种是readme.txt已经放入暂存区了，接着又作了修改，撤销修改就回到添加暂存区后的状态。
+</code></pre>
+
+<p>删除文件：</p>
+
+<pre><code>git checkout -- b.txt //必须是删除文件后，未提交
+</code></pre>
+
+<p>推送到远程代码库</p>
+
+<pre><code>//在第一次你想推送一个本地代码库到远程代码库时，你需要把它添加到你的项目配置里。像这样做：
+git remote add origin https://your_username@bitbucket.org/your_username/name_of_remote_repository.git
+git remote show
+git remote ?
+git remote -v show origin
+//注意这里的“origin”只是一个习惯。它是你的远程代码库的别名，但是你可以用其他任何你喜欢的词。你甚至可以有多个远程代码库，你只需要给它们起不同的别名。
+
+//之后，你想要推送你的本地代码库的主干分支到你的远程代码库：
+git push -u origin master
+//实际上是把当前分支master推送到远程。	//由于远程库是空的，我们第一次推送master分支时，加上了–u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令不要-u。
+</code></pre>
+
+<p>取得远程代码库的一份本地拷贝</p>
+
+<pre><code>//如果你还没有一份远程代码库的本地版本（例如，如果你在另一台机器上开始工作，这台机器上还没有用过这个项目），你首先需要拷贝（clone）它。去到你的代码库想要拷贝到的文件夹下，并发送：
+git clone https://your_username@bitbucket.org/your_username/name_of_remote_repository.git
+
+//另一方面，如果你已经在本地的项目上工作了，只是想从远程代码库上取得它最新的版本，移动到项目的根目录下，并发送：
+git pull origin master
+</code></pre>
+
+<p>创建分支 //建立分支是你创建代码的独立版本的动作，独立于你的主干分支。默认地，每次你提交到Git的文件都会被储存到“master（主干）”分支。</p>
+
+<pre><code>//现在我们来说说，你想要向项目里添加一个功能，但你想要能够回滚到现在版本，以防出现差错，或者你决定要放弃这个功能。这就是你创建分支的时候了。创建并同时切换到你新建的分支，发送：
+git checkout -b new_feature//创建并同时切换到你新建的分支
+git branch new_featuregit checkout new_feature//先创建一个分支，然后再切换到这个分支，等同上步骤，二选一
+git branch//查看项目上所有的分支，当前分支前面会添加一个星号
+</code></pre>
+
+<p>合并分支</p>
+
+<pre><code>//当你对你的新功能满意了的时候，你想要把它加到主干分支上。当你在你的新功能分支上时，你首先需要加载（stage）并且提交你的文件：
+git add .
+git commit -m "adds my new feature"
+//然后你移到你的主干分支：
+git checkout master
+//像这样合并：
+git merge new_feature （git merge --no-ff new_feature）
+//此时，你的主干分支和你的新功能分支会变成一样的了。
+</code></pre>
+
+<p>丢弃分支</p>
+
+<pre><code>//相反，如果你打算丢弃你在分支里做的修改，你首先需要加载（stage）你的文件并且在分支里提交：
+git add .
+git commit -m "feature to be discarded"
+//然后，你移到主干分支：
+git checkout master
+//现在，你的代码处于你创建分支之前的状态了。
+</code></pre>
+
+<p>删除一个分支</p>
+
+<pre><code>//如果你要把你的分支合并到主干分支，从主干（master）分支上发送：
+git branch -d new_feature
+//假如修改已经合并了，它只会删除分支。假如分支没有合并，你会得到一个错误信息。删除一个未合并的分支（通常你不想保留的修改），你需要发送一样的命令附带一个大写D。意思是“强制删除分支，无论如何我不想要它了。”：
+git branch -D new_feature
+</code></pre>
+
+<p>bug分支</p>
+
+<pre><code>git status
+git stash
+git status
+
+git stash list
+git stash apply恢复，恢复后，stash内容并不删除，你需要使用命令git stash drop来删除。
+另一种方式是使用git stash pop,恢复的同时把stash内容也删除了。
+</code></pre>
+
+<p>多人协作</p>
+
+<pre><code>详见网页 http://blog.jobbole.com/78960/
+</code></pre>
+
+<p>分支策略</p>
+
+<p>首先master主分支应该是非常稳定的，也就是用来发布新版本，一般情况下不允许在上面干活，干活一般情况下在新建的dev分支上干活，干完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。</p>
+
+<p>别名</p>
+
+<p>Git允许你为你常用的命令创建快捷方式（别名）。例如，如果你不想每次都输入git commit -m “some comment”，而是输入git c “some comment”，你可以向你的git全局配置里添加一个别名来实现，像这样：</p>
+
+<pre><code>git config --global alias.c 'commit -m'
+//这是我使用的别名列表：
+git config --global alias.c 'commit -m'
+git config --global alias.co 'checkout'
+git config --global alias.cob 'checkout -b'
+git config --global alias.br 'branch'
+git config --global alias.m 'merge'
+git config --global alias.a 'add .'
+git config --global alias.s 'status'
+git config --global alias.dbr 'branch -d'
+</code></pre>
+
+<p>二、Git与SVN的区别</p>
+
+<pre><code>SVN：SVN是集中式版本控制系统，版本库是集中放在中央服务器的，而干活的时候，用的都是自己的电脑，所以首先要从中央服务器哪里得到最新的版本，然后干活，干完后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作，如果在局域网还可以，带宽够大，速度够快，如果在互联网下，如果网速慢的话，就纳闷了。
+Git是分布式版本控制系统，那么它就没有中央服务器的，每个人的电脑就是一个完整的版本库，这样，工作的时候就不需要联网了，因为版本都是在自己的电脑上。既然每个人的电脑都有一个完整的版本库，那多个人如何协作呢？比如说自己在电脑上改了文件A，其他人也在电脑上改了文件A，这时，你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。
+</code></pre>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Other-Git_base.html" title="">https://magicjms.github.io/posts/Other-Git_base.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Linux-base-cmd_sort.html">
+      sort命令详解
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Linux-base-services_vsftp.html">
+      ftp服务器搭建
+    </a>
+  </span>
+  </div>
+  
+</div>
 <hr>
 <!-- Blog Comments -->
 <div class="media">

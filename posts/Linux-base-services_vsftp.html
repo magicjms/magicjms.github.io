@@ -4,8 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=" - 潘学文个人博客 - 作者:magicjms"/>
-    <title>栏目：python基础 - 潘学文个人博客栏目：MySQL - 潘学文个人博客</title>
+    <meta name="description" content="ftp服务器搭建 - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="ftp"/>
+    <title>ftp服务器搭建 - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -24,6 +25,19 @@
     <script src="/js/jquery-1.11.0.js"> </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   
   <body>
@@ -31,7 +45,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+<!--         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">
               Toggle navigation
@@ -43,10 +57,10 @@
             <span class="icon-bar">
             </span>
           </button>
-<!--           <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/">
             首页
-          </a> -->
-        </div>
+          </a>
+        </div> -->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           
@@ -129,47 +143,188 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-			<!-- Navi -->
-			<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/pythonbase.html">python基础</a>&nbsp;>&nbsp;列表<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/mysql.html">MySQL</a>&nbsp;>&nbsp;列表
-			<!-- List -->
-			<ul class="list-unstyled">
-			
-			  
-			  
-				
-				<h2>2018</h2> 
-			  
-			  <li>
-				<h4><span>2018-02-22</span>&raquo;
-				<a href="/posts/Python-Base_hasattr.html" title="python内建函数—hasattr,getattr,setattr">python内建函数—hasattr,getattr,setattr</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-01-25</span>&raquo;
-				<a href="/posts/Python-Base_loopingtechniques.html" title="循环技巧">循环技巧</a></h4>
-			  </li> 
-			
-			  
-			  
-				
-				<h2>2017</h2> 
-			  
-			  <li>
-				<h4><span>2017-12-08</span>&raquo;
-				<a href="/posts/Python-Base_isinstance.html" title="python内建函数—isinstance">python内建函数—isinstance</a></h4>
-			  </li> 
-			
-			</ul>
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>ftp服务器搭建</h2>
+<b>标签：</b><a href="/tags.html#ftp"><i>ftp</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-05-02
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>vsftpd是Linux下比较著名的FTP服务器，搭建FTP服务器当然首选这个。本文介绍了在CentOS 6下安装vsftpd、配置虚拟用户登录FTP的过程。<!-- more --></p>
+
+<blockquote>
+  <p>一、基于虚拟用户的配置</p>
+</blockquote>
+
+<p><span style="color:red">所谓虚拟用户就是没有使用真实的帐户，只是通过映射到真实帐户和设置权限的目的。虚拟用户不能登录CentOS系统。</span></p>
+
+<blockquote>
+  <p>二、安装vsftpd软件</p>
+</blockquote>
+
+<pre><code>rpm -qa | grep vsftpd
+yum -y install vsftpd
+chkconfig vsftpd on
+</code></pre>
+
+<blockquote>
+  <p>三、修改配置文件</p>
+</blockquote>
+
+<p>新建虚拟用户的宿主用户ftpvuser</p>
+
+<pre><code>useradd -d /APP/data/ftpvuser -s /sbin/nologinvuser
+</code></pre>
+
+<p>打开/etc/vsftpd/vsftpd.conf，做如下配置</p>
+
+<pre><code>anonymous_enable=NO //设定不允许匿名访问
+local_enable=YES //设定本地用户可以访问。注：如使用虚拟宿主用户，在该项目设定为NO的情况下所有虚拟用户将无法访问
+chroot_local_user=YES	//使用户不能离开主目录
+chroot_list_enable=YES	//指定chroot_list文件里的用户可以离开主目录
+chroot_list_file=/etc/vsftpd/chroot_list
+ascii_upload_enable=YES
+ascii_download_enable=YES //设定支持ASCII模式的上传和下载功能
+pam_service_name=vsftpd //PAM认证文件名。PAM将根据/etc/pam.d/vsftpd进行认证
+</code></pre>
+
+<p>以下这些是关于vsftpd虚拟用户支持的重要配置项，默认vsftpd.conf中不包含这些设定项目，需要自己手动添加</p>
+
+<pre><code>guest_enable=YES //设定启用虚拟用户功能
+guest_username=ftpvuser //指定虚拟用户的宿主用户，CentOS中已经有内置的ftp用户了
+virtual_use_local_privs=YES
+user_config_dir=/etc/vsftpd/vuser_conf //设定虚拟用户个人vsftp的CentOS FTP服务文件存放路径。存放虚拟用户个性的CentOS FTP服务文件(配置文件名=虚拟用户名
+</code></pre>
+
+<p>进行认证<br />
+首先，安装Berkeley DB工具，很多人找不到db_load的问题就是没有安装这个包。</p>
+
+<pre><code>yum install db4 db4-utils
+</code></pre>
+
+<p>然后，创建用户密码文本/etc/vsftpd/vuser_passwd.txt ，注意奇行是用户名，偶行是密码</p>
+
+<pre><code>test
+123456
+</code></pre>
+
+<p>接着，生成虚拟用户认证的db文件</p>
+
+<pre><code>db_load -T -t hash -f /etc/vsftpd/vuser_passwd.txt /etc/vsftpd/vuser_passwd.db
+</code></pre>
+
+<p>随后，编辑认证文件/etc/pam.d/vsftpd，全部注释掉原来语句，再增加以下两句：</p>
+
+<pre><code>auth required pam_userdb.so db=/etc/vsftpd/vuser_passwd
+account required pam_userdb.so db=/etc/vsftpd/vuser_passwd
+</code></pre>
+
+<p>最后，创建虚拟用户配置文件</p>
+
+<pre><code>mkdir /etc/vsftpd/vuser_conf/
+vi /etc/vsftpd/vuser_conf/test  //文件名等于vuser_passwd.txt里面的账户名，否则下面设置无效
+</code></pre>
+
+<p>内容如下</p>
+
+<pre><code>local_root=/APP/data/ftpvuser/ftpRoot  //虚拟用户根目录,根据实际情况修改
+write_enable=YES  //可写
+anon_umask=022 //掩码
+anon_world_readable_only=NO 
+anon_upload_enable=YES 
+anon_mkdir_write_enable=YES
+anon_other_write_enable=YES
+</code></pre>
+
+<p>设置ftp根目录
+	mkdir -p /APP/data/ftpvuser/ftpRoot</p>
+
+<p>新建空白chroot_list、user_list文件</p>
+
+<p>在配置文件目录/etc/vsftpd下新建chroot_list、user_list两个空白文件，这两个文件的作用是作一些细致的用户权限控制使用，具体请自行百度，在本篇保持空白即可。</p>
+
+<pre><code>touch /etc/vsftpd/chroot_list
+touch /etc/vsftpd/user_list
+</code></pre>
+
+<blockquote>
+  <p>四、设置SElinux</p>
+</blockquote>
+
+<pre><code>setsebool -P ftp_home_dir=1   //设置ftp可以使用home目录
+sersebool -P allow_ftpd_full_access=1   //设置ftp用户可以有所有权限
+或禁用SElinux并重启vim /etc/selinux/config 将SELINUX=permissive更改为SELINUX=disabled
+</code></pre>
+
+<blockquote>
+  <p>五、设置Iptables</p>
+</blockquote>
+
+<pre><code>-A INPUT –m state --state NEW –m tcp –p –dport 22 –j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p -dport 21 -j ACCEPT
+或者直接禁用iptable /etc/init.d/iptables stop
+</code></pre>
+
+<blockquote>
+  <p>六、扩展：修改ftp端口号</p>
+</blockquote>
+
+<p>1、编辑/etc/vsftpd/vsftpd.conf 文件，在该配置文件中添加此行：listen_port=811<br />
+2、编辑/etc/services 文件，将其中的</p>
+
+<pre><code>ftp 21/tcp  改为 ftp 811/tcp
+ftp 21/udp  改为 ftp 811/tcp
+</code></pre>
+
+<p>3、执行/etc/init.d/vsftpd restart 重新启动vsftpd 服务。启动完成后可以使用
+	netstat -tnulp | grep vsftpd
+	你就可以查看到现在系统现监听的vsftpd 的端口为811</p>
+
+<p>4、在命令行下执行ftp 192.168.5.1:801(192.168.5.1 是vsftpd 服务器的IP地址)，这样便访问到ftp 服务器了。</p>
+
+<p>参考：<br />
+<a href="https://www.cnblogs.com/xiongpq/p/3384759.html" title="https://www.cnblogs.com/xiongpq/p/3384759.html">https://www.cnblogs.com/xiongpq/p/3384759.html</a><br />
+<a href="https://blog.csdn.net/u011457628/article/details/19207045" title="https://blog.csdn.net/u011457628/article/details/19207045">https://blog.csdn.net/u011457628/article/details/19207045</a><br />
+<a href="https://zhidao.baidu.com/question/288091881.html" title="https://zhidao.baidu.com/question/288091881.html">https://zhidao.baidu.com/question/288091881.html</a></p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Linux-base-services_vsftp.html" title="">https://magicjms.github.io/posts/Linux-base-services_vsftp.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Other-Git_base.html">
+      Git基础操作
+    </a>
+  </span>
+   
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
           <!-- Blog Categories Well -->
           <div class="well">
-            <h4>
-              栏目分类
-            </h4>
+            <h4>栏目分类</h4>
             <div class="row">
                             <div class="col-lg-6">
                 <ul class="list-unstyled">
@@ -227,10 +382,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           </div>
 		  <!-- Blog Recent Well -->
           <div class="well">
-            <h4>
-              最新文章
-            </h4>
-			<div class="row">
+            <h4>最新文章</h4>
+			      <div class="row">
                             <div class="col-lg-12">
                 <ul class="list-unstyled">
 				
@@ -296,7 +449,7 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 				  
                 </ul>
               </div> 
-			</div>
+			      </div>
           </div>
         </div>
       </div>

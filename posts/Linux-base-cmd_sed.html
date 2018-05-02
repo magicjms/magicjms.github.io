@@ -4,8 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=" - 潘学文个人博客 - 作者:magicjms"/>
-    <title>栏目：python基础 - 潘学文个人博客栏目：MySQL - 潘学文个人博客</title>
+    <meta name="description" content="sed命令详解 - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="linuxbase"/>
+    <title>sed命令详解 - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -24,6 +25,19 @@
     <script src="/js/jquery-1.11.0.js"> </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   
   <body>
@@ -31,7 +45,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+<!--         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">
               Toggle navigation
@@ -43,10 +57,10 @@
             <span class="icon-bar">
             </span>
           </button>
-<!--           <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/">
             首页
-          </a> -->
-        </div>
+          </a>
+        </div> -->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           
@@ -129,47 +143,222 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-			<!-- Navi -->
-			<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/pythonbase.html">python基础</a>&nbsp;>&nbsp;列表<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/mysql.html">MySQL</a>&nbsp;>&nbsp;列表
-			<!-- List -->
-			<ul class="list-unstyled">
-			
-			  
-			  
-				
-				<h2>2018</h2> 
-			  
-			  <li>
-				<h4><span>2018-02-22</span>&raquo;
-				<a href="/posts/Python-Base_hasattr.html" title="python内建函数—hasattr,getattr,setattr">python内建函数—hasattr,getattr,setattr</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-01-25</span>&raquo;
-				<a href="/posts/Python-Base_loopingtechniques.html" title="循环技巧">循环技巧</a></h4>
-			  </li> 
-			
-			  
-			  
-				
-				<h2>2017</h2> 
-			  
-			  <li>
-				<h4><span>2017-12-08</span>&raquo;
-				<a href="/posts/Python-Base_isinstance.html" title="python内建函数—isinstance">python内建函数—isinstance</a></h4>
-			  </li> 
-			
-			</ul>
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>sed命令详解</h2>
+<b>标签：</b><a href="/tags.html#linuxbase"><i>linuxbase</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-04-25
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>sed命令是我们常用的命令之一<!-- more --></p>
+
+<blockquote>
+  <p>一、命令格式</p>
+</blockquote>
+
+<p>sed [option] ‘command’ input_file</p>
+
+<blockquote>
+  <p>二、命令功能</p>
+</blockquote>
+
+<p>sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。</p>
+
+<blockquote>
+  <p>三、命令参数</p>
+</blockquote>
+
+<p>其中option是可选的，常用的option有如下几种：</p>
+
+<pre><code>-n 使用安静(silent)模式（想不通为什么不是-s）。在一般sed的用法中，所有来自stdin的内容一般都会被列出到屏幕上。但如果加上-n参数后，则只有经过sed特殊处理的那一行(或者动作)才会被列出来；
+-e 直接在指令列模式上进行 sed 的动作编辑；
+-f 直接将 sed 的动作写在一个文件内， -f filename 则可以执行filename内的sed命令；
+-r 让sed命令支持扩展的正则表达式(默认是基础正则表达式)；
+-i 直接修改读取的文件内容，而不是由屏幕输出。
+</code></pre>
+
+<p>常用的命令有以下几种：</p>
+
+<pre><code>a \：append即追加字符串， a\的后面跟上字符串s(多行字符串可以用\n分隔)，则会在当前选择的行的后面都加上字符串s；
+c \：取代/替换字符串，c \后面跟上字符串s(多行字符串可以用\n分隔)，则会将当前选中的行替换成字符串s；【替换行】
+d：delete即删除，该命令会将当前选中的行删除；
+i \：insert即插入字符串，i \后面跟上字符串s(多行字符串可以用\n分隔)，则会在当前选中的行的前面都插入字符串s；
+p：print即打印，该命令会打印当前选择的行到屏幕上；
+s：替换，通常s命令的用法是这样的：1，2s/old/new/g，将old字符串替换成new字符串；【替换字符串】
+</code></pre>
+
+<blockquote>
+  <p>四、命令范例</p>
+</blockquote>
+
+<p>假设有一个本地文件test.txt并使用该文件进行演示，文件内容如下：</p>
+
+<pre><code>[qifuguang@winwill~]$ cat test.txt
+this is first line
+this is second line
+this is third line
+this is fourth line
+this fifth line
+happy everyday
+end
+</code></pre>
+
+<p>a命令</p>
+
+<p>本例命令部分中的1表示第一行，同样的第二行写成2，第一行到第三行写成1,3，用$表示最后一行，比如2,$表示第二行到最后一行中间所有的行(包含第二行和最后一行)。</p>
+
+<pre><code>本例的作用是在第一行之后增加字符串”add one”，从输出可以看到具体效果。
+[qifuguang@winwill~]$ sed '1a \add one' test.txt
+this is first line
+add one
+this is second line
+this is third line
+this is fourth line
+this is fifth line
+happy everyday
+end
+
+本例表示在第一行和最后一行所有的行后面都加上”add one”字符串，从输出可以看到效果。
+[qifuguang@winwill~]$ sed '1,$a \add one' test.txt
+this is first line
+add one
+this is second line
+add one
+this is third line
+add one
+this is fourth line
+add one
+this is fifth line
+add one
+happy everyday
+add one
+end
+add one
+
+本例表示在包含”first”字符串的行的后面加上字符串”add one”，从输出可以看到第一行包含first，所以第一行之后增加了”add one”
+[qifuguang@winwill~]$ sed '/first/a \add one' test.txt
+this is first line
+add one
+this is second line
+this is third line
+this is fourth line
+this is fifth line
+happy everyday
+end
+
+本例使用正则表达式匹配行，^ha.*day$表示以ha开头，以day结尾的行，则可以匹配到文件的”happy everyday”这样，所以在该行后面增加了”add one”字符串。
+[qifuguang@winwill~]$ sed '/^ha.*day$/a \add one' test.txt
+this is first line
+this is second line
+this is third line
+this is fourth line
+this is fifth line
+happy everyday
+add one
+end
+</code></pre>
+
+<p>i命令</p>
+
+<p>i命令使用方法和a命令一样的，只不过是在匹配的行的前面插入字符串，所以直接将上面a命令的示例的a替换成i即可，在此就不啰嗦了。</p>
+
+<p>c命令</p>
+
+<pre><code>本例表示将最后一行替换成字符串”add one”，从输出可以看到效果。
+[qifuguang@winwill~]$ sed '$c \add one' test.txt
+this is first line
+this is second line
+this is third line
+this is fourth line
+this is     fifth line
+happy everyday
+add one
+
+本例将第四行到最后一行的内容替换成字符串”add one”。
+[qifuguang@winwill~]$ sed '4,$c \add one' test.txt
+this is first line
+this is second line
+this is third line
+add one
+
+本例将以ha开头，以day结尾的行替换成”replace line”。
+[qifuguang@winwill~]$ sed '/^ha.*day$/c \replace line' test.txt
+this is first line
+this is second line
+this is third line
+this is fourth line
+this is fifth line
+replace line
+end
+</code></pre>
+
+<p>d命令</p>
+
+<pre><code>本例删除以ha开头，以day结尾的行。
+[qifuguang@winwill~]$ sed '/^ha.*day$/d' test.txt
+this is first line
+this is second line
+this is third line
+this is fourth line
+this is fifth line
+end
+本例删除第四行到最后一行中的内容。
+[qifuguang@winwill~]$ sed '4,$d' test.txt
+this is first line
+this is second line
+this is third line
+</code></pre>
+
+<p>本篇参考：
+<a href="http://www.cnblogs.com/dong008259/archive/2011/12/08/2281214.html" title="http://www.cnblogs.com/dong008259/archive/2011/12/08/2281214.html">http://www.cnblogs.com/dong008259/archive/2011/12/08/2281214.html</a></p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Linux-base-cmd_sed.html" title="">https://magicjms.github.io/posts/Linux-base-cmd_sed.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Linux-base-cmd_echo.html">
+      echo命令详解
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Linux-base-cmd_sort.html">
+      sort命令详解
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
           <!-- Blog Categories Well -->
           <div class="well">
-            <h4>
-              栏目分类
-            </h4>
+            <h4>栏目分类</h4>
             <div class="row">
                             <div class="col-lg-6">
                 <ul class="list-unstyled">
@@ -227,10 +416,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           </div>
 		  <!-- Blog Recent Well -->
           <div class="well">
-            <h4>
-              最新文章
-            </h4>
-			<div class="row">
+            <h4>最新文章</h4>
+			      <div class="row">
                             <div class="col-lg-12">
                 <ul class="list-unstyled">
 				
@@ -296,7 +483,7 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 				  
                 </ul>
               </div> 
-			</div>
+			      </div>
           </div>
         </div>
       </div>

@@ -4,8 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=" - 潘学文个人博客 - 作者:magicjms"/>
-    <title>栏目：python基础 - 潘学文个人博客栏目：MySQL - 潘学文个人博客</title>
+    <meta name="description" content="Git排除文件 - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="git"/>
+    <title>Git排除文件 - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -24,6 +25,19 @@
     <script src="/js/jquery-1.11.0.js"> </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   
   <body>
@@ -31,7 +45,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+<!--         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">
               Toggle navigation
@@ -43,10 +57,10 @@
             <span class="icon-bar">
             </span>
           </button>
-<!--           <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/">
             首页
-          </a> -->
-        </div>
+          </a>
+        </div> -->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           
@@ -129,47 +143,104 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-			<!-- Navi -->
-			<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/pythonbase.html">python基础</a>&nbsp;>&nbsp;列表<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/mysql.html">MySQL</a>&nbsp;>&nbsp;列表
-			<!-- List -->
-			<ul class="list-unstyled">
-			
-			  
-			  
-				
-				<h2>2018</h2> 
-			  
-			  <li>
-				<h4><span>2018-02-22</span>&raquo;
-				<a href="/posts/Python-Base_hasattr.html" title="python内建函数—hasattr,getattr,setattr">python内建函数—hasattr,getattr,setattr</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-01-25</span>&raquo;
-				<a href="/posts/Python-Base_loopingtechniques.html" title="循环技巧">循环技巧</a></h4>
-			  </li> 
-			
-			  
-			  
-				
-				<h2>2017</h2> 
-			  
-			  <li>
-				<h4><span>2017-12-08</span>&raquo;
-				<a href="/posts/Python-Base_isinstance.html" title="python内建函数—isinstance">python内建函数—isinstance</a></h4>
-			  </li> 
-			
-			</ul>
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>Git排除文件</h2>
+<b>标签：</b><a href="/tags.html#git"><i>git</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-04-24
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>在git中如果想忽略掉某个文件，不让这个文件提交到版本库中，可以在项目根目录新建.gitignore文件的方法。这个文件每一行保存了一个匹配的规则。<!-- more -->
+例如：</p>
+
+<pre><code>#	  # 此为注释 – 将被 Git 忽略
+*.a       # 忽略所有 .a 结尾的文件
+!lib.a    # 但 lib.a 除外
+/TODO     # 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO
+build/    # 忽略 build/ 目录下的所有文件
+doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+
+这样设置了以后 所有的 .pyc 文件都不会添加到版本库中去。
+另外 git 提供了一个全局的 .gitignore，你可以在你的用户目录下创建 ~/.gitignoreglobal 文件，以同样的规则来划定哪些文件是不需要版本控制的。
+需要执行 git config --global core.excludesfile ~/.gitignoreglobal来使得它生效。
+</code></pre>
+
+<p>其他的一些过滤条件</p>
+
+<pre><code>？：代表任意的一个字符
+＊：代表任意数目的字符
+{!ab}：必须不是此类型
+{ab,bb,cx}：代表ab,bb,cx中任一类型即可
+[abc]：代表a,b,c中任一字符即可
+[ ^abc]：代表必须不是a,b,c中任一字符
+</code></pre>
+
+<p>由于git不会加入空目录，所以下面做法会导致tmp不会存在 tmp/*　　　//忽略tmp文件夹所有文件</p>
+
+<pre><code>改下方法，在tmp下也加一个.gitignore,内容为
+*
+!.gitignore
+还有一种情况，就是已经commit了，再加入gitignore是无效的，所以需要删除下缓存
+git rm -r --cached ignore_file
+</code></pre>
+
+<p>注意： .gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。</p>
+
+<pre><code>正确的做法是在每个clone下来的仓库中手动设置不要检查特定文件的更改情况。
+git update-index --assume-unchanged PATH    在PATH处输入要忽略的文件。
+
+另外 git 还提供了另一种 exclude 的方式来做同样的事情，不同的是 .gitignore 这个文件本身会提交到版本库中去。用来保存的是公共的需要排除的文件。而 .git/info/exclude 这里设置的则是你自己本地需要排除的文件。 他不会影响到其他人。也不会提交到版本库中去。
+
+.gitignore 还有个有意思的小功能， 一个空的 .gitignore 文件 可以当作是一个 placeholder 。当你需要为项目创建一个空的 log 目录时， 这就变的很有用。 你可以创建一个 log 目录 在里面放置一个空的 .gitignore 文件。这样当你 clone 这个 repo 的时候 git 会自动的创建好一个空的 log 目录了。
+</code></pre>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="https://magicjms.github.io/posts/Other-Git_ignore.html" title="">https://magicjms.github.io/posts/Other-Git_ignore.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Python-Lib_random.html">
+      python模块详解—random
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Linux-base-cmd_echo.html">
+      echo命令详解
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
           <!-- Blog Categories Well -->
           <div class="well">
-            <h4>
-              栏目分类
-            </h4>
+            <h4>栏目分类</h4>
             <div class="row">
                             <div class="col-lg-6">
                 <ul class="list-unstyled">
@@ -227,10 +298,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           </div>
 		  <!-- Blog Recent Well -->
           <div class="well">
-            <h4>
-              最新文章
-            </h4>
-			<div class="row">
+            <h4>最新文章</h4>
+			      <div class="row">
                             <div class="col-lg-12">
                 <ul class="list-unstyled">
 				
@@ -296,7 +365,7 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 				  
                 </ul>
               </div> 
-			</div>
+			      </div>
           </div>
         </div>
       </div>
