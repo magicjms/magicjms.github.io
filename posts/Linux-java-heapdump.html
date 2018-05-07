@@ -4,8 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=" - 潘学文个人博客 - 作者:magicjms"/>
-    <title>栏目：系统 - 潘学文个人博客</title>
+    <meta name="description" content="java heapdump - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="heapdump"/>
+    <title>java heapdump - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -24,6 +25,19 @@
     <script src="/js/jquery-1.11.0.js"> </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   
   <body>
@@ -31,7 +45,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+<!--         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">
               Toggle navigation
@@ -43,10 +57,10 @@
             <span class="icon-bar">
             </span>
           </button>
-<!--           <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/">
             首页
-          </a> -->
-        </div>
+          </a>
+        </div> -->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           
@@ -83,9 +97,7 @@ http://blog.csdn.net/rabbitter/article/details/51125337
         <ul><!--一级菜单的li中的二级导航的ul-->
             <li><a href="/posts/linux.html"><span>基础</span></a></li><!--二级导航中各个选项li-->   
             <li><a href="/posts/shell.html"><span>shell</span></a></li><!--二级导航中各个选项li-->  
-            <li><a href="#"><span>Open-Source Apps</span></a></li>  
-            <li><a href="#"><span>Android</span></a></li>  
-            <li><a href="#"><span>JavaScript</span></a></li>  
+            <li><a href="/posts/LinuxCombat.html"><span>实战</span></a></li>  
         </ul>  
     </li>  
   
@@ -129,44 +141,123 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-			<!-- Navi -->
-			<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/system.html">系统</a>&nbsp;>&nbsp;列表
-			<!-- List -->
-			<ul class="list-unstyled">
-			
-			  
-			  
-				
-				<h2>2017</h2> 
-			  
-			  <li>
-				<h4><span>2017-11-01</span>&raquo;
-				<a href="/posts/LinuxPublicService.html" title="阿里云公共NTP、DNS、镜像服务地址信息">阿里云公共NTP、DNS、镜像服务地址信息</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2017-10-28</span>&raquo;
-				<a href="/posts/MACCommSourceInfo.html" title="MAC常用资源网站">MAC常用资源网站</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2017-10-27</span>&raquo;
-				<a href="/posts/UpanInstallMACSys.html" title="U盘安装MAC系统">U盘安装MAC系统</a></h4>
-			  </li> 
-			
-			</ul>
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>java heapdump</h2>
+<b>标签：</b><a href="/tags.html#heapdump"><i>heapdump</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-05-04
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>当java应用出现内存溢出异常时，导出heapdump(堆内在dump文件)文件进行问题分析、定位是必不可少的步骤<!-- more --></p>
+
+<blockquote>
+  <p>一、导出heapdump文件方法</p>
+</blockquote>
+
+<p>获取dump方式:<span style="color:red">在jvm运行用户下执行(在非JVM运行用户下执行可能会导致失败或者及其缓慢)</span>,以下是获取全量dump的命令</p>
+
+<pre><code>jmap -dump:format=b,file=cjds-rpc-provider-1016.hprof {jvm_pid}
+</code></pre>
+
+<blockquote>
+  <p>二、dump文件分析工具</p>
+</blockquote>
+
+<p>　1、IMB mat(离线分析)<br />
+　2、jvm自带jvisualvm(离线分析+在线监控)<br />
+　3、Jprofile(商业软件)</p>
+
+<blockquote>
+  <p>三、案例分析</p>
+</blockquote>
+
+<p>jvisualvm载入dump文件</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-04-Linux-java-heapdump/01.jpg" alt="有帮助的截图" /></p>
+
+<p>图中可以看出dump生成的日期，以及JVM内存快照占用大小</p>
+
+<pre><code>文件大小: 1,049.8 MB  ==&gt;1.05G
+字节总数: 1,014,822,217
+类总数: 10,796  ==&gt;1w
+实例总数: 18,007,106 ==&gt;18000w 
+类加载器: 1,221
+垃圾回收根节点: 6,216   ==&gt;6k
+等待结束的暂挂对象数: 0
+</code></pre>
+
+<p>从基本信息中得知 整个文件大小将近1.05G,类实例总数18000w, 在访问量不大的情况下，生成如此之多的对象实例，这是及其不合理的，可能潜在问题：</p>
+
+<p>　1、内存泄露，对象使用后未释放，例如LocalThread, static 变量，或者某个类的属性持有对象<br />
+　2、某个方法生成临时对象过多，例如一次次查询数据库表中所有记录<br />
+基于猜测点，我们下一步分析dump中类实例分布以及类实例内存占用分布   <br />
+类实例总数分析 <br />
+　1. 类实例数，从图中看出String，char[],Date,Integer,Fans,bytes[] 实例数最多，其中String 占比34.7%， 程序中不会单独如此大批量生成String对象，可能在跟随某个对象生成，再者char[],Date,Integer,bytes[]也如此大量,Top10中有Fans类实例，可能是这个造成的，继续跟进，按占用内存大小排序<br />
+　
+<img src="https://magicjms.github.io/assets/2018-05-04-Linux-java-heapdump/02.jpg" alt="有帮助的截图" /></p>
+
+<p>　2. 类实例内存top,图中可见，Fans实例数为62w，我们数据的粉丝数共计30多w,到目前为止可以判定为查询粉丝数据时全量查询，如果查询多次，那么会创建多个30w长度数组大小的实例。</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-04-Linux-java-heapdump/03.jpg" alt="有帮助的截图" /></p>
+
+<p>　jvisualvm没有直观提供每个类所有实例占heap内存大小，切换至MAT(IBM工具，
+类对象实例内存占比分析（切换MAT工具分析）
+ArrayList占用626M(75%)，一个Fans列表占用312M(37.5%)，可以确定是由于大量的Fans类实例造成的OOM(java heap space),从而导致dubbo从zookeeper中取消服务注册</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-04-Linux-java-heapdump/04.jpg" alt="有帮助的截图" /></p>
+
+<p>好了到这里已经分析出当前heap中占用最大的内存的类是哪一个了</p>
+
+<p>结论<br />
+cjds-rpc内存占用高的一个问题是Fans对象多，占用绝大部分heap空间，在内存低的环境下容易造成Java heap space溢出，建议在代码core层做代码走读，排查粉丝查询数据库的代码,如果多次触发特定条件时再多的内存也是不够用的</p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="http://localhost:8090/posts/Linux-java-heapdump.html" title="">http://localhost:8090/posts/Linux-java-heapdump.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Linux-base-services_vsftp.html">
+      ftp服务器搭建
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Linux-java-jmap.html">
+      java jmap
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
           <!-- Blog Categories Well -->
           <div class="well">
-            <h4>
-              栏目分类
-            </h4>
+            <h4>栏目分类</h4>
             <div class="row">
                             <div class="col-lg-6">
                 <ul class="list-unstyled">
@@ -224,12 +315,28 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           </div>
 		  <!-- Blog Recent Well -->
           <div class="well">
-            <h4>
-              最新文章
-            </h4>
-			<div class="row">
+            <h4>最新文章</h4>
+			      <div class="row">
                             <div class="col-lg-12">
                 <ul class="list-unstyled">
+				
+                  <li>
+                    <a href="/posts/Linux-java-oomdesc.html">
+                      java oom解析
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-java-jmap.html">
+                      java jmap
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-java-heapdump.html">
+                      java heapdump
+                    </a>
+                  </li>
 				
                   <li>
                     <a href="/posts/Linux-base-services_vsftp.html">
@@ -272,28 +379,10 @@ http://blog.csdn.net/rabbitter/article/details/51125337
                       python模块详解—random
                     </a>
                   </li>
-				
-                  <li>
-                    <a href="/posts/Linux-base_filePermission.html">
-                      linux下目录权限详解
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Linux-base_fileTime.html">
-                      Linux下文件的三个时间（Atime，Mtime，Ctime）
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Python-Lib_threading.html">
-                      python模块详解—threading
-                    </a>
-                  </li>
 				  
                 </ul>
               </div> 
-			</div>
+			      </div>
           </div>
         </div>
       </div>

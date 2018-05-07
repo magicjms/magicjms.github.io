@@ -4,8 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=" - 潘学文个人博客 - 作者:magicjms"/>
-    <title>栏目：python模块 - 潘学文个人博客栏目：MongoDB - 潘学文个人博客栏目：Redis - 潘学文个人博客</title>
+    <meta name="description" content="java oom解析 - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="oom"/>
+    <title>java oom解析 - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -24,6 +25,19 @@
     <script src="/js/jquery-1.11.0.js"> </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   
   <body>
@@ -31,7 +45,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+<!--         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">
               Toggle navigation
@@ -43,10 +57,10 @@
             <span class="icon-bar">
             </span>
           </button>
-<!--           <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/">
             首页
-          </a> -->
-        </div>
+          </a>
+        </div> -->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           
@@ -127,68 +141,124 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-			<!-- Navi -->
-			<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/pythonlib.html">python模块</a>&nbsp;>&nbsp;列表<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/mongodb.html">MongoDB</a>&nbsp;>&nbsp;列表<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/redis.html">Redis</a>&nbsp;>&nbsp;列表
-			<!-- List -->
-			<ul class="list-unstyled">
-			
-			  
-			  
-				
-				<h2>2018</h2> 
-			  
-			  <li>
-				<h4><span>2018-03-20</span>&raquo;
-				<a href="/posts/Python-Lib_random.html" title="python模块详解—random">python模块详解—random</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-02-24</span>&raquo;
-				<a href="/posts/Python-Lib_threading.html" title="python模块详解—threading">python模块详解—threading</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-02-22</span>&raquo;
-				<a href="/posts/Python-Lib_thread.html" title="python模块详解—thread">python模块详解—thread</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-02-22</span>&raquo;
-				<a href="/posts/Python-Lib_subprocess.html" title="python模块详解—subprocess">python模块详解—subprocess</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-02-04</span>&raquo;
-				<a href="/posts/Python-Lib_datetime.html" title="python模块详解—datetime">python模块详解—datetime</a></h4>
-			  </li> 
-			
-			  
-			  
-				
-				<h2>2017</h2> 
-			  
-			  <li>
-				<h4><span>2017-10-28</span>&raquo;
-				<a href="/posts/Python-Lib_time.html" title="python模块详解—time">python模块详解—time</a></h4>
-			  </li> 
-			
-			</ul>
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>java oom解析</h2>
+<b>标签：</b><a href="/tags.html#oom"><i>oom</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-05-04
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>OOM，全称“Out Of Memory”,是Java程序常见的报错原因之一<!-- more --></p>
+
+<blockquote>
+  <p>一、什么是OOM</p>
+</blockquote>
+
+<p>OOM，全称“Out Of Memory”，翻译成中文就是“内存用完了”，来源于java.lang.OutOfMemoryError。看下关于的官方说明： Thrown when the Java Virtual Machine cannot allocate an object because it is out of memory, and no more memory could be made available by the garbage collector. 意思就是说，当JVM因为没有足够的内存来为对象分配空间并且垃圾回收器也已经没有空间可回收时，就会抛出这个error（注：非exception，因为这个问题已经严重到不足以被应用处理）。</p>
+
+<blockquote>
+  <p>二、为什么会OOM</p>
+</blockquote>
+
+<p>为什么会没有内存了呢？原因不外乎有两点：</p>
+
+<p>1）分配的少了：比如虚拟机本身可使用的内存（一般通过启动时的VM参数指定）太少。</p>
+
+<p>2）应用用的太多，并且用完没释放，浪费了。此时就会造成内存泄露或者内存溢出。</p>
+
+<p><b>内存泄露</b>：申请使用完的内存没有释放，导致虚拟机不能再次使用该内存，此时这段内存就泄露了，因为申请者不用了，而又不能被虚拟机分配给别人用。<br />
+<b>内存溢出</b>：申请的内存超出了JVM能提供的内存大小，此时称之为溢出。</p>
+
+<p>在之前没有垃圾自动回收的日子里，比如C语言和C++语言，我们必须亲自负责内存的申请与释放操作，如果申请了内存，用完后又忘记了释放，比如C++中的new了但是没有delete，那么就可能造成内存泄露。偶尔的内存泄露可能不会造成问题，而大量的内存泄露可能会导致内存溢出。</p>
+
+<p>而在Java语言中，由于存在了垃圾自动回收机制，所以，我们一般不用去主动释放不用的对象所占的内存，也就是理论上来说，是不会存在“内存泄露”的。但是，如果编码不当，比如，将某个对象的引用放到了全局的Map中，虽然方法结束了，但是由于垃圾回收器会根据对象的引用情况来回收内存，导致该对象不能被及时的回收。如果该种情况出现次数多了，就会导致内存溢出，比如系统中经常使用的缓存机制。Java中的内存泄露，不同于C++中的忘了delete，往往是逻辑上的原因泄露。</p>
+
+<blockquote>
+  <p>三、OOM的类型</p>
+</blockquote>
+
+<p>JVM内存模型：</p>
+
+<p>按照JVM规范，JAVA虚拟机在运行时会管理以下的内存区域：<br />
+　　1、程序计数器：当前线程执行的字节码的行号指示器，线程私有<br />
+　　2、JAVA虚拟机栈：Java方法执行的内存模型，每个Java方法的执行对应着一个栈帧的进栈和出栈的操作。<br />
+　　3、本地方法栈：类似“ JAVA虚拟机栈 ”，但是为native方法的运行提供内存环境。<br />
+　　4、JAVA堆：对象内存分配的地方，内存垃圾回收的主要区域，所有线程共享。可分为新生代，老生代。<br />
+　　5、方法区：用于存储已经被JVM加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。Hotspot中的“永久代”。<br />
+　　6、运行时常量池：方法区的一部分，存储常量信息，如各种字面量、符号引用等。<br />
+　　7、直接内存：并不是JVM运行时数据区的一部分， 可直接访问的内存， 比如NIO会用到这部分。<br />
+按照JVM规范，除了程序计数器不会抛出OOM外，其他各个内存区域都可能会抛出OOM。</p>
+
+<p>最常见的OOM情况有以下三种：<br />
+1、java.lang.OutOfMemoryError: Java heap space ——&gt;java堆内存溢出，此种情况最常见，一般由于内存泄露或者堆的大小设置不当引起。对于内存泄露，需要通过内存监控软件查找程序中的泄露代码，而堆大小可以通过虚拟机参数-Xms,-Xmx等修改。</p>
+
+<p>2、java.lang.OutOfMemoryError: PermGen space ——&gt;java永久代溢出，即方法区溢出了，一般出现于大量Class或者jsp页面，或者采用cglib等反射机制的情况，因为上述情况会产生大量的Class信息存储于方法区。此种情况可以通过更改方法区的大小来解决，使用类似-  XX:PermSize=64m -XX:MaxPermSize=256m的形式修改。另外，过多的常量尤其是字符串也会导致方法区溢出。</p>
+
+<p>3、java.lang.StackOverflowError ——&gt; 不会抛OOM error，但也是比较常见的Java内存溢出。JAVA虚拟机栈溢出，一般是由于程序中存在死循环或者深度递归调用造成的，栈大小设置太小也会出现此种溢出。可以通过虚拟机参数-Xss来设置栈的大小。</p>
+
+<blockquote>
+  <p>四、OOM分析——heapdump</p>
+</blockquote>
+
+<p>要dump堆的内存镜像，可以采用如下两种方式：<br />
+1、设置JVM参数-XX:+HeapDumpOnOutOfMemoryError，设定当发生OOM时自动dump出堆信息。不过该方法需要JDK5以上版本。<br />
+2、使用JDK自带的jmap命令。”jmap -dump:format=b,file=heap.bin <pid>"   其中pid可以通过jps获取。</pid></p>
+
+<p>dump堆内存信息后，需要对dump出的文件进行分析，从而找到OOM的原因。常用的工具有：<br />
+1、mat: eclipse memory analyzer, 基于eclipse RCP的内存分析工具。详细信息参见：http://www.eclipse.org/mat/，推荐使用。   <br />
+2、jhat：JDK自带的java heap analyze tool，可以将堆中的对象以html的形式显示出来，包括对象的数量，大小等等，并支持对象查询语言OQL，分析相关的应用后，可以通过http://localhost:7000来访问分析结果。不推荐使用，因为在实际的排查过程中，一般是先在生产环境 dump出文件来，然后拉到自己的开发机器上分析，所以，不如采用高级的分析工具比如前面的mat来的高效。<br />
+这个链接：http://www.ibm.com/developerworks/cn/opensource/os-cn-ecl-ma/index.html中提供了一个采用mat分析的例子 。</p>
+
+<p>注意：因为JVM规范没有对dump出的文件的格式进行定义，所以不同的虚拟机产生的dump文件并不是一样的。在分析时，需要针对不同的虚拟机的输出采用不同的分析工具（当然，有的工具可以兼容多个虚拟机的格式）。IBM HeapAnalyzer也是分析heap的一个常用的工具。</p>
+
+<blockquote>
+  <p>五、小结</p>
+</blockquote>
+
+<p>涉及到的虚拟机的技术或者工具，往往需要考虑到虚拟机规范以及不同的虚拟机实现。尤其是针对虚拟机调优时，往往需要针对虚拟机在某些方面的实现策略来考虑，比如，不同的虚拟机的垃圾回收算法是不一样的，而这直接影响了虚拟机某些参数的设置，以达到虚拟机的最佳性能。
+而针对JVM运行时的分析与诊断，则需要掌握分析基本方法，针对具体情况，运用虚拟机的原理，具体分析。一句话，水很深啊。</p>
+
+<p>本篇转自：<br />
+<a href="https://www.cnblogs.com/ThinkVenus/p/6805495.html" title="https://www.cnblogs.com/ThinkVenus/p/6805495.html">https://www.cnblogs.com/ThinkVenus/p/6805495.html</a></p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="http://localhost:8090/posts/Linux-java-oomdesc.html" title="">http://localhost:8090/posts/Linux-java-oomdesc.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Linux-java-jmap.html">
+      java jmap
+    </a>
+  </span>
+   
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
           <!-- Blog Categories Well -->
           <div class="well">
-            <h4>
-              栏目分类
-            </h4>
+            <h4>栏目分类</h4>
             <div class="row">
                             <div class="col-lg-6">
                 <ul class="list-unstyled">
@@ -246,10 +316,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           </div>
 		  <!-- Blog Recent Well -->
           <div class="well">
-            <h4>
-              最新文章
-            </h4>
-			<div class="row">
+            <h4>最新文章</h4>
+			      <div class="row">
                             <div class="col-lg-12">
                 <ul class="list-unstyled">
 				
@@ -315,7 +383,7 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 				  
                 </ul>
               </div> 
-			</div>
+			      </div>
           </div>
         </div>
       </div>

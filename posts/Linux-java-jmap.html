@@ -4,8 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=" - 潘学文个人博客 - 作者:magicjms"/>
-    <title>栏目：python模块 - 潘学文个人博客栏目：MongoDB - 潘学文个人博客栏目：Redis - 潘学文个人博客</title>
+    <meta name="description" content="java jmap - 潘学文个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="jmap"/>
+    <title>java jmap - 潘学文个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -24,6 +25,19 @@
     <script src="/js/jquery-1.11.0.js"> </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   
   <body>
@@ -31,7 +45,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+<!--         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">
               Toggle navigation
@@ -43,10 +57,10 @@
             <span class="icon-bar">
             </span>
           </button>
-<!--           <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/">
             首页
-          </a> -->
-        </div>
+          </a>
+        </div> -->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           
@@ -127,68 +141,173 @@ http://blog.csdn.net/rabbitter/article/details/51125337
       <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-			<!-- Navi -->
-			<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/pythonlib.html">python模块</a>&nbsp;>&nbsp;列表<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/mongodb.html">MongoDB</a>&nbsp;>&nbsp;列表<a href="/">首页</a>&nbsp;>&nbsp;<a href="/posts/redis.html">Redis</a>&nbsp;>&nbsp;列表
-			<!-- List -->
-			<ul class="list-unstyled">
-			
-			  
-			  
-				
-				<h2>2018</h2> 
-			  
-			  <li>
-				<h4><span>2018-03-20</span>&raquo;
-				<a href="/posts/Python-Lib_random.html" title="python模块详解—random">python模块详解—random</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-02-24</span>&raquo;
-				<a href="/posts/Python-Lib_threading.html" title="python模块详解—threading">python模块详解—threading</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-02-22</span>&raquo;
-				<a href="/posts/Python-Lib_thread.html" title="python模块详解—thread">python模块详解—thread</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-02-22</span>&raquo;
-				<a href="/posts/Python-Lib_subprocess.html" title="python模块详解—subprocess">python模块详解—subprocess</a></h4>
-			  </li> 
-			
-			  
-			  
-			  <li>
-				<h4><span>2018-02-04</span>&raquo;
-				<a href="/posts/Python-Lib_datetime.html" title="python模块详解—datetime">python模块详解—datetime</a></h4>
-			  </li> 
-			
-			  
-			  
-				
-				<h2>2017</h2> 
-			  
-			  <li>
-				<h4><span>2017-10-28</span>&raquo;
-				<a href="/posts/Python-Lib_time.html" title="python模块详解—time">python模块详解—time</a></h4>
-			  </li> 
-			
-			</ul>
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>java jmap</h2>
+<b>标签：</b><a href="/tags.html#jmap"><i>jmap</i></a>
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-05-04
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<p>当java应用程序出现OOM(内存溢出)异常时，jmap是我们常用的排错指令，此指令能让我们看到jvm heap内存信息，java进程中每个对象有多少个实例，占用多少内存等信息<!-- more --></p>
+
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<blockquote>
+  <p>例一：查看jvm heap(堆内存)信息</p>
+</blockquote>
+
+<pre><code>[www@iZbp1j3zm4hugfnv44puytZ ~]$ jmap -heap 2493
+Attaching to process ID 2493, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 25.73-b02
+
+using parallel threads in the new generation.
+using thread-local object allocation.
+Concurrent Mark-Sweep GC
+
+Heap Configuration:
+   MinHeapFreeRatio         = 40
+   MaxHeapFreeRatio         = 70
+   MaxHeapSize              = 1258291200 (1200.0MB)
+   NewSize                  = 1073741824 (1024.0MB)
+   MaxNewSize               = 1073741824 (1024.0MB)
+   OldSize                  = 184549376 (176.0MB)
+   NewRatio                 = 2
+   SurvivorRatio            = 8
+   MetaspaceSize            = 21807104 (20.796875MB)
+   CompressedClassSpaceSize = 1073741824 (1024.0MB)
+   MaxMetaspaceSize         = 17592186044415 MB
+   G1HeapRegionSize         = 0 (0.0MB)
+
+Heap Usage:
+New Generation (Eden + 1 Survivor Space):
+   capacity = 966393856 (921.625MB)
+   used     = 966393848 (921.6249923706055MB)
+   free     = 8 (7.62939453125E-6MB)
+   99.99999917218017% used
+Eden Space:
+   capacity = 859045888 (819.25MB)
+   used     = 859045880 (819.2499923706055MB)
+   free     = 8 (7.62939453125E-6MB)
+   99.99999906873427% used
+From Space:
+   capacity = 107347968 (102.375MB)
+   used     = 107347968 (102.375MB)
+   free     = 0 (0.0MB)
+   100.0% used
+To Space:
+   capacity = 107347968 (102.375MB)
+   used     = 0 (0.0MB)
+   free     = 107347968 (102.375MB)
+   0.0% used
+concurrent mark-sweep generation:
+   capacity = 184549376 (176.0MB)
+   used     = 184549344 (175.99996948242188MB)
+   free     = 32 (3.0517578125E-5MB)
+   99.99998266046697% used
+
+20905 interned Strings occupying 2220488 bytes.
+[www@iZbp1j3zm4hugfnv44puytZ ~]$ 
+</code></pre>
+
+<p>上面2493为进程号：<br />
+jvm heap(堆)内存主要分为：<br />
+　　新生代（Young Generation）又分为：Eden区和Survivor区，Survivor区有分为From Space和To Space。Eden区是对象最初分配到的地方；默认情况下，From Space和To Space的区域大小相等。<br />
+　　老年代（Old Generation）<br />
+　　永久代（Permanent Generation）</p>
+
+<blockquote>
+  <p>例二：java进程中每个对象有多少个实例，占用多少内存信息</p>
+</blockquote>
+
+<pre><code>[root@localhost ~]# jmap -histo 25453 | head -n 20
+
+ num     #instances         #bytes  class name
+----------------------------------------------
+   1:        220855       27984664  [C
+   2:         19802       18777128  [B
+   3:          8735       11026312  [I
+   4:        211785        5082840  java.lang.String
+   5:         52714        5060544  java.util.jar.JarFile$JarFileEntry
+   6:         94705        3030560  java.util.HashMap$Node
+   7:         11058        1554912  [Ljava.util.HashMap$Node;
+   8:         10760        1207792  java.lang.Class
+   9:         21710        1136096  [Ljava.lang.Object;
+  10:         32501        1040032  java.util.concurrent.ConcurrentHashMap$Node
+  11:         11019         969672  java.lang.reflect.Method
+  12:         15147         969408  java.net.URL
+  13:         17583         703320  java.util.LinkedHashMap$Entry
+  14:          9742         545552  java.util.LinkedHashMap
+  15:         11037         529776  java.util.HashMap
+  16:          9381         525336  java.util.concurrent.ConcurrentHashMap$ValueIterator
+  17:          9147         439056  org.apache.catalina.loader.ResourceEntry
+Total       1089836       92194448
+</code></pre>
+
+<p>上面25453为进程号,因为输出太多只取前20行：<br />
+第一列，序号，无实际意义<br />
+第二列，对象实例数量<br />
+第三列，对象实例占用总内存数，单位：字节<br />
+第四列，对象实例名称<br />
+最后一行，总实例数量与总内存占用数</p>
+
+<p>另，部分示例说明（还没弄明白，后续补充）：<br />
+[C，<br />
+[B，<br />
+[I，<br />
+[J，<br />
+[L，</p>
+
+<p>参考：<br />
+<a href="http://www.importnew.com/15671.html" title="http://www.importnew.com/15671.html">http://www.importnew.com/15671.html</a><br />
+<a href="https://blog.csdn.net/zlzlei/article/details/46472729" title="https://blog.csdn.net/zlzlei/article/details/46472729">https://blog.csdn.net/zlzlei/article/details/46472729</a></p>
+
+</div>
+
+<br/>
+<b>原创文章，转载请注明出处！</b>
+<br/>
+<b>本文链接：</b><a href="http://localhost:8090/posts/Linux-java-jmap.html" title="">http://localhost:8090/posts/Linux-java-jmap.html</a>
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Linux-java-heapdump.html">
+      java heapdump
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Linux-java-oomdesc.html">
+      java oom解析
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
           <!-- Blog Categories Well -->
           <div class="well">
-            <h4>
-              栏目分类
-            </h4>
+            <h4>栏目分类</h4>
             <div class="row">
                             <div class="col-lg-6">
                 <ul class="list-unstyled">
@@ -246,10 +365,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           </div>
 		  <!-- Blog Recent Well -->
           <div class="well">
-            <h4>
-              最新文章
-            </h4>
-			<div class="row">
+            <h4>最新文章</h4>
+			      <div class="row">
                             <div class="col-lg-12">
                 <ul class="list-unstyled">
 				
@@ -315,7 +432,7 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 				  
                 </ul>
               </div> 
-			</div>
+			      </div>
           </div>
         </div>
       </div>

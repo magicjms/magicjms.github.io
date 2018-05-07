@@ -3,6 +3,30 @@
 	"data" : [
 	 
 	{
+		"title" : "java oom解析 - oom",
+		"url" : "/posts/Linux-java-oomdesc.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "java jmap - jmap",
+		"url" : "/posts/Linux-java-jmap.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "java heapdump - heapdump",
+		"url" : "/posts/Linux-java-heapdump.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "ftp服务器搭建 - ftp",
 		"url" : "/posts/Linux-base-services_vsftp.html"
 	}
