@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="python内建函数—hasattr,getattr,setattr - magicjms个人博客 - 作者:magicjms"/> 
-	<meta name="keywords" content="pythonbase"/>
-    <title>python内建函数—hasattr,getattr,setattr - magicjms个人博客</title>
+    <meta name="description" content="markdown基础操作 - magicjms个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="git"/>
+    <title>markdown基础操作 - magicjms个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -144,12 +144,12 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           <!-- Navi -->
 
 <!-- Title -->
-<h2>python内建函数—hasattr,getattr,setattr</h2>
-<b>标签：</b><a href="/tags.html#pythonbase"><i>pythonbase</i></a>
+<h2>markdown基础操作</h2>
+<b>标签：</b><a href="/tags.html#git"><i>git</i></a>
 
 <div class="post-date">
 	<span class="glyphicon glyphicon-time"></span>
-	2018-02-22
+	2018-05-14
 </div>
 <br/>
 
@@ -157,103 +157,13 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 <div style="text-indent:0em;">
 <link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
 
-<p>本篇主要介绍python内建函数hasattr的功能及用法<!-- more --></p>
+<p>markdown基础使用操作<!-- more --></p>
 
-<blockquote>
-  <p>一、<b>python内建函数 hasattr 的用法</b></p>
-</blockquote>
+<p>1、插入图片</p>
 
-<p>语法：hasattr（object，name）</p>
+<p><img src="https://magicjms.github.io/assets/2018-05-04-Linux-java-heapdump/01.jpg" alt="有帮助的截图" /></p>
 
-<p>作用：判断一个对象里面是否有name属性或者name方法，返回BOOL值，有name特性返回True， 否则返回False。
-需要注意的是name要用括号括起来</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#判断对象有name属性</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#判断对象有run方法</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
-
-<blockquote>
-  <p>二、<b>python内建函数 getattr 的用法</b></p>
-</blockquote>
-
-<p>语法：getattr(object, name[,default])</p>
-
-<p>作用：获取对象object的属性或者方法，如果存在打印出来，如果不存在，打印出默认值，默认值可选。
-需要注意的是，如果是返回的对象的方法，返回的是方法的内存地址，如果需要运行这个方法，
-可以在后面添加一对括号。</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#获取name属性，存在就打印出来。</span>
-<span class="s1">&#39;xiaohua&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#获取run方法，存在就打印出方法的内存地址。</span>
-<span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">test</span><span class="o">.</span><span class="n">run</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">test</span> <span class="n">instance</span> <span class="n">at</span> <span class="mh">0x0269C878</span><span class="o">&gt;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)()</span>  <span class="c1">#获取run方法，后面加括号可以将这个方法运行。</span>
-<span class="s1">&#39;HelloWord&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#获取一个不存在的属性。</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;18&quot;</span><span class="p">)</span>  <span class="c1">#若属性不存在，返回一个默认值。</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
-
-<blockquote>
-  <p>三、<b>python内建函数 setattr 的用法</b></p>
-</blockquote>
-
-<p>语法：setattr(object, name, values)</p>
-
-<p>作用：给对象的属性赋值，若属性不存在，先创建再赋值。</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>   <span class="c1">#判断属性是否存在</span>
-<span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">)</span>   <span class="c1">#为属相赋值，并没有返回值</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#属性存在了</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
-
-<blockquote>
-  <p>四、<b>常用应用</b></p>
-</blockquote>
-
-<p>一种综合的用法是：判断一个对象的属性是否存在，若不存在就添加该属性。</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#age属性不存在</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">))</span> <span class="c1">#age属性不存在时，设置该属性</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#可检测设置成功</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
-
-<p>本篇转自：<a href="https://www.cnblogs.com/cenyu/p/5713686.html" title="https://www.cnblogs.com/cenyu/p/5713686.html">https://www.cnblogs.com/cenyu/p/5713686.html</a></p>
+<p>2、语法着色</p>
 
 </div>
 
@@ -263,8 +173,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   
   <span class="next">
     上篇：
-    <a href="/posts/Python-Lib_datetime.html">
-      python模块详解—datetime
+    <a href="/posts/Linux-java-oomdesc.html">
+      java oom解析
     </a>
   </span>
    
@@ -272,8 +182,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   <div style="float:right">
   <span class="prev" >
     下篇：
-    <a href="/posts/Python-Lib_subprocess.html">
-      python模块详解—subprocess
+    <a href="/posts/Python-Base_code.html">
+      PYTHON编码的前世今生
     </a>
   </span>
   </div>

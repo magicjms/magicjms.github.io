@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="python内建函数—hasattr,getattr,setattr - magicjms个人博客 - 作者:magicjms"/> 
+    <meta name="description" content="lambda函数 - magicjms个人博客 - 作者:magicjms"/> 
 	<meta name="keywords" content="pythonbase"/>
-    <title>python内建函数—hasattr,getattr,setattr - magicjms个人博客</title>
+    <title>lambda函数 - magicjms个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -144,12 +144,12 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           <!-- Navi -->
 
 <!-- Title -->
-<h2>python内建函数—hasattr,getattr,setattr</h2>
+<h2>lambda函数</h2>
 <b>标签：</b><a href="/tags.html#pythonbase"><i>pythonbase</i></a>
 
 <div class="post-date">
 	<span class="glyphicon glyphicon-time"></span>
-	2018-02-22
+	2018-05-14
 </div>
 <br/>
 
@@ -157,103 +157,75 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 <div style="text-indent:0em;">
 <link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
 
-<p>本篇主要介绍python内建函数hasattr的功能及用法<!-- more --></p>
+<p>lambda函数也叫匿名函数，即函数没有具体的名称,而用def创建的方法是有名称的。<!-- more --></p>
 
 <blockquote>
-  <p>一、<b>python内建函数 hasattr 的用法</b></p>
+  <p>一、lambda函数</p>
 </blockquote>
 
-<p>语法：hasattr（object，name）</p>
+<p>1、lambda函数基础</p>
 
-<p>作用：判断一个对象里面是否有name属性或者name方法，返回BOOL值，有name特性返回True， 否则返回False。
-需要注意的是name要用括号括起来</p>
+<p>lambda函数也叫匿名函数，即函数没有具体的名称,而用def创建的方法是有名称的。如下：<br />
+“"”命名的foo函数”””<br />
+def foo():return ‘beginman’  #Python中单行参数可以和标题写在一行</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#判断对象有name属性</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#判断对象有run方法</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+<p>”"”lambda关键字创建匿名函数,该表达式同以上函数”””<br />
+lambda:’beginman’</p>
+
+<p>上面的只是简单的用lambda创建一个函数对象，并没有保存它也没有调用它，时刻会被回收了。这里我们保存并调用：<br />
+bar = lambda:’beginman’<br />
+print bar()      #beginman</p>
+
+<p>从上面几个例子中，可以理解Python lambda语法：<br />
+lambda [arg1[,arg2,arg3….argN]]:expression<br />
+<span style="color:red">lambda语句中，冒号前是参数，可以有多个，用逗号隔开，冒号右边的返回值。lambda语句构建的其实是一个函数对象。</span><br />
+print lambda:’beginman’   #&lt;function <lambda> at 0x00B00A30&gt;</lambda></p>
+
+<p>2、无参数<br />
+如果没有参数，则lambda冒号前面就没有，如以上例子</p>
+
+<pre><code>bar = lambda:'beginman'
+print bar()      #beginman
+</code></pre>
+
+<p>3、有参数</p>
+
+<pre><code>def add(x,y):return x+y
+add2 = lambda x,y:x+y
+print add2(1,2)     #3
+ 
+def sum(x,y=10):return x+y
+sum2 = lambda x,y=10:x+y
+print sum2(1)       #11
+print sum2(1,100)   #101
+</code></pre>
 
 <blockquote>
-  <p>二、<b>python内建函数 getattr 的用法</b></p>
+  <p>二、lambda与def</p>
 </blockquote>
 
-<p>语法：getattr(object, name[,default])</p>
+<p>上面的例子中，可知lambda函数只是创建简单的函数对象，是一个函数的简单版本，但是这种语句由于性能的原因，调用的时候绕过函数的栈分配。python lambda还有哪些和def不一样呢？</p>
 
-<p>作用：获取对象object的属性或者方法，如果存在打印出来，如果不存在，打印出默认值，默认值可选。
-需要注意的是，如果是返回的对象的方法，返回的是方法的内存地址，如果需要运行这个方法，
-可以在后面添加一对括号。</p>
+<p>　　1 、python lambda会创建一个函数对象，但不会把这个函数对象赋给一个标识符，而def则会把函数对象赋值给一个变量。</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#获取name属性，存在就打印出来。</span>
-<span class="s1">&#39;xiaohua&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#获取run方法，存在就打印出方法的内存地址。</span>
-<span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">test</span><span class="o">.</span><span class="n">run</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">test</span> <span class="n">instance</span> <span class="n">at</span> <span class="mh">0x0269C878</span><span class="o">&gt;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)()</span>  <span class="c1">#获取run方法，后面加括号可以将这个方法运行。</span>
-<span class="s1">&#39;HelloWord&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#获取一个不存在的属性。</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;18&quot;</span><span class="p">)</span>  <span class="c1">#若属性不存在，返回一个默认值。</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+<pre><code>如：
+&gt;&gt;&gt; def foo():return 'foo()'
+&gt;&gt;&gt; foo
+&lt;function foo at 0x011A34F0&gt;
+</code></pre>
+
+<p>　　2、python lambda它只是一个表达式，而def则是一个语句。lambda表达式运行起来像一个函数，当被调用时创建一个框架对象。<br />
+　　3、lambda只是一个表达式，函数体比def简单很多。<br />
+　　4、lambda的主体是一个表达式，而不是一个代码块。仅仅能在lambda表达式中封装有限的逻辑进去。<br />
+　　5、lambda表达式是起到一个函数速写的作用。允许在代码内嵌入一个函数的定义。</p>
 
 <blockquote>
-  <p>三、<b>python内建函数 setattr 的用法</b></p>
+  <p>三、 lambda函数的用途</p>
 </blockquote>
 
-<p>语法：setattr(object, name, values)</p>
-
-<p>作用：给对象的属性赋值，若属性不存在，先创建再赋值。</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>   <span class="c1">#判断属性是否存在</span>
-<span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">)</span>   <span class="c1">#为属相赋值，并没有返回值</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#属性存在了</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
-
-<blockquote>
-  <p>四、<b>常用应用</b></p>
-</blockquote>
-
-<p>一种综合的用法是：判断一个对象的属性是否存在，若不存在就添加该属性。</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#age属性不存在</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">))</span> <span class="c1">#age属性不存在时，设置该属性</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#可检测设置成功</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
-
-<p>本篇转自：<a href="https://www.cnblogs.com/cenyu/p/5713686.html" title="https://www.cnblogs.com/cenyu/p/5713686.html">https://www.cnblogs.com/cenyu/p/5713686.html</a></p>
+<p>　　1、对于单行函数，使用lambda可以省去定义函数的过程，让代码更加精简。<br />
+　　2、在非多次调用的函数的情况下，lambda表达式即用既得，提高性能<br />
+　　<span style="color:red">注意：如果for..in..if能做的，最好不要选择lambda</span></p>
 
 </div>
 
@@ -263,8 +235,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   
   <span class="next">
     上篇：
-    <a href="/posts/Python-Lib_datetime.html">
-      python模块详解—datetime
+    <a href="/posts/Python-Base_division.html">
+      Python中的除法
     </a>
   </span>
    
@@ -272,8 +244,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   <div style="float:right">
   <span class="prev" >
     下篇：
-    <a href="/posts/Python-Lib_subprocess.html">
-      python模块详解—subprocess
+    <a href="/posts/Python-Base_sort-sorted.html">
+      sort sorted函数
     </a>
   </span>
   </div>

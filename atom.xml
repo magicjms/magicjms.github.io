@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Atom Feed - 潘学文个人博客 - 作者:magicjms"/> 
+    <meta name="description" content="Atom Feed - magicjms个人博客 - 作者:magicjms"/> 
 	
-    <title>Atom Feed - 潘学文个人博客</title>
+    <title>Atom Feed - magicjms个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -160,12 +160,729 @@ http://blog.csdn.net/rabbitter/article/details/51125337
  <title></title>
  <link href="http://magicjms.github.io/atom.xml" rel="self"/>
  <link href="http://magicjms.github.io"/>
- <updated>2018-05-07T12:01:34+08:00</updated>
+ <updated>2018-07-24T18:33:36+08:00</updated>
  <author>
    <name>magicjms</name>
    <email>2368691083@qq.com</email>
  </author>
 
+ 
+ <entry>
+   <title>统计学-贾俊平(第四版)</title>
+   <link href="http://magicjms.github.io/posts/Book-statistics_5.html"/>
+   <updated>2018-06-27T00:00:00+08:00</updated>
+   <id>/posts/Book-statistics_5</id>
+   <content type="html">&lt;p&gt;常用符号：&lt;/p&gt;
+
+&lt;p&gt;≤≥≠∩∪ΦΩ&lt;/p&gt;
+
+&lt;p&gt;5.1.1 随便事件的几个基本概念：&lt;/p&gt;
+
+&lt;p&gt;1、随机事件(random event)：在同一组条件下，每次试验可能出现也可能不出现的事件，也叫偶然事件。随机事件简称事件，用大写字母A,B,C等表示&lt;br /&gt;
+2、必须事件(certain event)：在同一组条件下，每次试验一定出现的事件。用Ω(欧米伽 Omega)表示&lt;br /&gt;
+3、不可能事件(impossible event)：在同一组条件下，每次试验一定不出现的事件。用Φ表示&lt;br /&gt;
+https://zhidao.baidu.com/question/281576510.html  &lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;p&gt;5.1.2 事件的概率&lt;/p&gt;
+
+&lt;p&gt;概率的古典定义是，如果某一随机试验的结果有限，而且各个结果出现的可能性相等，则某一事件A发生的概率为该事件所包含的基本事件个数m与样本空间中所包含的基本事件个数n的比值，记为：
+P(A) = 事件A所包含的基本事件个数/样本空间所包含的基本事件个数=m/n&lt;/p&gt;
+
+&lt;p&gt;概率的统计定义：在相同条件下随机试验n次，某事件A出现m次(m&amp;lt;=n)，则比值m/n称为事件A发生的频率。随着n的增大，该频率围绕某一常数P上下波动，且波动的幅度逐渐减小，趋于稳定，这个频率的稳定值即为该事件的概率。&lt;/p&gt;
+
+&lt;p&gt;主观概率的定义：概率是一个决策者根据个人对某个事件是否发生以及本人掌握的信息对该事件发生可能性的判断。&lt;/p&gt;
+
+&lt;p&gt;5.2 概率的性质与运算法则&lt;/p&gt;
+
+&lt;p&gt;5.2.1 概率的基本性质&lt;/p&gt;
+
+&lt;p&gt;1）对任一随机事件A，有0 ≤ P(A) ≤ 1&lt;br /&gt;
+2) 必然事件的概率为1，而不可能事件的概率为0，即P(Ω) = 1, P(Φ) = 0&lt;br /&gt;
+3）若A与B互斥，则P(AUB) = P(A) + P(B)此性质可推广到多个两两互斥的随机事件A1,A2,……,An，则P(A1UA2U…UAn) = P(A1) + P(A2) + P(A3)+……+P(An)&lt;/p&gt;
+
+&lt;p&gt;5.2.2 概率的加法法则&lt;/p&gt;
+
+&lt;p&gt;法则1：两个互斥事件之和的概率，等于两个事件概率之和。设A和B为两个互斥事件，则
+P(AUB) = P(A) + P(B)&lt;/p&gt;
+
+&lt;p&gt;法则2：对于任意两个随机事件，它们和的概率为两个事件分别的概率之和减去两事件之交的概率，即
+P(AUB) = P(A) + P(B) - P(A∩B) 注：法则1可以看作为法则2的特例&lt;/p&gt;
+
+&lt;p&gt;5.2.3 条件概率与独立事件&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1、条件概率：例如当某一事件B已经发生时，求事件A发生的概率，称这种概率为事件B发生条件下事件A的条件概率(conditional probability)，记为P(A&lt;/td&gt;
+      &lt;td&gt;B)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2、乘法公式：条件概率P(A&lt;/td&gt;
+      &lt;td&gt;B)与概率P(AB),P(B)有以下关系：&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;P(A&lt;/td&gt;
+      &lt;td&gt;B) = P(AB)/P(B), P(B) &amp;gt; 0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>python模块详解—logging</title>
+   <link href="http://magicjms.github.io/posts/Python-Lib_logging.html"/>
+   <updated>2018-05-14T00:00:00+08:00</updated>
+   <id>/posts/Python-Lib_logging</id>
+   <content type="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://magicjms.github.io/pygments.css&quot; /&gt;
+
+&lt;p&gt;Python的logging模块提供了通用的日志系统，可以方便第三方模块或者是应用使用。这个模块提供不同的日志级别，并可以采用不同的方式记录日志&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;一、logging介绍&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　Python的logging模块提供了通用的日志系统，可以方便第三方模块或者是应用使用。这个模块提供不同的日志级别，并可以采用不同的方式记录日志，比如文件，HTTP GET/POST，SMTP，Socket等，甚至可以自己实现具体的日志记录方式。&lt;br /&gt;
+　　logging模块与log4j的机制是一样的，只是具体的实现细节不同。模块提供logger，handler，filter，formatter。&lt;br /&gt;
+　　logger：提供日志接口，供应用代码使用。logger最长用的操作有两类：配置和发送日志消息。可以通过logging.getLogger(name)获取logger对象，如果不指定name则返回root对象，多次使用相同的name调用getLogger方法返回同一个logger对象。&lt;br /&gt;
+　　handler：将日志记录（log record）发送到合适的目的地（destination），比如文件，socket等。一个logger对象可以通过addHandler方法添加0到多个handler，每个handler又可以定义不同日志级别，以实现日志分级过滤显示。&lt;br /&gt;
+　　filter：提供一种优雅的方式决定一个日志记录是否发送到handler。&lt;br /&gt;
+　　formatter：指定日志记录输出的具体格式。formatter的构造方法需要两个参数：消息的格式字符串和日期字符串，这两个参数都是可选的。  &lt;br /&gt;
+　　与log4j类似，logger，handler和日志消息的调用可以有具体的日志级别（Level），只有在日志消息的级别大于logger和handler的级别。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二、logging实例分析&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;import logging
+# 创建一个logger
+logger = logging.getLogger('mylogger')
+logger.setLevel(logging.DEBUG)
+
+# 创建一个handler，用于写入日志文件
+fh = logging.FileHandler('test.log')
+fh.setLevel(logging.DEBUG)
+# 再创建一个handler，用于输出到控制台
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+
+# 定义handler的输出格式
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+
+# 给logger添加handler
+logger.addHandler(fh)
+logger.addHandler(ch)
+# 记录一条日志
+logger.info('foorbar')
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结合上面的例子，我们说下几个最常使用的API：　　
+logging.getLogger([name])&lt;br /&gt;
+　　返回一个logger实例，如果没有指定name，返回root logger。只要name相同，返回的logger实例都是同一个而且只有一个，即name和logger实例是一一对应的。这意味着，无需把logger实例在各个模块中传递。只要知道name，就能得到同一个logger实例。&lt;/p&gt;
+
+&lt;p&gt;Logger.setLevel(lvl)&lt;br /&gt;
+　　设置logger的level， level有以下几个级别：
+　　级别高低顺序：NOTSET &amp;lt; DEBUG &amp;lt; INFO &amp;lt; WARNING &amp;lt; ERROR &amp;lt; CRITICAL
+　　如果把looger的级别设置为INFO， 那么小于INFO级别的日志都不输出， 大于等于INFO级别的日志都输出&lt;/p&gt;
+
+&lt;p&gt;Logger.addHandler(hdlr)&lt;br /&gt;
+　　通过handler对象可以把日志内容写到不同的地方。比如简单的StreamHandler就是把日志写到类似文件的地方。python提供了十几种实用handler，比较常用有：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;StreamHandler: 输出到控制台
+FileHandler:   输出到文件
+BaseRotatingHandler 可以按时间写入到不同的日志中。比如将日志按天写入不同的日期结尾的文件文件。
+SocketHandler 用TCP网络连接写LOG
+DatagramHandler 用UDP网络连接写LOG
+SMTPHandler 把LOG写成EMAIL邮寄出去
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;logging.basicConfig([&lt;em&gt;*kwargs])&lt;br /&gt;
+　　这个函数用来配置root logger， 为root logger创建一个StreamHandler，设置默认的格式。&lt;/em&gt; 这些函数： logging.debug()、logging.info()、logging.warning()、logging.error()、logging.critical() 如果调用的时候发现root logger没有任何handler，会自动调用basicConfig添加一个handler* 如果root logger已有handler，这个函数不做任何事情使用basicConfig来配置root logger的输出格式和level&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
+                    datefmt='%a, %d %b %Y %H:%M:%S',
+                    filename='myapp.log',
+                    filemode='w')
+logging.debug('This message should appear on the console')
+
+logging.basicConfig函数各参数:
+filename: 指定日志文件名
+filemode: 和file函数意义相同，指定日志文件的打开模式，'w'或'a'
+format: 指定输出的格式和内容，format可以输出很多有用信息，如上例所示:
+	 %(levelno)s: 打印日志级别的数值
+	 %(levelname)s: 打印日志级别名称
+	 %(pathname)s: 打印当前执行程序的路径，其实就是sys.argv[0]
+	 %(filename)s: 打印当前执行程序名
+	 %(funcName)s: 打印日志的当前函数
+	 %(lineno)d: 打印日志的当前行号
+	 %(asctime)s: 打印日志的时间
+	 %(thread)d: 打印线程ID
+	 %(threadName)s: 打印线程名称
+	 %(process)d: 打印进程ID
+	 %(message)s: 打印日志信息
+datefmt: 指定时间格式，同time.strftime()
+level: 设置日志级别，默认为logging.WARNING
+stream: 指定将日志的输出流，可以指定输出到sys.stderr,sys.stdout或者文件，默认输出到sys.stderr，当stream和filename同时指定时，stream被忽略
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;logger对象直接提供日志接口。&lt;br /&gt;
+formatter描述日志的格式。&lt;br /&gt;
+handler把日志写到不同的地方，你可以把日志保存成本地文件，也可以每个小时写一个日志文件，还可以把日志通过socket传到别的机器上。
+从最简单的formatter对象来看。formatter指定的是每一条日志记录的抬头信息，也就是你可以指定日志记录的时间格式、进程号、文件名、函数名等信息。可以用这个方法来创建一个formatter对象：&lt;br /&gt;
+logging.Formatter.&lt;strong&gt;init&lt;/strong&gt;( fmt=None, datefmt=None)&lt;br /&gt;
+fmt参数指定进程号、文件名、函数名等信息是否出现以及格式， datefmt为日期时间格式，默认的日期格式精确到微秒，例如‘2003-07-08 16:49:45,896’。fmt中可以指定多个字段，每个字段的格式为“%(&lt;dictionary key=&quot;&quot;&gt;)s”， 例如你想打印时间、日志级别、日志信息可以用下面的format:
+'%(asctime)s - %(levelname)s - %(message)s'&lt;/dictionary&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;四、logging参考&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;关于formatter的配置，采用的是%(&lt;dict key=&quot;&quot;&gt;)s的形式，就是字典的关键字替换。提供的关键字包括：&lt;/dict&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-05-14-Python-Lib_logging/01.png&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;logging的几种handle方式如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;logging.StreamHandler: 日志输出到流，可以是sys.stderr、sys.stdout或者文件
+logging.FileHandler: 日志输出到文件
+日志回滚方式，实际使用时用RotatingFileHandler和TimedRotatingFileHandler
+logging.handlers.BaseRotatingHandler
+logging.handlers.RotatingFileHandler
+logging.handlers.TimedRotatingFileHandler
+logging.handlers.SocketHandler: 远程输出日志到TCP/IP sockets
+logging.handlers.DatagramHandler:  远程输出日志到UDP sockets
+logging.handlers.SMTPHandler:  远程输出日志到邮件地址
+logging.handlers.SysLogHandler: 日志输出到syslog
+logging.handlers.NTEventLogHandler: 远程输出日志到Windows NT/2000/XP的事件日志
+logging.handlers.MemoryHandler: 日志输出到内存中的制定buffer
+logging.handlers.HTTPHandler: 通过&quot;GET&quot;或&quot;POST&quot;远程输出到HTTP服务器
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：&lt;br /&gt;
+&lt;a href=&quot;http://blog.csdn.net/chosen0ne/article/details/7319306&quot; title=&quot;http://blog.csdn.net/chosen0ne/article/details/7319306&quot;&gt;http://blog.csdn.net/chosen0ne/article/details/7319306&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.jb51.net/article/42626.htm&quot; title=&quot;http://www.jb51.net/article/42626.htm&quot;&gt;http://www.jb51.net/article/42626.htm&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.cnblogs.com/dkblog/archive/2011/08/26/2155018.html&quot; title=&quot;http://www.cnblogs.com/dkblog/archive/2011/08/26/2155018.html&quot;&gt;http://www.cnblogs.com/dkblog/archive/2011/08/26/2155018.html&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>sort sorted函数</title>
+   <link href="http://magicjms.github.io/posts/Python-Base_sort-sorted.html"/>
+   <updated>2018-05-14T00:00:00+08:00</updated>
+   <id>/posts/Python-Base_sort-sorted</id>
+   <content type="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://magicjms.github.io/pygments.css&quot; /&gt;
+
+&lt;p&gt;sort、sorted函数是我们日常编码中使用频率较高的函数，但是两都之间的共性、区别你真的搞明白了吗&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;一、功能&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;对给定的List进行排序 &lt;br /&gt;
+sort()与sorted()的不同在于，sort是在原位重新排列列表，而sorted()是产生一个新的列表&lt;br /&gt;
+List的元素可以是各种东西，字符串，字典，自己定义的类等。 &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二、函数说明&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;1、函数原型&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; help(sorted)
+Help on built-in function sorted in module __builtin__:
+sorted(...)
+    sorted(iterable, cmp=None, key=None, reverse=False) --&amp;gt; new sorted list
+
+&amp;gt;&amp;gt;&amp;gt; help(list.sort)
+Help on method_descriptor:
+sort(...)
+    L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
+    cmp(x, y) -&amp;gt; -1, 0, 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2、函数参数说明&lt;/p&gt;
+
+&lt;p&gt;iterable：是可迭代类型;&lt;br /&gt;
+cmp：用于比较的函数，比较什么由key决定,有默认值，迭代集合中的一项;&lt;br /&gt;
+cmp(e1, e2) 是带两个参数的比较函数,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;返回值: 
+	负数: e1 &amp;lt; e2, 
+	  0: e1 == e2, 
+   正数: e1 &amp;gt; e2. 
+默认为 None, 即用内建的比较函数. 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;key：用列表元素的某个属性和函数进行作为关键字，有默认值，迭代集合中的一项;&lt;br /&gt;
+key 是带一个参数的函数, 用来为每个元素提取比较值. 默认为 None, 即直接比较每个元素. &lt;/p&gt;
+
+&lt;p&gt;reverse：排序规则. reverse = True 或者 reverse = False，有默认值。&lt;br /&gt;
+返回值：是一个经过排序的可迭代类型，与iterable一样。&lt;br /&gt;
+key 和 reverse 比 cmp 快很多, 因为对每个元素它们只处理一次; 而 cmp 会处理多次. &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;三、使用示例&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;对tuple组成的List排序&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; students = [('john', 'A', 15), ('jane', 'B', 12), ('dave', 'B', 10),]
+
+用key函数排序(单级排序)
+&amp;gt;&amp;gt;&amp;gt; sorted(students, key=lambda student : student[2])   # sort by age  
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]  
+用key函数排序(多级排序) 
+&amp;gt;&amp;gt;&amp;gt; sorted(students, key=lambda student : (student[2], student[0]))   # sort by age  
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]
+
+用cmp函数排序
+&amp;gt;&amp;gt;&amp;gt; sorted(students, cmp=lambda x,y : cmp(x[2], y[2])) # sort by age  
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]
+
+用 operator 函数来加快速度, 上面排序等价于:(itemgetter的用法见 注释2)
+&amp;gt;&amp;gt;&amp;gt; from operator import itemgetter, attrgetter  
+&amp;gt;&amp;gt;&amp;gt; sorted(students, key=itemgetter(2))
+
+用 operator 函数进行多级排序
+&amp;gt;&amp;gt;&amp;gt; sorted(students, key=itemgetter(1,2))  # sort by grade then by age  
+[('john', 'A', 15), ('dave', 'B', 10), ('jane', 'B', 12)] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对字典排序&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; d = {'data1':3, 'data2':1, 'data3':2, 'data4':4}
+&amp;gt;&amp;gt;&amp;gt; sorted(d.iteritems(), key=itemgetter(1), reverse=True)  
+[('data4', 4), ('data1', 3), ('data3', 2), ('data2', 1)]  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：&lt;br /&gt;
+&lt;a href=&quot;http://www.cnblogs.com/65702708/archive/2010/09/14/1826362.html&quot; title=&quot; http://www.cnblogs.com/65702708/archive/2010/09/14/1826362.html&quot;&gt; http://www.cnblogs.com/65702708/archive/2010/09/14/1826362.html&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://gaopenghigh.iteye.com/blog/1483864&quot; title=&quot; http://gaopenghigh.iteye.com/blog/1483864&quot;&gt; http://gaopenghigh.iteye.com/blog/1483864&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>lambda函数</title>
+   <link href="http://magicjms.github.io/posts/Python-Base_lambda.html"/>
+   <updated>2018-05-14T00:00:00+08:00</updated>
+   <id>/posts/Python-Base_lambda</id>
+   <content type="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://magicjms.github.io/pygments.css&quot; /&gt;
+
+&lt;p&gt;lambda函数也叫匿名函数，即函数没有具体的名称,而用def创建的方法是有名称的。&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;一、lambda函数&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;1、lambda函数基础&lt;/p&gt;
+
+&lt;p&gt;lambda函数也叫匿名函数，即函数没有具体的名称,而用def创建的方法是有名称的。如下：&lt;br /&gt;
+“&quot;”命名的foo函数”””&lt;br /&gt;
+def foo():return ‘beginman’  #Python中单行参数可以和标题写在一行&lt;/p&gt;
+
+&lt;p&gt;”&quot;”lambda关键字创建匿名函数,该表达式同以上函数”””&lt;br /&gt;
+lambda:’beginman’&lt;/p&gt;
+
+&lt;p&gt;上面的只是简单的用lambda创建一个函数对象，并没有保存它也没有调用它，时刻会被回收了。这里我们保存并调用：&lt;br /&gt;
+bar = lambda:’beginman’&lt;br /&gt;
+print bar()      #beginman&lt;/p&gt;
+
+&lt;p&gt;从上面几个例子中，可以理解Python lambda语法：&lt;br /&gt;
+lambda [arg1[,arg2,arg3….argN]]:expression&lt;br /&gt;
+&lt;span style=&quot;color:red&quot;&gt;lambda语句中，冒号前是参数，可以有多个，用逗号隔开，冒号右边的返回值。lambda语句构建的其实是一个函数对象。&lt;/span&gt;&lt;br /&gt;
+print lambda:’beginman’   #&amp;lt;function &lt;lambda&gt; at 0x00B00A30&amp;gt;&lt;/lambda&gt;&lt;/p&gt;
+
+&lt;p&gt;2、无参数&lt;br /&gt;
+如果没有参数，则lambda冒号前面就没有，如以上例子&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bar = lambda:'beginman'
+print bar()      #beginman
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3、有参数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def add(x,y):return x+y
+add2 = lambda x,y:x+y
+print add2(1,2)     #3
+ 
+def sum(x,y=10):return x+y
+sum2 = lambda x,y=10:x+y
+print sum2(1)       #11
+print sum2(1,100)   #101
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二、lambda与def&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;上面的例子中，可知lambda函数只是创建简单的函数对象，是一个函数的简单版本，但是这种语句由于性能的原因，调用的时候绕过函数的栈分配。python lambda还有哪些和def不一样呢？&lt;/p&gt;
+
+&lt;p&gt;　　1 、python lambda会创建一个函数对象，但不会把这个函数对象赋给一个标识符，而def则会把函数对象赋值给一个变量。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;如：
+&amp;gt;&amp;gt;&amp;gt; def foo():return 'foo()'
+&amp;gt;&amp;gt;&amp;gt; foo
+&amp;lt;function foo at 0x011A34F0&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;　　2、python lambda它只是一个表达式，而def则是一个语句。lambda表达式运行起来像一个函数，当被调用时创建一个框架对象。&lt;br /&gt;
+　　3、lambda只是一个表达式，函数体比def简单很多。&lt;br /&gt;
+　　4、lambda的主体是一个表达式，而不是一个代码块。仅仅能在lambda表达式中封装有限的逻辑进去。&lt;br /&gt;
+　　5、lambda表达式是起到一个函数速写的作用。允许在代码内嵌入一个函数的定义。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;三、 lambda函数的用途&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　1、对于单行函数，使用lambda可以省去定义函数的过程，让代码更加精简。&lt;br /&gt;
+　　2、在非多次调用的函数的情况下，lambda表达式即用既得，提高性能&lt;br /&gt;
+　　&lt;span style=&quot;color:red&quot;&gt;注意：如果for..in..if能做的，最好不要选择lambda&lt;/span&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Python中的除法</title>
+   <link href="http://magicjms.github.io/posts/Python-Base_division.html"/>
+   <updated>2018-05-14T00:00:00+08:00</updated>
+   <id>/posts/Python-Base_division</id>
+   <content type="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://magicjms.github.io/pygments.css&quot; /&gt;
+
+&lt;p&gt;Python中分为3种除法：传统除法、精确除法、地板除。&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;一、说明&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Python中分为3种除法：传统除法、精确除法、地板除。&lt;br /&gt;
+在Python语言对于整形数执行除法会进行地板除（舍去小数部分）。例如 int a=15/10; a的结果为1。&lt;br /&gt;
+两个int型的数据相除需要返回一个浮点型数据的时候就需要强制类型转换，例如 float a = (float)b/c ,其中b、c都是int型数据。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二、传统除法&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如果是整数除法则执行地板除，如果是浮点数除法则执行精确除法。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;1/2
+0
+&amp;gt;&amp;gt;&amp;gt;1.0/2.0
+0.5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;三、精确除法&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;除法总是会返回真实的商，不管操作数是整形还是浮点型。执行from &lt;strong&gt;future&lt;/strong&gt; import division 指令就可以做到这一点。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;from __future__ import division
+&amp;gt;&amp;gt;&amp;gt;1/2
+0.5
+&amp;gt;&amp;gt;&amp;gt;1.0/2.0
+0.5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;四、地板除法&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;从Python2.2开始，增加了一个操作符 // ，以执行地板除：//除法不管操作数为何种数值类型，总是会舍去小数部分，返回数字序列中比真正的商小的最接近的数字。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;1//2
+0
+&amp;gt;&amp;gt;&amp;gt;1.0//2
+0
+&amp;gt;&amp;gt;&amp;gt;-1//2.0
+-1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;五、内建函数divmod()&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;divmod (a,b)，返回(a//b,a%b)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1. &amp;gt;&amp;gt;&amp;gt;divmod(1,2)  
+2. (0,1)  
+3. &amp;gt;&amp;gt;&amp;gt;divmod(3.14159,1.5)  
+4. (2.0,0.4159000000000002)  
+5. &amp;gt;&amp;gt;&amp;gt;5+6j//3+2j  
+6. 2+0j  
+7. &amp;gt;&amp;gt;&amp;gt;5+6j%3+2j  
+8. -1+2j  
+9. &amp;gt;&amp;gt;&amp;gt;divmod(5+6j,3+2j)  
+10. ((2+0j),(-1+2j))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：&lt;br /&gt;
+&lt;a href=&quot;http://blog.csdn.net/sicofield/article/details/8613877&quot; title=&quot;http://blog.csdn.net/sicofield/article/details/8613877&quot;&gt;http://blog.csdn.net/sicofield/article/details/8613877&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>PYTHON编码的前世今生</title>
+   <link href="http://magicjms.github.io/posts/Python-Base_code.html"/>
+   <updated>2018-05-14T00:00:00+08:00</updated>
+   <id>/posts/Python-Base_code</id>
+   <content type="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://magicjms.github.io/pygments.css&quot; /&gt;
+
+&lt;p&gt;这是我在知乎上回答的一个问题：Python 编码为什么那么蛋疼？，期间收到了不少赞，不过发现我的回答还存在一些误导，于是通过查找资料重新整理了一篇，希望能解答你对编码的困惑。&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;p&gt;这是我在知乎上回答的一个问题：Python 编码为什么那么蛋疼？，期间收到了不少赞，不过发现我的回答还存在一些误导，于是通过查找资料重新整理了一篇，希望能解答你对编码的困惑。&lt;/p&gt;
+
+&lt;p&gt;一旦走上了编程之路，如果你不把编码问题搞清楚，那么它将像幽灵一般纠缠你整个职业生涯，各种灵异事件会接踵而来，挥之不去。只有充分发挥程序员死磕到底的精神你才有可能彻底摆脱编码问题带来的烦恼，我第一次遇到编码问题是写 JavaWeb 相关的项目，一串字符从浏览器游离到应用程序代码中，翻江倒海沉浸到数据库中，随时随地都有可能踩到编码的地雷。第二次遇到编码问题就是学 Python 的时候，在爬取网页数据时，编码问题又出现了，当时我的心情是奔溃的，用时下最ing的一句话就是：“我当时就懵逼了”。为了搞清字符编码，我们得从计算机的起源开始，计算机中的所有数据，不论是文字、图片、视频、还是音频文件，本质上最终都是按照类似 01010101 的数字形式存储的。我们是幸运的，我们也是不幸的，幸运的是时代赋予了我们都有机会接触计算机，不幸的是，计算机不是我们国人发明的，所以计算机的标准得按美帝国人的习惯来设计，那么最开始计算机是通过什么样的方式来表现字符的呢？这要从计算机编码的发展史说起。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;一、ASCII&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;每个做 JavaWeb 开发的新手都会遇到乱码问题，每个做 Python 爬虫的新手都会遇到编码问题，为什么编码问题那么蛋疼呢？这个问题要从1992年 Guido van Rossum 创造 Python 这门语言说起，那时的 Guido 绝对没想到的是 Python 这门语言在今天会如此受大家欢迎，也不会想到计算机发展速度会如此惊人，尽管 Guido 在当初设计这门语言时是不需要关心编码的，因为在英语世界里，字符的个数非常有限，26个字母（大小写）、10个数字、标点符号、控制符，也就是键盘上所有的键所对应的字符加起来也不过是一百多个字符而已，这在计算机中用一个字节的存储空间来表示一个字符是绰绰有余的，因为一个字节相当于8个比特位，8个比特位可以表示256个符号。于是聪明的美国人就制定了一套字符编码的标准叫ASCII(American Standard Code for Information Interchange)，每个字符都对应唯一的一个数字，比如字符A对应的二进制数值是01000001，对应的十进制就是65。最开始ASCII只定义了128个字符编码，包括96个文字和32个控制符号，一共128个字符只需要一个字节的7位就能表示所有的字符，因此 ASCII 只使用了一个字节的后7位，最高位都为0。每个字符与ASCII码的对应关系可查看网站ascii-code。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-05-14-Python-Base_code/01.jpg&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二、EASCII(ISO/8859-1)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;然而计算机慢慢地普及到其他西欧地区时，他们发现还有很多西欧所特有的字符是 ASCII 编码表中没有的，于是后来出现了可扩展的 ASCII 叫 EASCII ，顾名思义，它是在ASCII的基础上扩展而来，把原来的7位扩充到8位，它完全兼容ASCII，扩展出来的符号包括表格符号、计算符号、希腊字母和特殊的拉丁符号。然而 EASCII 时代是一个混乱的时代，大家没有统一标准，他们各自把最高位按照自己的标准实现了自己的一套字符编码标准，比较著名的就有 CP437， CP437 是 Windows 系统中使用的字符编码，如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-05-14-Python-Base_code/02.jpg&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;另外一种被广泛使用的 EASCII 还有 ISO/8859-1(Latin-1)，它是国际标准化组织（ISO）及国际电工委员会（IEC）联合制定的一系列8位元字符集的标准，ISO/8859-1 只继承了 CP437 字符编码的128-159之间的字符，所以它是从160开始定义的，不幸的是这些众多的 ASCII 扩充字集之间互不兼容。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-05-14-Python-Base_code/03.jpg&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;三、GBK&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;随着时代的进步，计算机开始普及到千家万户，比尔盖茨让每个人桌面都有一台电脑的梦想得以实现。但是计算机进入中国不得不面临的一个问题就是字符编码，虽然咱们国家的汉字是人类使用频率最多的文字，汉字博大精深，常见的汉字就有成千上万，这已经大大超出了 ASCII 编码所能表示的字符范围了，即使是 EASCII 也显得杯水车薪，于是聪明的中国人自己弄了一套编码叫 GB2312，又称GB0，1981由中国国家标准总局发布。GB2312 编码共收录了6763个汉字，同时他还兼容 ASCII，GB 2312的出现，基本满足了汉字的计算机处理需要，它所收录的汉字已经覆盖中国大陆99.75%的使用频率，不过 GB2312 还是不能100%满足中国汉字的需求，对一些罕见的字和繁体字 GB2312 没法处理，后来就在GB2312的基础上创建了一种叫 GBK 的编码，GBK 不仅收录了27484个汉字，同时还收录了藏文、蒙文、维吾尔文等主要的少数民族文字。同样 GBK 也是兼容 ASCII 编码的，对于英文字符用1个字节来表示，汉字用两个字节来标识。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;四、Unicode&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;对于如何处理中国人自己的文字我们可以另立山头，按照我们自己的需求制定一套编码规范，但是计算机不止是美国人和中国人用啊，还有欧洲、亚洲其他国家的文字诸如日文、韩文全世界各地的文字加起来估计也有好几十万，这已经大大超出了ASCII码甚至GBK所能表示的范围了，况且人家为什么用采用你GBK标准呢？如此庞大的字符库究竟用什么方式来表示好呢？于是统一联盟国际组织提出了Unicode编码，Unicode的学名是”Universal Multiple-Octet Coded Character Set”，简称为UCS。Unicode有两种格式：UCS-2和UCS-4。UCS-2就是用两个字节编码，一共16个比特位，这样理论上最多可以表示65536个字符，不过要表示全世界所有的字符显示65536个数字还远远不过，因为光汉字就有近10万个，因此Unicode4.0规范定义了一组附加的字符编码，UCS-4就是用4个字节（实际上只用了31位，最高位必须为0）。理论上完全可以涵盖一切语言所用的符号。世界上任何一个字符都可以用一个Unicode编码来表示，一旦字符的Unicode编码确定下来后，就不会再改变了。但是Unicode有一定的局限性，一个Unicode字符在网络上传输或者最终存储起来的时候，并不见得每个字符都需要两个字节，比如一字符“A“，用一个字节就可以表示的字符，偏偏还要用两个字节，显然太浪费空间了。第二问题是，一个Unicode字符保存到计算机里面时就是一串01数字，那么计算机怎么知道一个2字节的Unicode字符是表示一个2字节的字符呢，还是表示两个1字节的字符呢，如果你不事先告诉计算机，那么计算机也会懵逼了。Unicode只是规定如何编码，并没有规定如何传输、保存这个编码。例如“汉”字的Unicode编码是6C49，我可以用4个ascii数字来传输、保存这个编码；也可以用utf-8编码的3个连续的字节E6 B1 89来表示它。关键在于通信双方都要认可。因此Unicode编码有不同的实现方式，比如：UTF-8、UTF-16等等。这里的Unicode就像英语一样，做为国与国之间交流世界通用的标准，每个国家有自己的语言，他们把标准的英文文档翻译成自己国家的文字，这是实现方式，就像utf-8。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;五、UTF-8&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;UTF-8（Unicode Transformation Format）作为Unicode的一种实现方式，广泛应用于互联网，它是一种变长的字符编码，可以根据具体情况用1-4个字节来表示一个字符。比如英文字符这些原本就可以用ASCII码表示的字符用UTF-8表示时就只需要一个字节的空间，和ASCII是一样的。对于多字节（n个字节）的字符，第一个字节的前n为都设为1，第n+1位设为0，后面字节的前两位都设为10。剩下的二进制位全部用该字符的unicode码填充。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-05-14-Python-Base_code/04.jpg&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以汉字“好”为例，“好”对应的Unicode是597D，对应的区间是0000 0800–0000 FFFF，因此它用UTF-8表示时需要用3个字节来存储，597D用二进制表示是： 0101100101111101，填充到1110xxxx 10xxxxxx 10xxxxxx得到11100101 10100101 10111101，转换成16进制：e5a5bd，因此“好”的Unicode”597D”对应的UTF-8编码是”E5A5BD”&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1	    中文        好
+2	    unicode         0101   100101   111101
+3	    编码规则     1110xxxx 10xxxxxx 10xxxxxx
+4	                --------------------------
+5	    utf-8       11100101 10100101 10111101
+6	                --------------------------
+7	    16进制utf-8     e   5    a   5    b   d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;六、PYTHON字符编码&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;现在总算把理论说完了。再来说说Python中的编码问题。Python的诞生时间比Unicode要早很多，Python的默认编码是ASCII&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import sys
+&amp;gt;&amp;gt;&amp;gt; sys.getdefaultencoding()
+'ascii'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以在Python源代码文件中如果不显示地指定编码的话，将出现语法错误&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#test.py
+print &quot;你好&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面是test.py脚本，运行 python test.py 就会包如下错误：
+File “test.py”, line 1 yntaxError: Non-ASCII character ‘xe4′ in file test.py on line 1, but no encoding declared; see http://www.python.org/ ps/pep-0263.html for details&lt;/p&gt;
+
+&lt;p&gt;为了在源代码中支持非ASCII字符，必须在源文件的第一行或者第二行显示地指定编码格式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# coding=utf-8   
+或者
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:red&quot;&gt;在python中和字符串相关的数据类型,分别是str、unicode两种，他们都是basestring的子类，可见str与unicode是两种不同类型的字符串对象。&lt;/span&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    basestring
+      /   \
+     /     \
+
+   str    unicode
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对于同一个汉字“好”，用str表示时，它对应的就是utf-8编码的’xe5xa5xbd’，而用unicode表示时，他对应的符号就是u’u597d’，与u”好”是等同的。需要补充一点的是，str类型的字符其具体的编码格式是UTF-8还是GBK，还是其他格式，根据操作系统相关。比如在Windows系统中，cmd命令行中显示的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# windows终端
+&amp;gt;&amp;gt;&amp;gt; a = '好'
+&amp;gt;&amp;gt;&amp;gt; type(a)
+&amp;lt;type 'str'&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; a
+'\xba\xc3'
+
+# linux终端
+&amp;gt;&amp;gt;&amp;gt; a='好'
+&amp;gt;&amp;gt;&amp;gt; type(a)
+&amp;lt;type 'str'&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; a
+'\xe5\xa5\xbd'
+ 
+&amp;gt;&amp;gt;&amp;gt; b=u'好'
+&amp;gt;&amp;gt;&amp;gt; type(b)
+&amp;lt;type 'unicode'&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; b
+u'\u597d'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不论是Python3x、Java还是其他编程语言，Unicode编码都成为语言的默认编码格式，而数据最后保存到介质中的时候，不同的介质可有用不同的方式，有些人喜欢用UTF-8，有些人喜欢用GBK，这都无所谓，只要平台统一的编码规范，具体怎么实现并不关心。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-05-14-Python-Base_code/05.jpg&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;七、str与unicode的转换&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;那么在Python中str和unicode之间是如何转换的呢？这两种类型的字符串类型之间的转换就是靠这两个方法decode和encode。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-05-14-Python-Base_code/06.jpg&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#从str类型转换到unicode
+s.decode(encoding)   =====&amp;gt;  &amp;lt;type 'str'&amp;gt; to &amp;lt;type 'unicode'&amp;gt;
+#从unicode转换到str
+u.encode(encoding)   =====&amp;gt;  &amp;lt;type 'unicode'&amp;gt; to &amp;lt;type 'str'&amp;gt;
+ 
+&amp;gt;&amp;gt;&amp;gt; c = b.encode('utf-8')
+&amp;gt;&amp;gt;&amp;gt; type(c)
+&amp;lt;type 'str'&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; c
+'\xe5\xa5\xbd'
+ 
+&amp;gt;&amp;gt;&amp;gt; d = c.decode('utf-8')
+&amp;gt;&amp;gt;&amp;gt; type(d)
+&amp;lt;type 'unicode'&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; d
+u'\u597d'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个’xe5xa5xbd’就是unicode u’好’通过函数encode编码得到的UTF-8编码的str类型的字符串。反之亦然，str类型的c通过函数decode解码成unicode字符串d。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;八、str(s)与unicode(s)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;str(s)和unicode(s)是两个工厂方法，分别返回str字符串对象和unicode字符串对象，str(s)是s.encode(‘ascii’)的简写。实验：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; s3 = u&quot;你好&quot;
+&amp;gt;&amp;gt;&amp;gt; s3
+u'\u4f60\u597d'
+&amp;gt;&amp;gt;&amp;gt; str(s3)
+Traceback (most recent call last):
+  File &quot;&amp;lt;stdin&amp;gt;&quot;, line 1, in &amp;lt;module&amp;gt;
+
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面s3是unicode类型的字符串，str(s3)相当于是执行s3.encode(‘ascii’)因为“你好”两个汉字不能用ascii码来表示，所以就报错了，指定正确的编码：s3.encode(‘gbk’)或者s3.encode(“utf-8”)就不会出现这个问题了。类似的unicode有同样的错误：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; s4 = &quot;你好&quot;
+&amp;gt;&amp;gt;&amp;gt; unicode(s4)
+Traceback (most recent call last):
+  File &quot;&amp;lt;stdin&amp;gt;&quot;, line 1, in &amp;lt;module&amp;gt;
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xc4 in position 0: ordinal not in range(128)
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;unicode(s4)等效于s4.decode(‘ascii’)，因此要正确的转换就要正确指定其编码s4.decode(‘gbk’)或者s4.decode(“utf-8”)。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;九、乱码&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;所有出现乱码的原因都可以归结为字符经过不同编码解码在编码的过程中使用的编码格式不一致，比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# encoding: utf-8
+ 
+&amp;gt;&amp;gt;&amp;gt; a='好'
+&amp;gt;&amp;gt;&amp;gt; a
+'\xe5\xa5\xbd'
+&amp;gt;&amp;gt;&amp;gt; b=a.decode(&quot;utf-8&quot;)
+&amp;gt;&amp;gt;&amp;gt; b
+u'u597d'
+&amp;gt;&amp;gt;&amp;gt; c=b.encode(&quot;gbk&quot;)
+&amp;gt;&amp;gt;&amp;gt; c
+'\xba\xc3'
+&amp;gt;&amp;gt;&amp;gt; print c
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;utf-8编码的字符‘好’占用3个字节，解码成Unicode后，如果再用gbk来解码后，只有2个字节的长度了，最后出现了乱码的问题，因此防止乱码的最好方式就是始终坚持使用同一种编码格式对字符进行编码和解码操作。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-05-14-Python-Base_code/07.jpg&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;十、其他技巧&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;对于如unicode形式的字符串（str类型)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;s = 'id\u003d215903184\u0026index\u003d0\u0026st\u003d52\u0026sid’
+转换成真正的unicode需要使用：
+s.decode('unicode-escape')
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;测试：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; s = 'id\u003d215903184\u0026index\u003d0\u0026st\u003d52\u0026sid\u003d95000\u0026i'
+&amp;gt;&amp;gt;&amp;gt; print(type(s))
+&amp;lt;type 'str'&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; s = s.decode('unicode-escape')
+&amp;gt;&amp;gt;&amp;gt; s
+u'id=215903184&amp;amp;index=0&amp;amp;st=52&amp;amp;sid=95000&amp;amp;i'
+&amp;gt;&amp;gt;&amp;gt; print(type(s))
+&amp;lt;type 'unicode'&amp;gt;
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上代码和概念都是基于Python2.x。&lt;/p&gt;
+
+&lt;p&gt;转自：&lt;br /&gt;
+&lt;a href=&quot;http://python.jobbole.com/86578/&quot; title=&quot;http://python.jobbole.com/86578/&quot;&gt;http://python.jobbole.com/86578/&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>markdown基础操作</title>
+   <link href="http://magicjms.github.io/posts/Other-markdown_base.html"/>
+   <updated>2018-05-14T00:00:00+08:00</updated>
+   <id>/posts/Other-markdown_base</id>
+   <content type="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://magicjms.github.io/pygments.css&quot; /&gt;
+
+&lt;p&gt;markdown基础使用操作&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;p&gt;1、插入图片&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://magicjms.github.io/assets/2018-05-04-Linux-java-heapdump/01.jpg&quot; alt=&quot;有帮助的截图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、语法着色&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>java oom解析</title>
@@ -3630,7 +4347,7 @@ time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;,time.localtime()) #把时间元组st
 &lt;p&gt;从Python官网下载&lt;a href=&quot;https://www.python.org/downloads/&quot; title=&quot;Python官网&quot;&gt;https://www.python.org/downloads/&lt;/a&gt;并安装。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;cd /usr/local/src
-wget https://www.python.org/downloads/
+wget https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tgz
 tar -tvzf Python-2.7.14.tgz
 cd Python-2.7.14
 ./configure --prefix=/usr/local/Python-2.7.14
@@ -3945,6 +4662,48 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
                 <ul class="list-unstyled">
 				
                   <li>
+                    <a href="/posts/Book-statistics_5.html">
+                      统计学-贾俊平(第四版)
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_logging.html">
+                      python模块详解—logging
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_sort-sorted.html">
+                      sort sorted函数
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_lambda.html">
+                      lambda函数
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_division.html">
+                      Python中的除法
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_code.html">
+                      PYTHON编码的前世今生
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Other-markdown_base.html">
+                      markdown基础操作
+                    </a>
+                  </li>
+				
+                  <li>
                     <a href="/posts/Linux-java-oomdesc.html">
                       java oom解析
                     </a>
@@ -3959,48 +4718,6 @@ Done. 当你看到最后有 「Copy complete」和「Done」 字样出现就是�
                   <li>
                     <a href="/posts/Linux-java-heapdump.html">
                       java heapdump
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Linux-base-services_vsftp.html">
-                      ftp服务器搭建
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Other-Git_base.html">
-                      Git基础操作
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Linux-base-cmd_sort.html">
-                      sort命令详解
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Linux-base-cmd_sed.html">
-                      sed命令详解
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Linux-base-cmd_echo.html">
-                      echo命令详解
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Other-Git_ignore.html">
-                      Git排除文件
-                    </a>
-                  </li>
-				
-                  <li>
-                    <a href="/posts/Python-Lib_random.html">
-                      python模块详解—random
                     </a>
                   </li>
 				  

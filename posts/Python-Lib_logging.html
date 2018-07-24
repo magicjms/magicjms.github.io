@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="python内建函数—hasattr,getattr,setattr - magicjms个人博客 - 作者:magicjms"/> 
-	<meta name="keywords" content="pythonbase"/>
-    <title>python内建函数—hasattr,getattr,setattr - magicjms个人博客</title>
+    <meta name="description" content="python模块详解—logging - magicjms个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="pythonlib"/>
+    <title>python模块详解—logging - magicjms个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -144,12 +144,12 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           <!-- Navi -->
 
 <!-- Title -->
-<h2>python内建函数—hasattr,getattr,setattr</h2>
-<b>标签：</b><a href="/tags.html#pythonbase"><i>pythonbase</i></a>
+<h2>python模块详解—logging</h2>
+<b>标签：</b><a href="/tags.html#pythonlib"><i>pythonlib</i></a>
 
 <div class="post-date">
 	<span class="glyphicon glyphicon-time"></span>
-	2018-02-22
+	2018-05-14
 </div>
 <br/>
 
@@ -157,103 +157,136 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 <div style="text-indent:0em;">
 <link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
 
-<p>本篇主要介绍python内建函数hasattr的功能及用法<!-- more --></p>
+<p>Python的logging模块提供了通用的日志系统，可以方便第三方模块或者是应用使用。这个模块提供不同的日志级别，并可以采用不同的方式记录日志<!-- more --></p>
 
 <blockquote>
-  <p>一、<b>python内建函数 hasattr 的用法</b></p>
+  <p>一、logging介绍</p>
 </blockquote>
 
-<p>语法：hasattr（object，name）</p>
-
-<p>作用：判断一个对象里面是否有name属性或者name方法，返回BOOL值，有name特性返回True， 否则返回False。
-需要注意的是name要用括号括起来</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#判断对象有name属性</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#判断对象有run方法</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+<p>　　Python的logging模块提供了通用的日志系统，可以方便第三方模块或者是应用使用。这个模块提供不同的日志级别，并可以采用不同的方式记录日志，比如文件，HTTP GET/POST，SMTP，Socket等，甚至可以自己实现具体的日志记录方式。<br />
+　　logging模块与log4j的机制是一样的，只是具体的实现细节不同。模块提供logger，handler，filter，formatter。<br />
+　　logger：提供日志接口，供应用代码使用。logger最长用的操作有两类：配置和发送日志消息。可以通过logging.getLogger(name)获取logger对象，如果不指定name则返回root对象，多次使用相同的name调用getLogger方法返回同一个logger对象。<br />
+　　handler：将日志记录（log record）发送到合适的目的地（destination），比如文件，socket等。一个logger对象可以通过addHandler方法添加0到多个handler，每个handler又可以定义不同日志级别，以实现日志分级过滤显示。<br />
+　　filter：提供一种优雅的方式决定一个日志记录是否发送到handler。<br />
+　　formatter：指定日志记录输出的具体格式。formatter的构造方法需要两个参数：消息的格式字符串和日期字符串，这两个参数都是可选的。  <br />
+　　与log4j类似，logger，handler和日志消息的调用可以有具体的日志级别（Level），只有在日志消息的级别大于logger和handler的级别。</p>
 
 <blockquote>
-  <p>二、<b>python内建函数 getattr 的用法</b></p>
+  <p>二、logging实例分析</p>
 </blockquote>
 
-<p>语法：getattr(object, name[,default])</p>
+<pre><code>import logging
+# 创建一个logger
+logger = logging.getLogger('mylogger')
+logger.setLevel(logging.DEBUG)
 
-<p>作用：获取对象object的属性或者方法，如果存在打印出来，如果不存在，打印出默认值，默认值可选。
-需要注意的是，如果是返回的对象的方法，返回的是方法的内存地址，如果需要运行这个方法，
-可以在后面添加一对括号。</p>
+# 创建一个handler，用于写入日志文件
+fh = logging.FileHandler('test.log')
+fh.setLevel(logging.DEBUG)
+# 再创建一个handler，用于输出到控制台
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#获取name属性，存在就打印出来。</span>
-<span class="s1">&#39;xiaohua&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#获取run方法，存在就打印出方法的内存地址。</span>
-<span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">test</span><span class="o">.</span><span class="n">run</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">test</span> <span class="n">instance</span> <span class="n">at</span> <span class="mh">0x0269C878</span><span class="o">&gt;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)()</span>  <span class="c1">#获取run方法，后面加括号可以将这个方法运行。</span>
-<span class="s1">&#39;HelloWord&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#获取一个不存在的属性。</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;18&quot;</span><span class="p">)</span>  <span class="c1">#若属性不存在，返回一个默认值。</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+# 定义handler的输出格式
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+
+# 给logger添加handler
+logger.addHandler(fh)
+logger.addHandler(ch)
+# 记录一条日志
+logger.info('foorbar')
+</code></pre>
+
+<p>结合上面的例子，我们说下几个最常使用的API：　　
+logging.getLogger([name])<br />
+　　返回一个logger实例，如果没有指定name，返回root logger。只要name相同，返回的logger实例都是同一个而且只有一个，即name和logger实例是一一对应的。这意味着，无需把logger实例在各个模块中传递。只要知道name，就能得到同一个logger实例。</p>
+
+<p>Logger.setLevel(lvl)<br />
+　　设置logger的level， level有以下几个级别：
+　　级别高低顺序：NOTSET &lt; DEBUG &lt; INFO &lt; WARNING &lt; ERROR &lt; CRITICAL
+　　如果把looger的级别设置为INFO， 那么小于INFO级别的日志都不输出， 大于等于INFO级别的日志都输出</p>
+
+<p>Logger.addHandler(hdlr)<br />
+　　通过handler对象可以把日志内容写到不同的地方。比如简单的StreamHandler就是把日志写到类似文件的地方。python提供了十几种实用handler，比较常用有：</p>
+
+<pre><code>StreamHandler: 输出到控制台
+FileHandler:   输出到文件
+BaseRotatingHandler 可以按时间写入到不同的日志中。比如将日志按天写入不同的日期结尾的文件文件。
+SocketHandler 用TCP网络连接写LOG
+DatagramHandler 用UDP网络连接写LOG
+SMTPHandler 把LOG写成EMAIL邮寄出去
+</code></pre>
+
+<p>logging.basicConfig([<em>*kwargs])<br />
+　　这个函数用来配置root logger， 为root logger创建一个StreamHandler，设置默认的格式。</em> 这些函数： logging.debug()、logging.info()、logging.warning()、logging.error()、logging.critical() 如果调用的时候发现root logger没有任何handler，会自动调用basicConfig添加一个handler* 如果root logger已有handler，这个函数不做任何事情使用basicConfig来配置root logger的输出格式和level</p>
+
+<pre><code>import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
+                    datefmt='%a, %d %b %Y %H:%M:%S',
+                    filename='myapp.log',
+                    filemode='w')
+logging.debug('This message should appear on the console')
+
+logging.basicConfig函数各参数:
+filename: 指定日志文件名
+filemode: 和file函数意义相同，指定日志文件的打开模式，'w'或'a'
+format: 指定输出的格式和内容，format可以输出很多有用信息，如上例所示:
+	 %(levelno)s: 打印日志级别的数值
+	 %(levelname)s: 打印日志级别名称
+	 %(pathname)s: 打印当前执行程序的路径，其实就是sys.argv[0]
+	 %(filename)s: 打印当前执行程序名
+	 %(funcName)s: 打印日志的当前函数
+	 %(lineno)d: 打印日志的当前行号
+	 %(asctime)s: 打印日志的时间
+	 %(thread)d: 打印线程ID
+	 %(threadName)s: 打印线程名称
+	 %(process)d: 打印进程ID
+	 %(message)s: 打印日志信息
+datefmt: 指定时间格式，同time.strftime()
+level: 设置日志级别，默认为logging.WARNING
+stream: 指定将日志的输出流，可以指定输出到sys.stderr,sys.stdout或者文件，默认输出到sys.stderr，当stream和filename同时指定时，stream被忽略
+</code></pre>
+
+<p>logger对象直接提供日志接口。<br />
+formatter描述日志的格式。<br />
+handler把日志写到不同的地方，你可以把日志保存成本地文件，也可以每个小时写一个日志文件，还可以把日志通过socket传到别的机器上。
+从最简单的formatter对象来看。formatter指定的是每一条日志记录的抬头信息，也就是你可以指定日志记录的时间格式、进程号、文件名、函数名等信息。可以用这个方法来创建一个formatter对象：<br />
+logging.Formatter.<strong>init</strong>( fmt=None, datefmt=None)<br />
+fmt参数指定进程号、文件名、函数名等信息是否出现以及格式， datefmt为日期时间格式，默认的日期格式精确到微秒，例如‘2003-07-08 16:49:45,896’。fmt中可以指定多个字段，每个字段的格式为“%(<dictionary key="">)s”， 例如你想打印时间、日志级别、日志信息可以用下面的format:
+'%(asctime)s - %(levelname)s - %(message)s'</dictionary></p>
 
 <blockquote>
-  <p>三、<b>python内建函数 setattr 的用法</b></p>
+  <p>四、logging参考</p>
 </blockquote>
 
-<p>语法：setattr(object, name, values)</p>
+<p>关于formatter的配置，采用的是%(<dict key="">)s的形式，就是字典的关键字替换。提供的关键字包括：</dict></p>
 
-<p>作用：给对象的属性赋值，若属性不存在，先创建再赋值。</p>
+<p><img src="https://magicjms.github.io/assets/2018-05-14-Python-Lib_logging/01.png" alt="有帮助的截图" /></p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>   <span class="c1">#判断属性是否存在</span>
-<span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">)</span>   <span class="c1">#为属相赋值，并没有返回值</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#属性存在了</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+<p>logging的几种handle方式如下：</p>
 
-<blockquote>
-  <p>四、<b>常用应用</b></p>
-</blockquote>
+<pre><code>logging.StreamHandler: 日志输出到流，可以是sys.stderr、sys.stdout或者文件
+logging.FileHandler: 日志输出到文件
+日志回滚方式，实际使用时用RotatingFileHandler和TimedRotatingFileHandler
+logging.handlers.BaseRotatingHandler
+logging.handlers.RotatingFileHandler
+logging.handlers.TimedRotatingFileHandler
+logging.handlers.SocketHandler: 远程输出日志到TCP/IP sockets
+logging.handlers.DatagramHandler:  远程输出日志到UDP sockets
+logging.handlers.SMTPHandler:  远程输出日志到邮件地址
+logging.handlers.SysLogHandler: 日志输出到syslog
+logging.handlers.NTEventLogHandler: 远程输出日志到Windows NT/2000/XP的事件日志
+logging.handlers.MemoryHandler: 日志输出到内存中的制定buffer
+logging.handlers.HTTPHandler: 通过"GET"或"POST"远程输出到HTTP服务器
+</code></pre>
 
-<p>一种综合的用法是：判断一个对象的属性是否存在，若不存在就添加该属性。</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#age属性不存在</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">))</span> <span class="c1">#age属性不存在时，设置该属性</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#可检测设置成功</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
-
-<p>本篇转自：<a href="https://www.cnblogs.com/cenyu/p/5713686.html" title="https://www.cnblogs.com/cenyu/p/5713686.html">https://www.cnblogs.com/cenyu/p/5713686.html</a></p>
+<p>参考：<br />
+<a href="http://blog.csdn.net/chosen0ne/article/details/7319306" title="http://blog.csdn.net/chosen0ne/article/details/7319306">http://blog.csdn.net/chosen0ne/article/details/7319306</a><br />
+<a href="http://www.jb51.net/article/42626.htm" title="http://www.jb51.net/article/42626.htm">http://www.jb51.net/article/42626.htm</a><br />
+<a href="http://www.cnblogs.com/dkblog/archive/2011/08/26/2155018.html" title="http://www.cnblogs.com/dkblog/archive/2011/08/26/2155018.html">http://www.cnblogs.com/dkblog/archive/2011/08/26/2155018.html</a></p>
 
 </div>
 
@@ -263,8 +296,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   
   <span class="next">
     上篇：
-    <a href="/posts/Python-Lib_datetime.html">
-      python模块详解—datetime
+    <a href="/posts/Python-Base_sort-sorted.html">
+      sort sorted函数
     </a>
   </span>
    
@@ -272,8 +305,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   <div style="float:right">
   <span class="prev" >
     下篇：
-    <a href="/posts/Python-Lib_subprocess.html">
-      python模块详解—subprocess
+    <a href="/posts/Book-statistics_5.html">
+      统计学-贾俊平(第四版)
     </a>
   </span>
   </div>

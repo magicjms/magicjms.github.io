@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="PYTHON编码的前世今生 - magicjms个人博客 - 作者:magicjms"/> 
+	<meta name="keywords" content="pythonbase"/>
+    <title>PYTHON编码的前世今生 - magicjms个人博客</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="/css/blog.css" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+    queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://
+    -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+      </script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+      </script>
+    <![endif]-->
+        <!-- jQuery Version 1.11.0 -->
+    <script src="/js/jquery-1.11.0.js"> </script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+     
+    <!--下面的部分为我自己添加上去的-->
+    <style type="text/css">
+      .col-md-8 blockquote{
+        margin-top: 20px;
+        padding: 5px 5px;
+        background-color: #F1F7FD;
+        border: 1px solid #D2E8FA;
+        color: #479AC1;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+<!--         <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">
+              Toggle navigation
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+          </button>
+          <a class="navbar-brand" href="/">
+            首页
+          </a>
+        </div> -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          
+<!--
+http://blog.csdn.net/rabbitter/article/details/51125337
+-->
+
+<style type="text/css">
+/*    body,ul,li,a{margin: 0;padding: 0}  */
+/*    body{background-color: #e6e7e9;}  */
+/*    #nav-wrap{margin: 10px auto;width: 100%;background-color: white;border-bottom: 2px solid #ddd;}  
+*/  
+    ul,li,a{margin: 0;padding: 0;}
+    ul{list-style: none;}  
+    #nav{width: 750px; height: 45px;margin:0 auto; float: left;}  
+    #nav>li{float: left;position: relative;height: 45px;margin-right: 60px;}  
+    #nav a{display: block; text-decoration: none;font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 12px;}  
+    #nav>li>a{color: #000;text-transform:uppercase;height: 13px; line-height: 13px; padding: 17px 0 15px 0px;font-size: 16px;text-align: center; color: white;}  
+    #nav>li i{display: inline-block; height: 5px; width:5px; background: url(../images/home.png) left bottom no-repeat;}  
+    #nav>li ul{position: absolute;left: -20px;top: 47px; width: 180px;background-color: #fff;padding: 20px;display: none;border:1px solid #ECEFF5;}  
+    #nav>li ul li{margin-bottom: 10px;}  
+    #nav>li ul a{font-size: 12px;color: #606060;}  
+    .this{border-bottom: 2px solid #b0b;}  
+    #nav>li:hover ul{display:block;}  
+    #nav>li:hover{border-bottom: 2px solid #0bb;}  
+</style>
+
+
+<!-- <div id="nav-wrap">  
+ --><ul id="nav"><!--一级导航的ul-->  
+    <li class="home this"><a href="/"><i></i><span style="font-size: 18px;">首页</span></a></li>  
+  
+    <li class="safe"><a href="/posts/linux.html"><i></i><span>Linux</span></a><!--一级导航的li-->  
+        <ul><!--一级菜单的li中的二级导航的ul-->
+            <li><a href="/posts/linux.html"><span>基础</span></a></li><!--二级导航中各个选项li-->   
+            <li><a href="/posts/shell.html"><span>shell</span></a></li><!--二级导航中各个选项li-->  
+            <li><a href="/posts/LinuxCombat.html"><span>实战</span></a></li>  
+        </ul>  
+    </li>  
+  
+    <li class="service"><a href="/posts/python.html"><i></i><span>Python语言</span></a>  
+        <ul>  
+            <li><a href="/posts/pythonbase.html"><span>基础</span></a></li>  
+            <li><a href="/posts/pythonlib.html"><span>常用模块</span></a></li>  
+            <li><a href="#"><span>实战常用</span></a></li>  
+            <li><a href="#"><span>大数据相关</span></a></li>  
+        </ul>  
+    </li>  
+    <li class="service"><a href="/posts/database.html"><i></i><span>数据库</span></a>  
+        <ul>  
+            <li><a href="/posts/mysql.html"><span>MySQL</span></a></li>  
+            <li><a href="/posts/mongodb.html"><span>MongoDB</span></a></li>  
+            <li><a href="/posts/redis.html"><span>Redis</span></a></li>  
+        </ul>  
+    </li>
+    <li class="service"><a href="/posts/other.html"><i></i><span>其它常用</span></a>  
+        <ul>  
+            <li><a href="/posts/git.html"><span>Git</span></a></li>  
+        </ul>  
+    </li>   
+    <li class="member"><a href="#"><i></i><span>MEMBER</span></a>  
+        <ul>  
+            <li><a href="#"><span>After Effects</span></a></li>  
+            <li><a href="#"><span>Open-Source Apps</span></a></li>  
+            <li><a href="#"><span>Android</span></a></li>  
+            <li><a href="#"><span>See More...</span></a></li>  
+        </ul>  
+    </li>  
+</ul>  
+<!-- </div>   --> 
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+          <!-- Navi -->
+
+<!-- Title -->
+<h2>PYTHON编码的前世今生</h2>
+<b>标签：</b><a href="/tags.html#pythonbase"><i>pythonbase</i></a>
+
+<div class="post-date">
+	<span class="glyphicon glyphicon-time"></span>
+	2018-05-14
+</div>
+<br/>
+
+<!-- content -->
+<div style="text-indent:0em;">
+<link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
+
+<p>这是我在知乎上回答的一个问题：Python 编码为什么那么蛋疼？，期间收到了不少赞，不过发现我的回答还存在一些误导，于是通过查找资料重新整理了一篇，希望能解答你对编码的困惑。<!-- more --></p>
+
+<p>这是我在知乎上回答的一个问题：Python 编码为什么那么蛋疼？，期间收到了不少赞，不过发现我的回答还存在一些误导，于是通过查找资料重新整理了一篇，希望能解答你对编码的困惑。</p>
+
+<p>一旦走上了编程之路，如果你不把编码问题搞清楚，那么它将像幽灵一般纠缠你整个职业生涯，各种灵异事件会接踵而来，挥之不去。只有充分发挥程序员死磕到底的精神你才有可能彻底摆脱编码问题带来的烦恼，我第一次遇到编码问题是写 JavaWeb 相关的项目，一串字符从浏览器游离到应用程序代码中，翻江倒海沉浸到数据库中，随时随地都有可能踩到编码的地雷。第二次遇到编码问题就是学 Python 的时候，在爬取网页数据时，编码问题又出现了，当时我的心情是奔溃的，用时下最ing的一句话就是：“我当时就懵逼了”。为了搞清字符编码，我们得从计算机的起源开始，计算机中的所有数据，不论是文字、图片、视频、还是音频文件，本质上最终都是按照类似 01010101 的数字形式存储的。我们是幸运的，我们也是不幸的，幸运的是时代赋予了我们都有机会接触计算机，不幸的是，计算机不是我们国人发明的，所以计算机的标准得按美帝国人的习惯来设计，那么最开始计算机是通过什么样的方式来表现字符的呢？这要从计算机编码的发展史说起。</p>
+
+<blockquote>
+  <p>一、ASCII</p>
+</blockquote>
+
+<p>每个做 JavaWeb 开发的新手都会遇到乱码问题，每个做 Python 爬虫的新手都会遇到编码问题，为什么编码问题那么蛋疼呢？这个问题要从1992年 Guido van Rossum 创造 Python 这门语言说起，那时的 Guido 绝对没想到的是 Python 这门语言在今天会如此受大家欢迎，也不会想到计算机发展速度会如此惊人，尽管 Guido 在当初设计这门语言时是不需要关心编码的，因为在英语世界里，字符的个数非常有限，26个字母（大小写）、10个数字、标点符号、控制符，也就是键盘上所有的键所对应的字符加起来也不过是一百多个字符而已，这在计算机中用一个字节的存储空间来表示一个字符是绰绰有余的，因为一个字节相当于8个比特位，8个比特位可以表示256个符号。于是聪明的美国人就制定了一套字符编码的标准叫ASCII(American Standard Code for Information Interchange)，每个字符都对应唯一的一个数字，比如字符A对应的二进制数值是01000001，对应的十进制就是65。最开始ASCII只定义了128个字符编码，包括96个文字和32个控制符号，一共128个字符只需要一个字节的7位就能表示所有的字符，因此 ASCII 只使用了一个字节的后7位，最高位都为0。每个字符与ASCII码的对应关系可查看网站ascii-code。</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-14-Python-Base_code/01.jpg" alt="有帮助的截图" /></p>
+
+<blockquote>
+  <p>二、EASCII(ISO/8859-1)</p>
+</blockquote>
+
+<p>然而计算机慢慢地普及到其他西欧地区时，他们发现还有很多西欧所特有的字符是 ASCII 编码表中没有的，于是后来出现了可扩展的 ASCII 叫 EASCII ，顾名思义，它是在ASCII的基础上扩展而来，把原来的7位扩充到8位，它完全兼容ASCII，扩展出来的符号包括表格符号、计算符号、希腊字母和特殊的拉丁符号。然而 EASCII 时代是一个混乱的时代，大家没有统一标准，他们各自把最高位按照自己的标准实现了自己的一套字符编码标准，比较著名的就有 CP437， CP437 是 Windows 系统中使用的字符编码，如下图：</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-14-Python-Base_code/02.jpg" alt="有帮助的截图" /></p>
+
+<p>另外一种被广泛使用的 EASCII 还有 ISO/8859-1(Latin-1)，它是国际标准化组织（ISO）及国际电工委员会（IEC）联合制定的一系列8位元字符集的标准，ISO/8859-1 只继承了 CP437 字符编码的128-159之间的字符，所以它是从160开始定义的，不幸的是这些众多的 ASCII 扩充字集之间互不兼容。</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-14-Python-Base_code/03.jpg" alt="有帮助的截图" /></p>
+
+<blockquote>
+  <p>三、GBK</p>
+</blockquote>
+
+<p>随着时代的进步，计算机开始普及到千家万户，比尔盖茨让每个人桌面都有一台电脑的梦想得以实现。但是计算机进入中国不得不面临的一个问题就是字符编码，虽然咱们国家的汉字是人类使用频率最多的文字，汉字博大精深，常见的汉字就有成千上万，这已经大大超出了 ASCII 编码所能表示的字符范围了，即使是 EASCII 也显得杯水车薪，于是聪明的中国人自己弄了一套编码叫 GB2312，又称GB0，1981由中国国家标准总局发布。GB2312 编码共收录了6763个汉字，同时他还兼容 ASCII，GB 2312的出现，基本满足了汉字的计算机处理需要，它所收录的汉字已经覆盖中国大陆99.75%的使用频率，不过 GB2312 还是不能100%满足中国汉字的需求，对一些罕见的字和繁体字 GB2312 没法处理，后来就在GB2312的基础上创建了一种叫 GBK 的编码，GBK 不仅收录了27484个汉字，同时还收录了藏文、蒙文、维吾尔文等主要的少数民族文字。同样 GBK 也是兼容 ASCII 编码的，对于英文字符用1个字节来表示，汉字用两个字节来标识。</p>
+
+<blockquote>
+  <p>四、Unicode</p>
+</blockquote>
+
+<p>对于如何处理中国人自己的文字我们可以另立山头，按照我们自己的需求制定一套编码规范，但是计算机不止是美国人和中国人用啊，还有欧洲、亚洲其他国家的文字诸如日文、韩文全世界各地的文字加起来估计也有好几十万，这已经大大超出了ASCII码甚至GBK所能表示的范围了，况且人家为什么用采用你GBK标准呢？如此庞大的字符库究竟用什么方式来表示好呢？于是统一联盟国际组织提出了Unicode编码，Unicode的学名是”Universal Multiple-Octet Coded Character Set”，简称为UCS。Unicode有两种格式：UCS-2和UCS-4。UCS-2就是用两个字节编码，一共16个比特位，这样理论上最多可以表示65536个字符，不过要表示全世界所有的字符显示65536个数字还远远不过，因为光汉字就有近10万个，因此Unicode4.0规范定义了一组附加的字符编码，UCS-4就是用4个字节（实际上只用了31位，最高位必须为0）。理论上完全可以涵盖一切语言所用的符号。世界上任何一个字符都可以用一个Unicode编码来表示，一旦字符的Unicode编码确定下来后，就不会再改变了。但是Unicode有一定的局限性，一个Unicode字符在网络上传输或者最终存储起来的时候，并不见得每个字符都需要两个字节，比如一字符“A“，用一个字节就可以表示的字符，偏偏还要用两个字节，显然太浪费空间了。第二问题是，一个Unicode字符保存到计算机里面时就是一串01数字，那么计算机怎么知道一个2字节的Unicode字符是表示一个2字节的字符呢，还是表示两个1字节的字符呢，如果你不事先告诉计算机，那么计算机也会懵逼了。Unicode只是规定如何编码，并没有规定如何传输、保存这个编码。例如“汉”字的Unicode编码是6C49，我可以用4个ascii数字来传输、保存这个编码；也可以用utf-8编码的3个连续的字节E6 B1 89来表示它。关键在于通信双方都要认可。因此Unicode编码有不同的实现方式，比如：UTF-8、UTF-16等等。这里的Unicode就像英语一样，做为国与国之间交流世界通用的标准，每个国家有自己的语言，他们把标准的英文文档翻译成自己国家的文字，这是实现方式，就像utf-8。</p>
+
+<blockquote>
+  <p>五、UTF-8</p>
+</blockquote>
+
+<p>UTF-8（Unicode Transformation Format）作为Unicode的一种实现方式，广泛应用于互联网，它是一种变长的字符编码，可以根据具体情况用1-4个字节来表示一个字符。比如英文字符这些原本就可以用ASCII码表示的字符用UTF-8表示时就只需要一个字节的空间，和ASCII是一样的。对于多字节（n个字节）的字符，第一个字节的前n为都设为1，第n+1位设为0，后面字节的前两位都设为10。剩下的二进制位全部用该字符的unicode码填充。</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-14-Python-Base_code/04.jpg" alt="有帮助的截图" /></p>
+
+<p>以汉字“好”为例，“好”对应的Unicode是597D，对应的区间是0000 0800–0000 FFFF，因此它用UTF-8表示时需要用3个字节来存储，597D用二进制表示是： 0101100101111101，填充到1110xxxx 10xxxxxx 10xxxxxx得到11100101 10100101 10111101，转换成16进制：e5a5bd，因此“好”的Unicode”597D”对应的UTF-8编码是”E5A5BD”</p>
+
+<pre><code>1	    中文        好
+2	    unicode         0101   100101   111101
+3	    编码规则     1110xxxx 10xxxxxx 10xxxxxx
+4	                --------------------------
+5	    utf-8       11100101 10100101 10111101
+6	                --------------------------
+7	    16进制utf-8     e   5    a   5    b   d
+</code></pre>
+
+<blockquote>
+  <p>六、PYTHON字符编码</p>
+</blockquote>
+
+<p>现在总算把理论说完了。再来说说Python中的编码问题。Python的诞生时间比Unicode要早很多，Python的默认编码是ASCII</p>
+
+<pre><code>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.getdefaultencoding()
+'ascii'
+</code></pre>
+
+<p>所以在Python源代码文件中如果不显示地指定编码的话，将出现语法错误</p>
+
+<pre><code>#test.py
+print "你好"
+</code></pre>
+
+<p>上面是test.py脚本，运行 python test.py 就会包如下错误：
+File “test.py”, line 1 yntaxError: Non-ASCII character ‘xe4′ in file test.py on line 1, but no encoding declared; see http://www.python.org/ ps/pep-0263.html for details</p>
+
+<p>为了在源代码中支持非ASCII字符，必须在源文件的第一行或者第二行显示地指定编码格式：</p>
+
+<pre><code># coding=utf-8   
+或者
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+</code></pre>
+
+<p><span style="color:red">在python中和字符串相关的数据类型,分别是str、unicode两种，他们都是basestring的子类，可见str与unicode是两种不同类型的字符串对象。</span></p>
+
+<pre><code>    basestring
+      /   \
+     /     \
+
+   str    unicode
+</code></pre>
+
+<p>对于同一个汉字“好”，用str表示时，它对应的就是utf-8编码的’xe5xa5xbd’，而用unicode表示时，他对应的符号就是u’u597d’，与u”好”是等同的。需要补充一点的是，str类型的字符其具体的编码格式是UTF-8还是GBK，还是其他格式，根据操作系统相关。比如在Windows系统中，cmd命令行中显示的：</p>
+
+<pre><code># windows终端
+&gt;&gt;&gt; a = '好'
+&gt;&gt;&gt; type(a)
+&lt;type 'str'&gt;
+&gt;&gt;&gt; a
+'\xba\xc3'
+
+# linux终端
+&gt;&gt;&gt; a='好'
+&gt;&gt;&gt; type(a)
+&lt;type 'str'&gt;
+&gt;&gt;&gt; a
+'\xe5\xa5\xbd'
+ 
+&gt;&gt;&gt; b=u'好'
+&gt;&gt;&gt; type(b)
+&lt;type 'unicode'&gt;
+&gt;&gt;&gt; b
+u'\u597d'
+</code></pre>
+
+<p>不论是Python3x、Java还是其他编程语言，Unicode编码都成为语言的默认编码格式，而数据最后保存到介质中的时候，不同的介质可有用不同的方式，有些人喜欢用UTF-8，有些人喜欢用GBK，这都无所谓，只要平台统一的编码规范，具体怎么实现并不关心。</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-14-Python-Base_code/05.jpg" alt="有帮助的截图" /></p>
+
+<blockquote>
+  <p>七、str与unicode的转换</p>
+</blockquote>
+
+<p>那么在Python中str和unicode之间是如何转换的呢？这两种类型的字符串类型之间的转换就是靠这两个方法decode和encode。</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-14-Python-Base_code/06.jpg" alt="有帮助的截图" /></p>
+
+<pre><code>#从str类型转换到unicode
+s.decode(encoding)   =====&gt;  &lt;type 'str'&gt; to &lt;type 'unicode'&gt;
+#从unicode转换到str
+u.encode(encoding)   =====&gt;  &lt;type 'unicode'&gt; to &lt;type 'str'&gt;
+ 
+&gt;&gt;&gt; c = b.encode('utf-8')
+&gt;&gt;&gt; type(c)
+&lt;type 'str'&gt;
+&gt;&gt;&gt; c
+'\xe5\xa5\xbd'
+ 
+&gt;&gt;&gt; d = c.decode('utf-8')
+&gt;&gt;&gt; type(d)
+&lt;type 'unicode'&gt;
+&gt;&gt;&gt; d
+u'\u597d'
+</code></pre>
+
+<p>这个’xe5xa5xbd’就是unicode u’好’通过函数encode编码得到的UTF-8编码的str类型的字符串。反之亦然，str类型的c通过函数decode解码成unicode字符串d。</p>
+
+<blockquote>
+  <p>八、str(s)与unicode(s)</p>
+</blockquote>
+
+<p>str(s)和unicode(s)是两个工厂方法，分别返回str字符串对象和unicode字符串对象，str(s)是s.encode(‘ascii’)的简写。实验：</p>
+
+<pre><code>&gt;&gt;&gt; s3 = u"你好"
+&gt;&gt;&gt; s3
+u'\u4f60\u597d'
+&gt;&gt;&gt; str(s3)
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
+</code></pre>
+
+<p>上面s3是unicode类型的字符串，str(s3)相当于是执行s3.encode(‘ascii’)因为“你好”两个汉字不能用ascii码来表示，所以就报错了，指定正确的编码：s3.encode(‘gbk’)或者s3.encode(“utf-8”)就不会出现这个问题了。类似的unicode有同样的错误：</p>
+
+<pre><code>&gt;&gt;&gt; s4 = "你好"
+&gt;&gt;&gt; unicode(s4)
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xc4 in position 0: ordinal not in range(128)
+&gt;&gt;&gt;
+</code></pre>
+
+<p>unicode(s4)等效于s4.decode(‘ascii’)，因此要正确的转换就要正确指定其编码s4.decode(‘gbk’)或者s4.decode(“utf-8”)。</p>
+
+<blockquote>
+  <p>九、乱码</p>
+</blockquote>
+
+<p>所有出现乱码的原因都可以归结为字符经过不同编码解码在编码的过程中使用的编码格式不一致，比如：</p>
+
+<pre><code># encoding: utf-8
+ 
+&gt;&gt;&gt; a='好'
+&gt;&gt;&gt; a
+'\xe5\xa5\xbd'
+&gt;&gt;&gt; b=a.decode("utf-8")
+&gt;&gt;&gt; b
+u'u597d'
+&gt;&gt;&gt; c=b.encode("gbk")
+&gt;&gt;&gt; c
+'\xba\xc3'
+&gt;&gt;&gt; print c
+</code></pre>
+
+<p>utf-8编码的字符‘好’占用3个字节，解码成Unicode后，如果再用gbk来解码后，只有2个字节的长度了，最后出现了乱码的问题，因此防止乱码的最好方式就是始终坚持使用同一种编码格式对字符进行编码和解码操作。</p>
+
+<p><img src="https://magicjms.github.io/assets/2018-05-14-Python-Base_code/07.jpg" alt="有帮助的截图" /></p>
+
+<blockquote>
+  <p>十、其他技巧</p>
+</blockquote>
+
+<p>对于如unicode形式的字符串（str类型)：</p>
+
+<pre><code>s = 'id\u003d215903184\u0026index\u003d0\u0026st\u003d52\u0026sid’
+转换成真正的unicode需要使用：
+s.decode('unicode-escape')
+</code></pre>
+
+<p>测试：</p>
+
+<pre><code>&gt;&gt;&gt; s = 'id\u003d215903184\u0026index\u003d0\u0026st\u003d52\u0026sid\u003d95000\u0026i'
+&gt;&gt;&gt; print(type(s))
+&lt;type 'str'&gt;
+&gt;&gt;&gt; s = s.decode('unicode-escape')
+&gt;&gt;&gt; s
+u'id=215903184&amp;index=0&amp;st=52&amp;sid=95000&amp;i'
+&gt;&gt;&gt; print(type(s))
+&lt;type 'unicode'&gt;
+&gt;&gt;&gt;
+</code></pre>
+
+<p>以上代码和概念都是基于Python2.x。</p>
+
+<p>转自：<br />
+<a href="http://python.jobbole.com/86578/" title="http://python.jobbole.com/86578/">http://python.jobbole.com/86578/</a></p>
+
+</div>
+
+
+<!-- next and previous -->
+<div style="margin-top:15px; margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/posts/Other-markdown_base.html">
+      markdown基础操作
+    </a>
+  </span>
+   
+  
+  <div style="float:right">
+  <span class="prev" >
+    下篇：
+    <a href="/posts/Python-Base_division.html">
+      Python中的除法
+    </a>
+  </span>
+  </div>
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  请修改_includes/comment.html添加评论代码。 
+</div>
+        </div>
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <!-- Blog Categories Well -->
+          <div class="well">
+            <h4>栏目分类</h4>
+            <div class="row">
+                            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/posts/system.html">
+                      系统
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/web.html">
+                      Web建站
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/read.html">
+                      读书笔记
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/archives.html">
+                      存档
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.col-lg-6 -->
+              <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/posts/python.html">
+                      python语言
+                    </a>
+                  </li>                  
+				  <li>
+                    <a href="/posts/linux.html">
+                      Linux相关
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/posts/other.html">
+                      杂记
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/tags.html">
+                      Tags
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.col-lg-6 -->
+ 
+            </div>
+            <!-- /.row -->
+          </div>
+		  <!-- Blog Recent Well -->
+          <div class="well">
+            <h4>最新文章</h4>
+			      <div class="row">
+                            <div class="col-lg-12">
+                <ul class="list-unstyled">
+				
+                  <li>
+                    <a href="/posts/Book-statistics_5.html">
+                      统计学-贾俊平(第四版)
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Lib_logging.html">
+                      python模块详解—logging
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_sort-sorted.html">
+                      sort sorted函数
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_lambda.html">
+                      lambda函数
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_division.html">
+                      Python中的除法
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Python-Base_code.html">
+                      PYTHON编码的前世今生
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Other-markdown_base.html">
+                      markdown基础操作
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-java-oomdesc.html">
+                      java oom解析
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-java-jmap.html">
+                      java jmap
+                    </a>
+                  </li>
+				
+                  <li>
+                    <a href="/posts/Linux-java-heapdump.html">
+                      java heapdump
+                    </a>
+                  </li>
+				  
+                </ul>
+              </div> 
+			      </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+      <!-- Footer -->
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+                        <div style="text-align:center;margin-top:15px;">
+				Copyright &copy; magicjms.github.io, generated by Jekyll, designed by <a href="https://www.panxw.com">panxw</a>. <a href="https://github.com/panxw/panxw.github.com">[source]</a>
+				<br/>
+				请修改_includes/copyright.html添加统计代码。
+            </div>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script> 
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+      </footer>
+    </div>
+    <!-- /.container -->
+  </body>
+
+</html>

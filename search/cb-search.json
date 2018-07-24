@@ -3,6 +3,62 @@
 	"data" : [
 	 
 	{
+		"title" : "统计学-贾俊平(第四版) - git",
+		"url" : "/posts/Book-statistics_5.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "python模块详解—logging - pythonlib",
+		"url" : "/posts/Python-Lib_logging.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "sort sorted函数 - pythonbase",
+		"url" : "/posts/Python-Base_sort-sorted.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "lambda函数 - pythonbase",
+		"url" : "/posts/Python-Base_lambda.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Python中的除法 - pythonbase",
+		"url" : "/posts/Python-Base_division.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "PYTHON编码的前世今生 - pythonbase",
+		"url" : "/posts/Python-Base_code.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "markdown基础操作 - git",
+		"url" : "/posts/Other-markdown_base.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "java oom解析 - oom",
 		"url" : "/posts/Linux-java-oomdesc.html"
 	}

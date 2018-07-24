@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="python内建函数—hasattr,getattr,setattr - magicjms个人博客 - 作者:magicjms"/> 
+    <meta name="description" content="sort sorted函数 - magicjms个人博客 - 作者:magicjms"/> 
 	<meta name="keywords" content="pythonbase"/>
-    <title>python内建函数—hasattr,getattr,setattr - magicjms个人博客</title>
+    <title>sort sorted函数 - magicjms个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -144,12 +144,12 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           <!-- Navi -->
 
 <!-- Title -->
-<h2>python内建函数—hasattr,getattr,setattr</h2>
+<h2>sort sorted函数</h2>
 <b>标签：</b><a href="/tags.html#pythonbase"><i>pythonbase</i></a>
 
 <div class="post-date">
 	<span class="glyphicon glyphicon-time"></span>
-	2018-02-22
+	2018-05-14
 </div>
 <br/>
 
@@ -157,103 +157,92 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 <div style="text-indent:0em;">
 <link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
 
-<p>本篇主要介绍python内建函数hasattr的功能及用法<!-- more --></p>
+<p>sort、sorted函数是我们日常编码中使用频率较高的函数，但是两都之间的共性、区别你真的搞明白了吗<!-- more --></p>
 
 <blockquote>
-  <p>一、<b>python内建函数 hasattr 的用法</b></p>
+  <p>一、功能</p>
 </blockquote>
 
-<p>语法：hasattr（object，name）</p>
-
-<p>作用：判断一个对象里面是否有name属性或者name方法，返回BOOL值，有name特性返回True， 否则返回False。
-需要注意的是name要用括号括起来</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#判断对象有name属性</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#判断对象有run方法</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+<p>对给定的List进行排序 <br />
+sort()与sorted()的不同在于，sort是在原位重新排列列表，而sorted()是产生一个新的列表<br />
+List的元素可以是各种东西，字符串，字典，自己定义的类等。 </p>
 
 <blockquote>
-  <p>二、<b>python内建函数 getattr 的用法</b></p>
+  <p>二、函数说明</p>
 </blockquote>
 
-<p>语法：getattr(object, name[,default])</p>
+<p>1、函数原型</p>
 
-<p>作用：获取对象object的属性或者方法，如果存在打印出来，如果不存在，打印出默认值，默认值可选。
-需要注意的是，如果是返回的对象的方法，返回的是方法的内存地址，如果需要运行这个方法，
-可以在后面添加一对括号。</p>
+<pre><code>&gt;&gt;&gt; help(sorted)
+Help on built-in function sorted in module __builtin__:
+sorted(...)
+    sorted(iterable, cmp=None, key=None, reverse=False) --&gt; new sorted list
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#获取name属性，存在就打印出来。</span>
-<span class="s1">&#39;xiaohua&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#获取run方法，存在就打印出方法的内存地址。</span>
-<span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">test</span><span class="o">.</span><span class="n">run</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">test</span> <span class="n">instance</span> <span class="n">at</span> <span class="mh">0x0269C878</span><span class="o">&gt;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)()</span>  <span class="c1">#获取run方法，后面加括号可以将这个方法运行。</span>
-<span class="s1">&#39;HelloWord&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#获取一个不存在的属性。</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;18&quot;</span><span class="p">)</span>  <span class="c1">#若属性不存在，返回一个默认值。</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+&gt;&gt;&gt; help(list.sort)
+Help on method_descriptor:
+sort(...)
+    L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
+    cmp(x, y) -&gt; -1, 0, 1
+</code></pre>
+
+<p>2、函数参数说明</p>
+
+<p>iterable：是可迭代类型;<br />
+cmp：用于比较的函数，比较什么由key决定,有默认值，迭代集合中的一项;<br />
+cmp(e1, e2) 是带两个参数的比较函数,</p>
+
+<pre><code>返回值: 
+	负数: e1 &lt; e2, 
+	  0: e1 == e2, 
+   正数: e1 &gt; e2. 
+默认为 None, 即用内建的比较函数. 
+</code></pre>
+
+<p>key：用列表元素的某个属性和函数进行作为关键字，有默认值，迭代集合中的一项;<br />
+key 是带一个参数的函数, 用来为每个元素提取比较值. 默认为 None, 即直接比较每个元素. </p>
+
+<p>reverse：排序规则. reverse = True 或者 reverse = False，有默认值。<br />
+返回值：是一个经过排序的可迭代类型，与iterable一样。<br />
+key 和 reverse 比 cmp 快很多, 因为对每个元素它们只处理一次; 而 cmp 会处理多次. </p>
 
 <blockquote>
-  <p>三、<b>python内建函数 setattr 的用法</b></p>
+  <p>三、使用示例</p>
 </blockquote>
 
-<p>语法：setattr(object, name, values)</p>
+<p>对tuple组成的List排序</p>
 
-<p>作用：给对象的属性赋值，若属性不存在，先创建再赋值。</p>
+<pre><code>&gt;&gt;&gt; students = [('john', 'A', 15), ('jane', 'B', 12), ('dave', 'B', 10),]
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>   <span class="c1">#判断属性是否存在</span>
-<span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">)</span>   <span class="c1">#为属相赋值，并没有返回值</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#属性存在了</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+用key函数排序(单级排序)
+&gt;&gt;&gt; sorted(students, key=lambda student : student[2])   # sort by age  
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]  
+用key函数排序(多级排序) 
+&gt;&gt;&gt; sorted(students, key=lambda student : (student[2], student[0]))   # sort by age  
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]
 
-<blockquote>
-  <p>四、<b>常用应用</b></p>
-</blockquote>
+用cmp函数排序
+&gt;&gt;&gt; sorted(students, cmp=lambda x,y : cmp(x[2], y[2])) # sort by age  
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]
 
-<p>一种综合的用法是：判断一个对象的属性是否存在，若不存在就添加该属性。</p>
+用 operator 函数来加快速度, 上面排序等价于:(itemgetter的用法见 注释2)
+&gt;&gt;&gt; from operator import itemgetter, attrgetter  
+&gt;&gt;&gt; sorted(students, key=itemgetter(2))
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#age属性不存在</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">))</span> <span class="c1">#age属性不存在时，设置该属性</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#可检测设置成功</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+用 operator 函数进行多级排序
+&gt;&gt;&gt; sorted(students, key=itemgetter(1,2))  # sort by grade then by age  
+[('john', 'A', 15), ('dave', 'B', 10), ('jane', 'B', 12)] 
+</code></pre>
 
-<p>本篇转自：<a href="https://www.cnblogs.com/cenyu/p/5713686.html" title="https://www.cnblogs.com/cenyu/p/5713686.html">https://www.cnblogs.com/cenyu/p/5713686.html</a></p>
+<p>对字典排序</p>
+
+<pre><code>&gt;&gt;&gt; d = {'data1':3, 'data2':1, 'data3':2, 'data4':4}
+&gt;&gt;&gt; sorted(d.iteritems(), key=itemgetter(1), reverse=True)  
+[('data4', 4), ('data1', 3), ('data3', 2), ('data2', 1)]  
+</code></pre>
+
+<p>参考：<br />
+<a href="http://www.cnblogs.com/65702708/archive/2010/09/14/1826362.html" title=" http://www.cnblogs.com/65702708/archive/2010/09/14/1826362.html"> http://www.cnblogs.com/65702708/archive/2010/09/14/1826362.html</a><br />
+<a href="http://gaopenghigh.iteye.com/blog/1483864" title=" http://gaopenghigh.iteye.com/blog/1483864"> http://gaopenghigh.iteye.com/blog/1483864</a></p>
 
 </div>
 
@@ -263,8 +252,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   
   <span class="next">
     上篇：
-    <a href="/posts/Python-Lib_datetime.html">
-      python模块详解—datetime
+    <a href="/posts/Python-Base_lambda.html">
+      lambda函数
     </a>
   </span>
    
@@ -272,8 +261,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   <div style="float:right">
   <span class="prev" >
     下篇：
-    <a href="/posts/Python-Lib_subprocess.html">
-      python模块详解—subprocess
+    <a href="/posts/Python-Lib_logging.html">
+      python模块详解—logging
     </a>
   </span>
   </div>

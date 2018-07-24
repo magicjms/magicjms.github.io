@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="python内建函数—hasattr,getattr,setattr - magicjms个人博客 - 作者:magicjms"/> 
+    <meta name="description" content="Python中的除法 - magicjms个人博客 - 作者:magicjms"/> 
 	<meta name="keywords" content="pythonbase"/>
-    <title>python内建函数—hasattr,getattr,setattr - magicjms个人博客</title>
+    <title>Python中的除法 - magicjms个人博客</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -144,12 +144,12 @@ http://blog.csdn.net/rabbitter/article/details/51125337
           <!-- Navi -->
 
 <!-- Title -->
-<h2>python内建函数—hasattr,getattr,setattr</h2>
+<h2>Python中的除法</h2>
 <b>标签：</b><a href="/tags.html#pythonbase"><i>pythonbase</i></a>
 
 <div class="post-date">
 	<span class="glyphicon glyphicon-time"></span>
-	2018-02-22
+	2018-05-14
 </div>
 <br/>
 
@@ -157,103 +157,75 @@ http://blog.csdn.net/rabbitter/article/details/51125337
 <div style="text-indent:0em;">
 <link rel="stylesheet" href="https://magicjms.github.io/pygments.css" />
 
-<p>本篇主要介绍python内建函数hasattr的功能及用法<!-- more --></p>
+<p>Python中分为3种除法：传统除法、精确除法、地板除。<!-- more --></p>
 
 <blockquote>
-  <p>一、<b>python内建函数 hasattr 的用法</b></p>
+  <p>一、说明</p>
 </blockquote>
 
-<p>语法：hasattr（object，name）</p>
-
-<p>作用：判断一个对象里面是否有name属性或者name方法，返回BOOL值，有name特性返回True， 否则返回False。
-需要注意的是name要用括号括起来</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#判断对象有name属性</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#判断对象有run方法</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+<p>Python中分为3种除法：传统除法、精确除法、地板除。<br />
+在Python语言对于整形数执行除法会进行地板除（舍去小数部分）。例如 int a=15/10; a的结果为1。<br />
+两个int型的数据相除需要返回一个浮点型数据的时候就需要强制类型转换，例如 float a = (float)b/c ,其中b、c都是int型数据。</p>
 
 <blockquote>
-  <p>二、<b>python内建函数 getattr 的用法</b></p>
+  <p>二、传统除法</p>
 </blockquote>
 
-<p>语法：getattr(object, name[,default])</p>
+<p>如果是整数除法则执行地板除，如果是浮点数除法则执行精确除法。</p>
 
-<p>作用：获取对象object的属性或者方法，如果存在打印出来，如果不存在，打印出默认值，默认值可选。
-需要注意的是，如果是返回的对象的方法，返回的是方法的内存地址，如果需要运行这个方法，
-可以在后面添加一对括号。</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="c1">#获取name属性，存在就打印出来。</span>
-<span class="s1">&#39;xiaohua&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span>  <span class="c1">#获取run方法，存在就打印出方法的内存地址。</span>
-<span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">test</span><span class="o">.</span><span class="n">run</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">test</span> <span class="n">instance</span> <span class="n">at</span> <span class="mh">0x0269C878</span><span class="o">&gt;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)()</span>  <span class="c1">#获取run方法，后面加括号可以将这个方法运行。</span>
-<span class="s1">&#39;HelloWord&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#获取一个不存在的属性。</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;18&quot;</span><span class="p">)</span>  <span class="c1">#若属性不存在，返回一个默认值。</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+<pre><code>&gt;&gt;&gt;1/2
+0
+&gt;&gt;&gt;1.0/2.0
+0.5
+</code></pre>
 
 <blockquote>
-  <p>三、<b>python内建函数 setattr 的用法</b></p>
+  <p>三、精确除法</p>
 </blockquote>
 
-<p>语法：setattr(object, name, values)</p>
+<p>除法总是会返回真实的商，不管操作数是整形还是浮点型。执行from <strong>future</strong> import division 指令就可以做到这一点。</p>
 
-<p>作用：给对象的属性赋值，若属性不存在，先创建再赋值。</p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>   <span class="c1">#判断属性是否存在</span>
-<span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">)</span>   <span class="c1">#为属相赋值，并没有返回值</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#属性存在了</span>
-<span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+<pre><code>&gt;&gt;&gt;from __future__ import division
+&gt;&gt;&gt;1/2
+0.5
+&gt;&gt;&gt;1.0/2.0
+0.5
+</code></pre>
 
 <blockquote>
-  <p>四、<b>常用应用</b></p>
+  <p>四、地板除法</p>
 </blockquote>
 
-<p>一种综合的用法是：判断一个对象的属性是否存在，若不存在就添加该属性。</p>
+<p>从Python2.2开始，增加了一个操作符 // ，以执行地板除：//除法不管操作数为何种数值类型，总是会舍去小数部分，返回数字序列中比真正的商小的最接近的数字。</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xiaohua&quot;</span>
-<span class="o">...</span>     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="o">...</span>             <span class="k">return</span> <span class="s2">&quot;HelloWord&quot;</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">=</span><span class="n">test</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>    <span class="c1">#age属性不存在</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">test</span> <span class="n">instance</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;age&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">))</span> <span class="c1">#age属性不存在时，设置该属性</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>  <span class="c1">#可检测设置成功</span>
-<span class="s1">&#39;18&#39;</span>
-<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+<pre><code>&gt;&gt;&gt;1//2
+0
+&gt;&gt;&gt;1.0//2
+0
+&gt;&gt;&gt;-1//2.0
+-1
+</code></pre>
 
-<p>本篇转自：<a href="https://www.cnblogs.com/cenyu/p/5713686.html" title="https://www.cnblogs.com/cenyu/p/5713686.html">https://www.cnblogs.com/cenyu/p/5713686.html</a></p>
+<blockquote>
+  <p>五、内建函数divmod()</p>
+</blockquote>
+
+<p>divmod (a,b)，返回(a//b,a%b)</p>
+
+<pre><code>1. &gt;&gt;&gt;divmod(1,2)  
+2. (0,1)  
+3. &gt;&gt;&gt;divmod(3.14159,1.5)  
+4. (2.0,0.4159000000000002)  
+5. &gt;&gt;&gt;5+6j//3+2j  
+6. 2+0j  
+7. &gt;&gt;&gt;5+6j%3+2j  
+8. -1+2j  
+9. &gt;&gt;&gt;divmod(5+6j,3+2j)  
+10. ((2+0j),(-1+2j))
+</code></pre>
+
+<p>参考：<br />
+<a href="http://blog.csdn.net/sicofield/article/details/8613877" title="http://blog.csdn.net/sicofield/article/details/8613877">http://blog.csdn.net/sicofield/article/details/8613877</a></p>
 
 </div>
 
@@ -263,8 +235,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   
   <span class="next">
     上篇：
-    <a href="/posts/Python-Lib_datetime.html">
-      python模块详解—datetime
+    <a href="/posts/Python-Base_code.html">
+      PYTHON编码的前世今生
     </a>
   </span>
    
@@ -272,8 +244,8 @@ http://blog.csdn.net/rabbitter/article/details/51125337
   <div style="float:right">
   <span class="prev" >
     下篇：
-    <a href="/posts/Python-Lib_subprocess.html">
-      python模块详解—subprocess
+    <a href="/posts/Python-Base_lambda.html">
+      lambda函数
     </a>
   </span>
   </div>
